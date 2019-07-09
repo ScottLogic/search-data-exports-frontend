@@ -1,0 +1,25 @@
+.container-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  background-color: rgb(200, 200, 200);
+}
+
+ul {
+  display: flex;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+}
+
+.title-header {
+  margin: auto; 
+  font-size: 3vmax;
+}
+
+.email-header {
+  margin: auto;
+  font-size: 1vmax;
+}
