@@ -1,0 +1,14 @@
+.app {
+  text-align: center;
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+.paper-display-page {
+  display: flex;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 2% 15%;
+  min-height: 82vh;
+}
