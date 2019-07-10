@@ -19,8 +19,8 @@ const App = () => {
   return (
     <div className="app">
       <Header email="oforeman@scottlogic.com" />
-      <div style={{ flexDirection: 'column' }} className="paper-display-page">
-        <div style={{ margin: 'auto', padding: '1vmin' }}>
+      <div className="paper-display-page">
+        <div className="container-index-select-form">
           <form onSubmit={handleSearch}>
             <div>
               <input type="radio" id="userPostSearch" name="indexSearch" value="both" defaultChecked />
@@ -34,7 +34,7 @@ const App = () => {
             <input type="submit" value="Search" />
           </form>
         </div>
-        <div style={{ margin: 'auto', flexGrow: 2 }}>
+        <div className="container-result-list">
           <ResultList data={['Result 1', 'Result 2']} />    
         </div>
 
