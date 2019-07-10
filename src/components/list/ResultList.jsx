@@ -27,7 +27,7 @@ const resultFormat = ({ UserID, DateCreated, Content, Tags }) => (
 );
 
 ResultList.propTypes = {
-  data: PropTypes.arrayOf(String).isRequired
+  data: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default ResultList;

@@ -40,7 +40,7 @@ const App = ({ data, maxPages, searchCriteria, handleSearch, handlePageChange })
 );
 
 App.propTypes = {
-  data: PropTypes.arrayOf(Object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   maxPages: PropTypes.number.isRequired,
   searchCriteria: PropTypes.object.isRequired,
   handleSearch: PropTypes.func.isRequired,
