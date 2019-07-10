@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useInputForm } from '../../utilities/hooks';
-import MockAPICall from '../../utilities/mockAPICall';
+import mockAPICall from '../../utilities/mockAPICall';
 import App from './App';
 
 const AppContainer = () => {
@@ -36,13 +36,21 @@ const AppContainer = () => {
 
   //Make API call with request data
   const fetchAndSetData = request => {
-    const response = MockAPICall(request);
+    const response = mockAPICall(request);
     setMaxPages(response.hits.total.value / request.results);
     setData(response.hits.hits);
   };
 
+  const appProps = {
+    data,
+    maxPages,
+    searchCriteria,
+    handleSearch,
+    handlePageChange
+  };
+
   return (
-    <App data={data} maxPages={maxPages} searchCriteria={searchCriteria} handleSearch={handleSearch} handlePageChange={handlePageChange} />
+    <App {...appProps} />
   );
 };
 

@@ -24,7 +24,7 @@ const App = ({ data, maxPages, searchCriteria, handleSearch, handlePageChange })
         </form>
       </div>
       <div className="container-result-list">
-        <ResultList data={data} />   
+        <ResultList data={data} />
       </div>
 
       <ReactPaginate
