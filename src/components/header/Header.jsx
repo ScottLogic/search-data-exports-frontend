@@ -4,7 +4,7 @@ import './Header.css';
 
 const Header = ({ email }) => (
   <header className="container-header">
-    <ul role="navigation">
+    <ul className="header-list" role="navigation">
       <li className="title-header">Helixer Search</li>
       <li className="email-header">{email}</li>
     </ul>

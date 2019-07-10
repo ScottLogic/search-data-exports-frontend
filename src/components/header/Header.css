@@ -4,9 +4,10 @@
   align-items: center;
   height: 10vh;
   background-color: rgb(200, 200, 200);
+  box-shadow: 0 0 1vh rgba(200, 200, 200, 1);
 }
 
-ul {
+.header-list {
   display: flex;
   padding: 0;
   list-style: none;
