@@ -1,0 +1,50 @@
+.app {
+  text-align: center;
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+.paper-display-page {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 2% 15%;
+  min-height: 82vh;
+}
+
+.container-index-select-form {
+  margin: auto;
+  padding: 1vmin;
+}
+
+.container-result-list {
+  margin: auto;
+  flex-grow: 2;
+}
+
+.pagination {
+  display: inline-block;
+  padding: 0;
+}
+
+.pagination li {
+  display: inline-block;
+  border: 1px solid rgb(200, 200, 200);
+  font-size: 1em;
+  padding: 1vmin;
+  cursor: pointer;
+}
+
+.pagination li:hover {
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+.pagination .disabled {
+  visibility: hidden;
+}
+
+.pagination .active {
+  background-color: rgb(200, 200, 200);
+}
