@@ -5,7 +5,7 @@ import Header from '../header/Header';
 import ReactPaginate from 'react-paginate';
 import ResultList from '../list/ResultList';
 
-const App = ({ data, maxPages, searchCriteria, handleSearch, handlePageChange }) => (
+const App = ({ data, currentPage, maxPages, searchCriteria, handleSearch, handlePageChange }) => (
   <div className="app">
     <Header email="oforeman@scottlogic.com" />
     <div className="paper-display-page">
@@ -34,6 +34,7 @@ const App = ({ data, maxPages, searchCriteria, handleSearch, handlePageChange })
         containerClassName={'pagination'}
         activeClassName={'active'}
         onPageChange={handlePageChange}
+        forcePage={currentPage}
       />
     </div>
   </div>
@@ -41,6 +42,7 @@ const App = ({ data, maxPages, searchCriteria, handleSearch, handlePageChange })
 
 App.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentPage: PropTypes.number.isRequired,
   maxPages: PropTypes.number.isRequired,
   searchCriteria: PropTypes.object.isRequired,
   handleSearch: PropTypes.func.isRequired,

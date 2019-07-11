@@ -6,6 +6,7 @@ import App from './App';
 const AppContainer = () => {
   const searchCriteria = useInputForm('');
   const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
   const [maxPages, setMaxPages] = useState(1);
   const [lastRequest, setLastRequest] = useState({});
 
@@ -15,6 +16,7 @@ const AppContainer = () => {
       page: selected
     };
 
+    setCurrentPage(selected);
     fetchAndSetData(request);
   };
 
@@ -30,6 +32,7 @@ const AppContainer = () => {
       ]
     };
     
+    setCurrentPage(0);
     setLastRequest(request);
     fetchAndSetData(request);
   };
@@ -37,12 +40,13 @@ const AppContainer = () => {
   //Make API call with request data
   const fetchAndSetData = request => {
     const response = mockAPICall(request);
-    setMaxPages(response.hits.total.value / request.results);
+    setMaxPages(Math.ceil(response.hits.total.value / request.results));
     setData(response.hits.hits);
   };
 
   const appProps = {
     data,
+    currentPage,
     maxPages,
     searchCriteria,
     handleSearch,
