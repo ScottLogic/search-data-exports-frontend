@@ -16,16 +16,16 @@
   margin: auto;
 }
 
-#container-result-row-user-date {
+.container-result-row-user-date {
   justify-content: space-between;
   padding: 0.5vh 1vw 0;
 }
 
-#container-result-row-content {
+.container-result-row-content {
   justify-content: center;
   padding: 0 1vw;
 }
 
-#container-result-row-tags {
+.container-result-row-tags {
   padding: 0 0 0.5vh 0.5vw;
 }

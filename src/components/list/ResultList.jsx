@@ -10,15 +10,15 @@ const ResultList = ({ data }) => (
 
 const resultFormat = ({ UserID, DateCreated, Content, Tags }) => (
   <div className="container-result-row">
-    <div className="container-result-row-contents" id="container-result-row-user-date">
+    <div className="container-result-row-contents container-result-row-user-date">
       <div>{UserID}</div>
       <div>{DateCreated}</div>
     </div>
     <hr />
-    <div className="container-result-row-contents" id="container-result-row-content">
+    <div className="container-result-row-contents container-result-row-content">
       {Content}
     </div>
-    <div className="container-result-row-contents" id="container-result-row-tags">
+    <div className="container-result-row-contents container-result-row-tags">
       <i>
         {Tags.map(tag => `${tag} `)}
       </i>
