@@ -1,3 +1,23 @@
+## Notes 12/07/2019
+
+### Components
+
+* All Components are functional components (as opposed to class components) meaning [hooks](https://reactjs.org/docs/hooks-intro.html) are used in place of traditional class state and lifecycle functions
+* App.jsx, Header.jsx, and ResultList.jsx are all presentational components, they are solely responsible for taking props and rendering them appropriately 
+* AppContainer.js is currently the only container component, it is responsible for handling the functional logic of the application
+
+### API Requests
+
+* Created in the utilities/requestCreator.js file
+* AppContainer currently uses the mockAPICall function to get mock data to display, this can be replaced with an actual API call when ready, the structure of the request should be correct
+* API call functions could be located in files under src/api/fileName.js or a similar structure
+* API calls can be made using fetch or a 3rd party alternative such as [Axios](https://www.npmjs.com/package/axios), which could be more useful
+
+### Additional functionality
+
+* There is currently no way to search by a specific field (all searchs target all fields) so this could potentially be added
+* There is currently no way to search by a date range, if this is wanted it could be useful to use a 3rd party library such as [react-dates](https://www.npmjs.com/package/react-dates)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
