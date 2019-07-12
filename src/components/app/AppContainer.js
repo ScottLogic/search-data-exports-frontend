@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useInputForm } from '../../utilities/hooks';
+import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
 import mockAPICall from '../../utilities/mockAPICall';
 import App from './App';
 
@@ -11,10 +12,7 @@ const AppContainer = () => {
   const [lastRequest, setLastRequest] = useState({});
 
   const handlePageChange = ({ selected }) => {
-    const request = {
-      ...lastRequest,
-      page: selected
-    };
+    const request = updateRequestPage(lastRequest, selected);
 
     setCurrentPage(selected);
     fetchAndSetData(request);
@@ -22,17 +20,9 @@ const AppContainer = () => {
 
   const handleSearch = e => {
     e.preventDefault();
-    
-    const request = {
-      type: e.target.indexSearch.value,
-      results: 10,
-      page: 0,
-      search: [
-        { field: 'all', value: e.target.searchInput.value }
-      ]
-    };
-    
     setCurrentPage(0);
+
+    const request = createRequest(e.target.indexSearch.value, 10, 0, e.target.searchInput.value);
     setLastRequest(request);
     fetchAndSetData(request);
   };
