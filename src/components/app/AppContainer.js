@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useInputForm } from '../../utilities/hooks';
 import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
-import mockAPICall from '../../utilities/mockAPICall';
+//import mockAPICall from '../../utilities/mockAPICall';
+import APICall from '../../utilities/APICall';
 import App from './App';
 
 const AppContainer = () => {
@@ -29,9 +30,7 @@ const AppContainer = () => {
 
   //Make API call with request data
   const fetchAndSetData = request => {
-    const response = mockAPICall(request);
-    setMaxPages(Math.ceil(response.hits.total.value / request.results));
-    setData(response.hits.hits);
+    APICall(request, setMaxPages, setData);   
   };
 
   const appProps = {

@@ -1,3 +1,6 @@
+## Notes - 19/07/2019 
+To run locally, create a local .env file based on the template in .env.local which will contain the URL of which to point to the search API gateway. 
+
 ## Notes - 12/07/2019
 
 ### Components
@@ -17,6 +20,7 @@
 
 * There is currently no way to search by a specific field (all searchs target all fields) so this could potentially be added
 * There is currently no way to search by a date range, if this is wanted it could be useful to use a 3rd party library such as [react-dates](https://www.npmjs.com/package/react-dates)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
