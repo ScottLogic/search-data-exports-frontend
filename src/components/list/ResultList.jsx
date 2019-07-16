@@ -4,7 +4,7 @@ import './ResultList.css';
 
 const ResultList = ({ data }) => (
   <ul className="result-list">
-    {data.map((value, index) => <li key={index}>{resultFormat(value._source)}</li>)}
+    {data.map((value, index) => <li key={index}>{resultFormat(value)}</li>)}
   </ul>
 );
 
