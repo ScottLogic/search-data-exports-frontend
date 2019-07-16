@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useInputForm } from '../../utilities/hooks';
 import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
-//import mockAPICall from '../../utilities/mockAPICall';
 import APICall from '../../utilities/APICall';
 import App from './App';
 
