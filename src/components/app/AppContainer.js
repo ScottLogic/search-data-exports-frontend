@@ -29,8 +29,8 @@ const AppContainer = () => {
 
   //Make API call with request data
   const fetchAndSetData = request => {    
-    APICall(request).then( (result) => {      
-      setMaxPages(Math.ceil(result.TotalResults / request.ResultCount));
+    APICall(request).then( (result) => {           
+      setMaxPages(Math.ceil(result.TotalResults / request.results));
       setData(result.Results);
       }
     ).catch( error => { 
