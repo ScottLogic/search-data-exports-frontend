@@ -17,7 +17,16 @@
 .container-index-select-form {
   margin: auto;
   padding: 1vmin;
+  width: -webkit-fill-available;
 }
+
+.container-index-select-form input {
+  padding: 1vmin;
+}
+.container-index-select-form input[type="text"] {
+  width:90%;
+}
+
 
 .container-result-list {
   margin: auto;
