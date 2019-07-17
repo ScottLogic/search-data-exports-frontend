@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './App.css';
-import Header from '../header/Header';
-import ReactPaginate from 'react-paginate';
-import ResultList from '../list/ResultList';
-import ExportResultsModal from '../modal/ExportResultsModal';
+import React from "react";
+import PropTypes from "prop-types";
+import "./App.css";
+import Header from "../header/Header";
+import ReactPaginate from "react-paginate";
+import ResultList from "../list/ResultList";
+import ExportResultsModal from "../modal/ExportResultsModal";
 
 const App = ({
   data,
@@ -15,6 +15,7 @@ const App = ({
   handlePageChange,
   handleExportClick,
   showModal,
+  totalHitsCount,
   handleModalClose,
   handleModalSubmit
 }) => (
@@ -43,12 +44,17 @@ const App = ({
         pageCount={maxPages}
         pageRangeDisplayed={5}
         marginPagesDisplayed={2}
-        containerClassName={'pagination'}
-        activeClassName={'active'}
+        containerClassName={"pagination"}
+        activeClassName={"active"}
         onPageChange={handlePageChange}
         forcePage={currentPage}
       />
-      <ExportResultsModal showModal={showModal} submitCallback={handleModalSubmit} closeCallback={handleModalClose}/>
+      <ExportResultsModal
+        showModal={showModal}
+        showDirectDownloadOption={totalHitsCount < 100}
+        submitCallback={handleModalSubmit}
+        closeCallback={handleModalClose}
+      />
     </div>
   </div>
 );
@@ -62,6 +68,7 @@ App.propTypes = {
   handlePageChange: PropTypes.func.isRequired,
   handleExportClick: PropTypes.func.isRequired,
   showModal: PropTypes.bool.isRequired,
+  totalHitsCount: PropTypes.number.isRequired,
   handleModalClose: PropTypes.func.isRequired,
   handleModalSubmit: PropTypes.func.isRequired
 };

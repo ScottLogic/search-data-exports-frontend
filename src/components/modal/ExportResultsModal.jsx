@@ -5,7 +5,12 @@ import useExportResultsModal from "./ExportResultsModalContainer";
 
 ReactModal.setAppElement("#root");
 
-const ExportResultsModal = ({ showModal, closeCallback, submitCallback }) => {
+const ExportResultsModal = ({
+  showModal,
+  showDirectDownloadOption,
+  closeCallback,
+  submitCallback
+}) => {
   const {
     handleSubmit,
     handleRadioInputChange,
@@ -36,12 +41,23 @@ const ExportResultsModal = ({ showModal, closeCallback, submitCallback }) => {
         <input
           type="radio"
           name="exportType"
-          id="directDownload"
-          checked={selectedType === "directDownload"}
+          id="pushNotification"
+          checked={selectedType === "pushNotification"}
           onChange={handleRadioInputChange}
         />
-        <label htmlFor="directDownload">Direct Download</label>
+        <label htmlFor="pushNotification">Push Notification</label>
         <br />
+        <div style={showDirectDownloadOption ? {} : { display: "none" }}>
+          <input
+            type="radio"
+            name="exportType"
+            id="directDownload"
+            checked={selectedType === "directDownload"}
+            onChange={handleRadioInputChange}
+          />
+          <label htmlFor="directDownload">Direct Download</label>
+          <br />
+        </div>
         <input
           type="radio"
           name="exportType"
@@ -58,18 +74,10 @@ const ExportResultsModal = ({ showModal, closeCallback, submitCallback }) => {
             id="emailInput"
             onChange={handleEmailInputChange}
             value={emailInput}
+            required
           />
           <br />
         </div>
-        <input
-          type="radio"
-          name="exportType"
-          id="pushNotification"
-          checked={selectedType === "pushNotification"}
-          onChange={handleRadioInputChange}
-        />
-        <label htmlFor="pushNotification">Push Notification</label>
-        <br />
         <button type="submit">Download</button>
       </form>
     </ReactModal>
@@ -78,6 +86,7 @@ const ExportResultsModal = ({ showModal, closeCallback, submitCallback }) => {
 
 ExportResultsModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
+  showDirectDownloadOption: PropTypes.bool.isRequired,
   submitCallback: PropTypes.func.isRequired
 };
 

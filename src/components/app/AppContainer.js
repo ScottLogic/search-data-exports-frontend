@@ -7,6 +7,7 @@ import App from './App';
 const AppContainer = () => {
   const searchCriteria = useInputForm('');
   const [data, setData] = useState([]);
+  const [totalHitsCount, setTotalHitsCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [maxPages, setMaxPages] = useState(1);
   const [lastRequest, setLastRequest] = useState({});
@@ -33,11 +34,13 @@ const AppContainer = () => {
     APICall(request).then( (result) => {      
       setMaxPages(Math.ceil(result.TotalResults / request.ResultCount));
       setData(result.Results);
+      setTotalHitsCount(result.TotalResults);
       }
     ).catch( error => { 
       console.error(`Error in Search API-`,error);
       setMaxPages(0);
       setData([]);
+      setTotalHitsCount(0);
     })
   };
 
@@ -68,6 +71,7 @@ const AppContainer = () => {
     handlePageChange,
     handleExportClick,
     showModal,
+    totalHitsCount,
     handleModalClose,
     handleModalSubmit
   };

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useExportResultsModal = submitCallback => {
   const [emailInput, setEmailInput] = useState("");
-  const [selectedType, setSelectedType] = useState("directDownload");
+  const [selectedType, setSelectedType] = useState("pushNotification");
 
   const handleRadioInputChange = event => {
     event.persist();
