@@ -4,9 +4,17 @@ import './ResultList.css';
 
 const ResultList = ({ data }) => (
   <ul className="result-list">
-    {data.map((value, index) => <li key={index}>{resultFormat(value)}</li>)}
+    {data.map((value, index) => <li key={index}>{showResults(value)}</li>)}
   </ul>
 );
+
+const showResults = (result) => {  
+  switch ( result.Type ) {
+    case "posts" : return resultFormat(result);
+    case "users" : return userFormat(result);
+    default: return;
+  }  
+}
 
 const resultFormat = ({ UserID, DateCreated, Content, Tags }) => (
   <div className="container-result-row">
@@ -22,6 +30,21 @@ const resultFormat = ({ UserID, DateCreated, Content, Tags }) => (
       <i>
         {Tags.map(tag => `${tag} `)}
       </i>
+    </div>
+  </div>
+);
+
+const userFormat = ({ UserID, LastName, FirstName, EmailAddress }) => (
+  <div className="container-result-row">
+    <div className="container-result-row-contents container-result-row-user-date">
+      <div>{UserID}</div>      
+    </div>
+    <hr />
+    <div className="container-result-row-contents container-result-row-content">
+      {FirstName} {LastName}
+    </div>
+    <div className="container-result-row-contents container-result-row-tags">      
+      {EmailAddress}      
     </div>
   </div>
 );
