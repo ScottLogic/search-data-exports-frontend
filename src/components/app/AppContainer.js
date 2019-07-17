@@ -28,8 +28,16 @@ const AppContainer = () => {
   };
 
   //Make API call with request data
-  const fetchAndSetData = request => {
-    APICall(request, setMaxPages, setData);   
+  const fetchAndSetData = request => {    
+    APICall(request).then( (result) => {      
+      setMaxPages(Math.ceil(result.TotalResults / request.ResultCount));
+      setData(result.Results);
+      }
+    ).catch( error => { 
+      console.error(`Error in Search API-`,error);
+      setMaxPages(0);
+      setData([]);
+    })
   };
 
   const appProps = {
