@@ -10,13 +10,13 @@ const ResultList = ({ data }) => (
 
 const showResults = ( result ) => {  
   switch ( result.Type ) {
-    case "posts" : return resultFormat(result);
+    case "posts" : return postFormat(result);
     case "users" : return userFormat(result);
     default: return;
   }  
 }
 
-const resultFormat = ({ UserID, DateCreated, Content, Tags }) => (
+const postFormat = ({ UserID, DateCreated, Content, Tags }) => (
   <div className="container-result-row">
     <div className="container-result-row-contents container-result-row-user-date">
       <div>{UserID}</div>
