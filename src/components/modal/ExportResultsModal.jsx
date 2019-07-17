@@ -37,7 +37,7 @@ const ExportResultsModal = ({
       }}
     >
       <p>Select the download type:</p>
-      <form onSubmit={handleSubmit}>
+      <form className="export-results-form" onSubmit={handleSubmit}>
         <input
           type="radio"
           name="exportType"
@@ -47,7 +47,7 @@ const ExportResultsModal = ({
         />
         <label htmlFor="pushNotification">Push Notification</label>
         <br />
-        <div style={showDirectDownloadOption ? {} : { display: "none" }}>
+        <div className="direct-download" style={showDirectDownloadOption ? {} : { display: "none" }}>
           <input
             type="radio"
             name="exportType"
@@ -67,7 +67,7 @@ const ExportResultsModal = ({
         />
         <label htmlFor="email">Email</label>
         <br />
-        <div style={selectedType === "email" ? {} : { display: "none" }}>
+        <div className="email" style={selectedType === "email" ? {} : { display: "none" }}>
           <label htmlFor="emailInput">Enter your email:</label>
           <input
             type={selectedType === "email" ? "email" : "hidden"}

@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 import "./ResultList.css";
 
 const ResultList = ({ data, handleExportClick }) => {
-  const exportButton = data.length ? (<button onClick={handleExportClick}>Export Results</button>) : ("");
+  const exportButton = data.length ? (
+    <button id="exportResultsButton" onClick={handleExportClick}>
+      Export Results
+    </button>
+  ) : (
+    ""
+  );
   return (
     <ul className="result-list">
       {exportButton}
