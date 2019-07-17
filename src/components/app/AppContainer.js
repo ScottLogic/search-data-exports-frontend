@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useInputForm } from '../../utilities/hooks';
 import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
-import mockAPICall from '../../utilities/mockAPICall';
+import APICall from '../../utilities/APICall';
 import App from './App';
 
 const AppContainer = () => {
@@ -29,10 +29,16 @@ const AppContainer = () => {
   };
 
   //Make API call with request data
-  const fetchAndSetData = request => {
-    const response = mockAPICall(request);
-    setMaxPages(Math.ceil(response.hits.total.value / request.results));
-    setData(response.hits.hits);
+  const fetchAndSetData = request => {    
+    APICall(request).then( (result) => {      
+      setMaxPages(Math.ceil(result.TotalResults / request.ResultCount));
+      setData(result.Results);
+      }
+    ).catch( error => { 
+      console.error(`Error in Search API-`,error);
+      setMaxPages(0);
+      setData([]);
+    })
   };
 
   const handleExportClick = () => {

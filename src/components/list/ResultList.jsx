@@ -8,7 +8,7 @@ const ResultList = ({ data, handleExportClick }) => {
     <ul className="result-list">
       {exportButton}
       {data.map((value, index) => (
-        <li key={index}>{resultFormat(value._source)}</li>
+        <li key={index}>{resultFormat(value)}</li>
       ))}
     </ul>
   );
