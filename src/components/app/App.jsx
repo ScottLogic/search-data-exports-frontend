@@ -10,15 +10,7 @@ const App = ({ data, currentPage, maxPages, searchCriteria, handleSearch, handle
     <Header email="oforeman@scottlogic.com" />
     <div className="paper-display-page">
       <div className="container-index-select-form">
-        <form onSubmit={handleSearch}>
-          <div>
-            <input type="radio" id="userPostSearch" name="indexSearch" value="" defaultChecked />
-            <label htmlFor="userPostSearch">Both</label>
-            <input type="radio" id="userSearch" name="indexSearch" value="user" />
-            <label htmlFor="userSearch">User</label>
-            <input type="radio" id="postSearch" name="indexSearch" value="post" />
-            <label htmlFor="postSearch">Post</label>
-          </div>
+        <form onSubmit={handleSearch}>          
           <input name="searchInput" placeholder="Input search criteria" type="text" {...searchCriteria} required />
           <input type="submit" value="Search" />
         </form>
