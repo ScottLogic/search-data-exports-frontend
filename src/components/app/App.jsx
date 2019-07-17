@@ -4,8 +4,20 @@ import './App.css';
 import Header from '../header/Header';
 import ReactPaginate from 'react-paginate';
 import ResultList from '../list/ResultList';
+import ExportResultsModal from '../modal/ExportResultsModal';
 
-const App = ({ data, currentPage, maxPages, searchCriteria, handleSearch, handlePageChange }) => (
+const App = ({
+  data,
+  currentPage,
+  maxPages,
+  searchCriteria,
+  handleSearch,
+  handlePageChange,
+  handleExportClick,
+  showModal,
+  handleModalClose,
+  handleModalSubmit
+}) => (
   <div className="app">
     <Header email="oforeman@scottlogic.com" />
     <div className="paper-display-page">
@@ -24,7 +36,7 @@ const App = ({ data, currentPage, maxPages, searchCriteria, handleSearch, handle
         </form>
       </div>
       <div className="container-result-list">
-        <ResultList data={data} />
+        <ResultList data={data} handleExportClick={handleExportClick} />
       </div>
 
       <ReactPaginate
@@ -36,6 +48,7 @@ const App = ({ data, currentPage, maxPages, searchCriteria, handleSearch, handle
         onPageChange={handlePageChange}
         forcePage={currentPage}
       />
+      <ExportResultsModal showModal={showModal} submitCallback={handleModalSubmit} closeCallback={handleModalClose}/>
     </div>
   </div>
 );
@@ -46,7 +59,11 @@ App.propTypes = {
   maxPages: PropTypes.number.isRequired,
   searchCriteria: PropTypes.object.isRequired,
   handleSearch: PropTypes.func.isRequired,
-  handlePageChange: PropTypes.func.isRequired
+  handlePageChange: PropTypes.func.isRequired,
+  handleExportClick: PropTypes.func.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  handleModalClose: PropTypes.func.isRequired,
+  handleModalSubmit: PropTypes.func.isRequired
 };
 
 export default App;

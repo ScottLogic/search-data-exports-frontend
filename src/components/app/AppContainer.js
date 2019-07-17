@@ -10,6 +10,7 @@ const AppContainer = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [maxPages, setMaxPages] = useState(1);
   const [lastRequest, setLastRequest] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const handlePageChange = ({ selected }) => {
     const request = updateRequestPage(lastRequest, selected);
@@ -34,13 +35,35 @@ const AppContainer = () => {
     setData(response.hits.hits);
   };
 
+  const handleExportClick = () => {
+    setShowModal(true);    
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  const handleModalSubmit = (modalData) => {
+    handleModalClose();
+    switch (modalData.selectedType) {
+      case "directDownload": break;
+      case "email": break;
+      case "pushNotification": break;
+      default: break;
+    }
+  };
+
   const appProps = {
     data,
     currentPage,
     maxPages,
     searchCriteria,
     handleSearch,
-    handlePageChange
+    handlePageChange,
+    handleExportClick,
+    showModal,
+    handleModalClose,
+    handleModalSubmit
   };
 
   return (
