@@ -8,7 +8,7 @@ const ResultList = ({ data }) => (
   </ul>
 );
 
-const showResults = (result) => {  
+const showResults = ( result ) => {  
   switch ( result.Type ) {
     case "posts" : return resultFormat(result);
     case "users" : return userFormat(result);
