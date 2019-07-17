@@ -31,12 +31,14 @@ describe("<ResultList />", () => {
     }
   ];
 
+  const handleExportClick = jest.fn();
+
   beforeEach(() => {
-    wrapper = shallow(<ResultList data={testData} />);
+    wrapper = shallow(<ResultList data={testData} handleExportClick={handleExportClick} />);
   });
 
   it("Can handle an empty data set", () => {
-    const wrapper = shallow(<ResultList data={[]} />);
+    const wrapper = shallow(<ResultList data={[]} handleExportClick={handleExportClick}/>);
     expect(wrapper.find(".result-list li")).toHaveLength(0);
   });
 

@@ -13,7 +13,12 @@ describe('<App />', () => {
     maxPages: 1,
     searchCriteria: {},
     handleSearch: jest.fn(),
-    handlePageChange: jest.fn()
+    handlePageChange: jest.fn(),
+    handleExportClick: jest.fn(),
+    showModal: false,
+    totalHitsCount: 0,
+    handleModalClose: jest.fn(),
+    handleModalSubmit: jest.fn()
   };
 
   beforeEach(() => {

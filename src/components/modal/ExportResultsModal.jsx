@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ReactModal from "react-modal";
 import useExportResultsModal from "./ExportResultsModalContainer";
 
-ReactModal.setAppElement("#root");
+if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement("#root");
 
 const ExportResultsModal = ({
   showModal,
