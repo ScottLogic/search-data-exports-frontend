@@ -32,8 +32,8 @@
   outline:none;
   flex:1;
 }
-.container-index-select-form input[type="submit"]:hover {  
-  background-color: forestgreen;
+.container-index-select-form input[type="submit"]:hover {    
+  cursor: pointer;
 }
 
 
