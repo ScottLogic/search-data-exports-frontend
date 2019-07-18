@@ -10,9 +10,11 @@ const App = ({ data, currentPage, maxPages, searchCriteria, handleSearch, handle
     <Header email="oforeman@scottlogic.com" />
     <div className="paper-display-page">
       <div className="container-index-select-form">
-        <form onSubmit={handleSearch}>          
-          <input name="searchInput" placeholder="Input search criteria" type="text" {...searchCriteria} required />
-          <input type="submit" value="Search" />
+        <form onSubmit={handleSearch}>    
+          <span className="searchInputs">
+            <input name="searchInput" placeholder="Input search criteria" type="text" {...searchCriteria} required />
+            <input type="submit" value="Search" />
+          </span>
         </form>
       </div>
       <div className="container-result-list">
