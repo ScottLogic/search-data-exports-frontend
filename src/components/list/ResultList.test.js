@@ -31,24 +31,13 @@ describe("<ResultList />", () => {
     }
   ];
 
-  const handleExportClick = jest.fn();
-
   beforeEach(() => {
-    wrapper = shallow(<ResultList data={testData} handleExportClick={handleExportClick} />);
+    wrapper = shallow(<ResultList data={testData} />);
   });
 
   it("Can handle an empty data set", () => {
-    const wrapper = shallow(<ResultList data={[]} handleExportClick={handleExportClick}/>);
+    const wrapper = shallow(<ResultList data={[]}/>);
     expect(wrapper.find(".result-list li")).toHaveLength(0);
-  });
-
-  it("Does not render the export button for an empty dataset", () => {
-    const wrapper = shallow(<ResultList data={[]} handleExportClick={handleExportClick}/>);
-    expect(wrapper.find("#exportResultsButton")).toHaveLength(0);
-  });
-
-  it("Renders the export button for a populated dataset", () => {    
-    expect(wrapper.find("#exportResultsButton")).toHaveLength(1);
   });
 
   it("Renders a container for each data element", () => {

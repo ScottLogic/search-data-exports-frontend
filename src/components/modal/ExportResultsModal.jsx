@@ -78,6 +78,7 @@ const ExportResultsModal = ({
           />
           <br />
         </div>
+        <button type="button" onClick={closeCallback}>Cancel</button>
         <button type="submit">Download</button>
       </form>
     </ReactModal>
