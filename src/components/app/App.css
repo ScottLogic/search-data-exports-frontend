@@ -51,7 +51,7 @@
   display: inline-block;
   border: 1px solid rgb(200, 200, 200);
   font-size: 1em;
-  /*padding: 1vmin;*/
+  padding: 1vmin;
   cursor: pointer;
 }
 
