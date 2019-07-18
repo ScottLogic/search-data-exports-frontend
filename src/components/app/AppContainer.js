@@ -7,9 +7,11 @@ import App from './App';
 const AppContainer = () => {
   const searchCriteria = useInputForm('');
   const [data, setData] = useState([]);
+  const [totalHitsCount, setTotalHitsCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [maxPages, setMaxPages] = useState(1);
   const [lastRequest, setLastRequest] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const handlePageChange = ({ selected }) => {
     const request = updateRequestPage(lastRequest, selected);
@@ -32,12 +34,32 @@ const AppContainer = () => {
     APICall(request).then( (result) => { 
       setMaxPages(Math.ceil(result.TotalResults / request.results));
       setData(result.Results);
+      setTotalHitsCount(result.TotalResults);
       }
     ).catch( error => { 
       console.error(`Error in Search API-`,error);
       setMaxPages(0);
       setData([]);
+      setTotalHitsCount(0);
     })
+  };
+
+  const handleExportClick = () => {
+    setShowModal(true);    
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  const handleModalSubmit = (modalData) => {
+    handleModalClose();
+    switch (modalData.selectedType) {
+      case "directDownload": break;
+      case "email": break;
+      case "pushNotification": break;
+      default: break;
+    }
   };
 
   const appProps = {
@@ -46,7 +68,12 @@ const AppContainer = () => {
     maxPages,
     searchCriteria,
     handleSearch,
-    handlePageChange
+    handlePageChange,
+    handleExportClick,
+    showModal,
+    totalHitsCount,
+    handleModalClose,
+    handleModalSubmit
   };
 
   return (

@@ -36,7 +36,7 @@ describe("<ResultList />", () => {
   });
 
   it("Can handle an empty data set", () => {
-    const wrapper = shallow(<ResultList data={[]} />);
+    const wrapper = shallow(<ResultList data={[]}/>);
     expect(wrapper.find(".result-list li")).toHaveLength(0);
   });
 
