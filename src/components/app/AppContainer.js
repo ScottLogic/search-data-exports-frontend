@@ -24,7 +24,7 @@ const AppContainer = () => {
     e.preventDefault();
     setCurrentPage(0);
 
-    const request = createRequest(e.target.indexSearch.value, 10, 0, e.target.searchInput.value);
+    const request = createRequest("post", 10, 0, e.target.searchInput.value);
     setLastRequest(request);
     fetchAndSetData(request);
   };

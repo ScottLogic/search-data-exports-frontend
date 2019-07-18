@@ -1,7 +1,7 @@
 .app {
   text-align: center;
   background-color: whitesmoke;
-  height: 100%;
+  height: 100%;  
 }
 
 .paper-display-page {
@@ -15,12 +15,30 @@
 }
 
 .container-index-select-form {
-  margin: auto;
-  padding: 1vmin;
+  margin: 1vh 2vw 1vh 2vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 }
 
+.searchInputs{  
+  display: flex;
+}
+
+.container-index-select-form input {
+  padding: 1vmin;
+  border-radius: 2vmin;
+}
+.container-index-select-form input[type="text"] {    
+  outline:none;
+  flex:1;
+}
+.container-index-select-form input[type="submit"]:hover {    
+  cursor: pointer;
+}
+
+
 .container-result-list {
-  margin: auto;
+  margin: 0 2vw 0 2vw;
   flex-grow: 2;
 }
 
