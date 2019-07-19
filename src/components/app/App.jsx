@@ -5,6 +5,7 @@ import Header from "../header/Header";
 import ReactPaginate from "react-paginate";
 import ResultList from "../list/ResultList";
 import ExportResultsModal from "../modal/ExportResultsModal";
+import ReportsModal from "../reports/ReportsModal";
 
 const App = ({
   data,
@@ -17,7 +18,10 @@ const App = ({
   showModal,
   totalHitsCount,
   handleModalClose,
-  handleModalSubmit
+  handleModalSubmit,
+  showReportModal,
+  handleReportsModalClick,
+  handleReportsModalClose
 }) => {
   const exportButton = data.length ? (    
       <input type="button" id="exportResultsButton" onClick={handleExportClick} value="Export Results"/>    
@@ -36,7 +40,7 @@ const App = ({
         </div>
         <div className="container-index-options">
           {exportButton}
-          <input type="button" id="showReportsButton" onClick={() => console.log(`click`)} value="Reports"></input>          
+          <input type="button" id="showReportsButton" onClick={handleReportsModalClick} value="Reports"></input>          
         </div>
         <div className="container-result-list">
           <ResultList data={data} />
@@ -56,6 +60,11 @@ const App = ({
           showDirectDownloadOption={totalHitsCount < (process.env.REACT_APP_DIRECT_DOWNLOAD_LIMIT || 100)}
           submitCallback={handleModalSubmit}
           closeCallback={handleModalClose}
+        />
+        <ReportsModal
+          showModal={showReportModal}          
+          submitCallback={() => console.log(`CallBack`)}
+          closeCallback={handleReportsModalClose}
         />
       </div>
     </div>
