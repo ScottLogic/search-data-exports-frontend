@@ -47,8 +47,9 @@ const ReportsModal = ({
             onView: () => console.log(`Dummy View Event 2`),
             onDownload: () => console.log(`Dummy Download Event 2`)
           })}
-        </ul>        
-        <button type="button" onClick={closeCallback}>Cancel</button>        
+        </ul> 
+        <hr/>       
+        <input type="button" onClick={closeCallback} value="Close"/>
       </form>
     </ReactModal>
   );
