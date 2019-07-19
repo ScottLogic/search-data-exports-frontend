@@ -36,7 +36,10 @@ const App = ({
             </span>
           </form>
         </div>
-        {exportButton}
+        <div>
+          <input type="button" id="showReportsButton" onClick="" value="Reports"></input>
+          {exportButton}
+        </div>
         <div className="container-result-list">
           <ResultList data={data} />
         </div>
