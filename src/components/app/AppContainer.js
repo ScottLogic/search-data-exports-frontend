@@ -71,6 +71,11 @@ const AppContainer = () => {
     setShowReportModal(false);
   };
 
+  const handleRequestSubmit = (mode,report) => {
+    //handleReportsModalClose();
+    console.log(mode,report);
+  }
+
   const appProps = {
     data,
     currentPage,
@@ -86,6 +91,7 @@ const AppContainer = () => {
     showReportModal,
     handleReportsModalClick,
     handleReportsModalClose,
+    handleRequestSubmit
   };
 
   return (

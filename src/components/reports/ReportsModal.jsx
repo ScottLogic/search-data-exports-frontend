@@ -11,7 +11,9 @@ const ReportsModal = ({
   closeCallback,
   submitCallback
 }) => {
-  const { handleSubmit } = useReportsModal(submitCallback);
+  const { handleSubmit,
+    viewReport,
+    requestDownload } = useReportsModal(submitCallback);
 
   return (
     <ReactModal
@@ -38,14 +40,12 @@ const ReportsModal = ({
           {reportItem( {
             Name: "Post Frequency Report",
             Description: "Graph report of posts per hour for the last 24 hours.",
-            onView: () => console.log(`Dummy View Event`),
-            onDownload: () => console.log(`Dummy Download Event`)
+            onView: () => viewReport(`PostFreq`)
           })}
           {reportItem( {
             Name: "Trending Report",
             Description: "Report of the currently trending #tags.",
-            onView: () => console.log(`Dummy View Event 2`),
-            onDownload: () => console.log(`Dummy Download Event 2`)
+            onDownload: () => requestDownload(`Trending`)
           })}
         </ul> 
         <hr/>       
@@ -66,8 +66,8 @@ const reportItem = ( { Name, Description, Image = "default.png", onView, onDownl
         <p>{Description}</p>
       </div>
       <div className="reports-list-item-options">
-        <input type="button" value="View" onClick={onView} />
-        <input type="button" value="Download" onClick={onDownload} />
+        {onView && <input type="button" value="View" onClick={onView} />}
+        {onDownload && <input type="button" value="Download" onClick={onDownload} />}
       </div>
     </div>
   </li>

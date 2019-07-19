@@ -21,7 +21,8 @@ const App = ({
   handleModalSubmit,
   showReportModal,
   handleReportsModalClick,
-  handleReportsModalClose
+  handleReportsModalClose,
+  handleRequestSubmit
 }) => {
   const exportButton = data.length ? (    
       <input type="button" id="exportResultsButton" onClick={handleExportClick} value="Export Results"/>    
@@ -63,7 +64,7 @@ const App = ({
         />
         <ReportsModal
           showModal={showReportModal}          
-          submitCallback={() => console.log(`CallBack`)}
+          submitCallback={handleRequestSubmit}
           closeCallback={handleReportsModalClose}
         />
       </div>

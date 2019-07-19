@@ -6,9 +6,19 @@ const useReportsModal = submitCallback => {
       if (event) event.preventDefault();
       submitCallback();
     };
+
+    const viewReport = reportName => {
+      submitCallback("View",reportName);
+    }
+
+    const requestDownload = reportName => {
+      submitCallback("Download",reportName);
+    }
   
     return {
-      handleSubmit
+      handleSubmit,
+      viewReport,
+      requestDownload
     };
   };
   
