@@ -19,10 +19,8 @@ const App = ({
   handleModalClose,
   handleModalSubmit
 }) => {
-  const exportButton = data.length ? (
-    <div>
-      <button id="exportResultsButton" onClick={handleExportClick}>Export Results</button>
-    </div>
+  const exportButton = data.length ? (    
+      <input type="button" id="exportResultsButton" onClick={handleExportClick} value="Export Results"/>    
   ) : ("");
   return (
     <div className="app">
@@ -36,9 +34,9 @@ const App = ({
             </span>
           </form>
         </div>
-        <div>
-          <input type="button" id="showReportsButton" onClick="" value="Reports"></input>
+        <div className="container-index-options">
           {exportButton}
+          <input type="button" id="showReportsButton" onClick={() => console.log(`click`)} value="Reports"></input>          
         </div>
         <div className="container-result-list">
           <ResultList data={data} />
