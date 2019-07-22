@@ -12,6 +12,7 @@ const AppContainer = () => {
   const [maxPages, setMaxPages] = useState(1);
   const [lastRequest, setLastRequest] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePageChange = ({ selected }) => {
     const request = updateRequestPage(lastRequest, selected);
@@ -31,6 +32,7 @@ const AppContainer = () => {
 
   //Make API call with request data
   const fetchAndSetData = request => { 
+    setIsLoading(true);
     APICall(request).then( (result) => { 
       setMaxPages(Math.ceil(result.TotalResults / request.results));
       setData(result.Results);
@@ -41,7 +43,9 @@ const AppContainer = () => {
       setMaxPages(0);
       setData([]);
       setTotalHitsCount(0);
-    })
+    }).finally(() => {
+      setIsLoading(false);
+    });
   };
 
   const handleExportClick = () => {
@@ -73,7 +77,8 @@ const AppContainer = () => {
     showModal,
     totalHitsCount,
     handleModalClose,
-    handleModalSubmit
+    handleModalSubmit,
+    isLoading
   };
 
   return (
