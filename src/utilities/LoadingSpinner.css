@@ -1,11 +1,11 @@
 .loader {
   align-self: center;
-  border: 1vmin solid lightgray;
+  border: 1vmin solid lightgrey;
   border-top: 1vmin solid black;
   border-radius: 50%;
   width: 3vmin;
   height: 3vmin;
-  animation: spin 1.5s linear infinite; 
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
