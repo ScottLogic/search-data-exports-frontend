@@ -5,6 +5,7 @@ import Header from "../header/Header";
 import ReactPaginate from "react-paginate";
 import ResultList from "../list/ResultList";
 import ExportResultsModal from "../modal/ExportResultsModal";
+import LoadingSpinner from '../../utilities/LoadingSpinner';
 
 const App = ({
   data,
@@ -17,7 +18,8 @@ const App = ({
   showModal,
   totalHitsCount,
   handleModalClose,
-  handleModalSubmit
+  handleModalSubmit,
+  isLoading
 }) => {
   const exportButton = data.length ? (
     <div>
@@ -37,6 +39,9 @@ const App = ({
           </form>
         </div>
         {exportButton}
+
+        <LoadingSpinner isDisplayed={isLoading} />
+
         <div className="container-result-list">
           <ResultList data={data} />
         </div>
@@ -72,7 +77,8 @@ App.propTypes = {
   showModal: PropTypes.bool.isRequired,
   totalHitsCount: PropTypes.number.isRequired,
   handleModalClose: PropTypes.func.isRequired,
-  handleModalSubmit: PropTypes.func.isRequired
+  handleModalSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default App;
