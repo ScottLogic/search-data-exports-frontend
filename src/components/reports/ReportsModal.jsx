@@ -74,7 +74,8 @@ const reportItem = ( { name, description, image = "default.png", onView, onDownl
 );
 
 ReportsModal.propTypes = {
-  showModal: PropTypes.bool.isRequired,  
+  showModal: PropTypes.bool.isRequired, 
+  closeCallback: PropTypes.func.isRequired, 
   submitCallback: PropTypes.func.isRequired
 };
 
