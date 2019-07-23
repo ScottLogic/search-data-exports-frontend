@@ -83,7 +83,11 @@ App.propTypes = {
   showModal: PropTypes.bool.isRequired,
   totalHitsCount: PropTypes.number.isRequired,
   handleModalClose: PropTypes.func.isRequired,
-  handleModalSubmit: PropTypes.func.isRequired
+  handleModalSubmit: PropTypes.func.isRequired,
+  showReportModal : PropTypes.bool.isRequired,
+  handleReportsModalClick: PropTypes.func.isRequired,
+  handleReportsModalClose: PropTypes.func.isRequired,
+  handleRequestSubmit: PropTypes.func.isRequired
 };
 
 export default App;

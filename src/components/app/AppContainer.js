@@ -73,7 +73,7 @@ const AppContainer = () => {
 
   const handleRequestSubmit = (mode,report) => {    
     console.log(mode,report);    
-  }
+  };
 
   const appProps = {
     data,

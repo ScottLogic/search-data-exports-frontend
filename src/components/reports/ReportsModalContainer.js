@@ -1,5 +1,3 @@
-//import { useState } from "react";
-
 const useReportsModal = submitCallback => {    
   
     const handleSubmit = event => {
@@ -9,11 +7,11 @@ const useReportsModal = submitCallback => {
 
     const viewReport = reportName => {
       submitCallback("View",reportName);
-    }
+    };
 
     const requestDownload = reportName => {
       submitCallback("Download",reportName);
-    }
+    };
   
     return {
       handleSubmit,

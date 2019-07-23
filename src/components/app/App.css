@@ -67,11 +67,9 @@
   background-color: rgb(200, 200, 200);
 }
 
-/***/
 .container-index-options {
-  margin: 1vh 2vw 1vh 2vw;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+  margin: 1vh 2vw;
+  padding: 1vh 0;
   text-align: right;
 }
 

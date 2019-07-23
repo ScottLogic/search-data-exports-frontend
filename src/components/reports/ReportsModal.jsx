@@ -38,13 +38,13 @@ const ReportsModal = ({
         <hr/>
         <ul className="reports-list">          
           {reportItem( {
-            Name: "Post Frequency Report",
-            Description: "Graph report of posts per hour for the last 24 hours.",
+            name: "Post Frequency Report",
+            description: "Graph report of posts per hour for the last 24 hours.",
             onView: () => viewReport(`PostFreq`)
           })}
           {reportItem( {
-            Name: "Trending Report",
-            Description: "Report of the currently trending #tags.",
+            name: "Trending Report",
+            description: "Report of the currently trending #tags.",
             onDownload: () => requestDownload(`Trending`)
           })}
         </ul> 
@@ -55,15 +55,15 @@ const ReportsModal = ({
   );
 };
 
-const reportItem = ( { Name, Description, Image = "default.png", onView, onDownload}) => (
+const reportItem = ( { name, description, image = "default.png", onView, onDownload}) => (
   <li>
     <div className="reports-list-item">
       <div className="reports-list-item-image">
-        <img src={`/images/icons/${Image}`} alt={Name}></img>
+        <img src={`/images/icons/${image}`} alt={name}></img>
       </div>                
       <div className="reports-list-item-details">
-        <p>{Name}</p>
-        <p>{Description}</p>
+        <p>{name}</p>
+        <p>{description}</p>
       </div>
       <div className="reports-list-item-options">
         {onView && <input type="button" value="View" onClick={onView} />}
