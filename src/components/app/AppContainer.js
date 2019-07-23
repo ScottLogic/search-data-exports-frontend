@@ -15,6 +15,8 @@ const AppContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePageChange = ({ selected }) => {
+    if (isLoading) return;
+
     const request = updateRequestPage(lastRequest, selected);
 
     setCurrentPage(selected);
