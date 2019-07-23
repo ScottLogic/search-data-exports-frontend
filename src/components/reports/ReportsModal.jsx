@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
-import useReportsModal from "./ReportsModalContainer";
+import useReportsModal from "./ReportsModalHook";
 import "./ReportsModal.css";
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement("#root");
