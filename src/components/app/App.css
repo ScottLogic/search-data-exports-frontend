@@ -66,3 +66,14 @@
 .pagination .active {
   background-color: rgb(200, 200, 200);
 }
+
+.container-index-options {
+  margin: 1vh 2vw;
+  padding: 1vh 0;
+  text-align: right;
+}
+
+.container-index-options input {
+  padding: 1vmin;
+  border-radius: 2vmin;
+}

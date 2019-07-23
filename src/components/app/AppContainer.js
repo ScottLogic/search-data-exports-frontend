@@ -12,6 +12,7 @@ const AppContainer = () => {
   const [maxPages, setMaxPages] = useState(1);
   const [lastRequest, setLastRequest] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
 
   const handlePageChange = ({ selected }) => {
     const request = updateRequestPage(lastRequest, selected);
@@ -62,6 +63,18 @@ const AppContainer = () => {
     }
   };
 
+  const handleReportsModalClick = () => {
+    setShowReportModal(true);    
+  };
+
+  const handleReportsModalClose = () => {
+    setShowReportModal(false);
+  };
+
+  const handleRequestSubmit = (mode,report) => {    
+    console.log(mode,report);    
+  };
+
   const appProps = {
     data,
     currentPage,
@@ -73,7 +86,11 @@ const AppContainer = () => {
     showModal,
     totalHitsCount,
     handleModalClose,
-    handleModalSubmit
+    handleModalSubmit,
+    showReportModal,
+    handleReportsModalClick,
+    handleReportsModalClose,
+    handleRequestSubmit
   };
 
   return (
