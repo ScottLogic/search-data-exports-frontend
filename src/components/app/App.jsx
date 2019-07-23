@@ -7,6 +7,7 @@ import ResultList from "../list/ResultList";
 import ExportResultsModal from "../modal/ExportResultsModal";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import ReportsModal from "../reports/ReportsModal";
 
 const App = ({
   data,
@@ -19,12 +20,14 @@ const App = ({
   showModal,
   totalHitsCount,
   handleModalClose,
-  handleModalSubmit
+  handleModalSubmit,
+  showReportModal,
+  handleReportsModalClick,
+  handleReportsModalClose,
+  handleRequestSubmit
 }) => {
-  const exportButton = data.length ? (
-    <div>
-      <button id="exportResultsButton" onClick={handleExportClick}>Export Results</button>
-    </div>
+  const exportButton = data.length ? (    
+      <input type="button" id="exportResultsButton" onClick={handleExportClick} value="Export Results"/>    
   ) : ("");
   return (
     <div className="app">
@@ -38,7 +41,10 @@ const App = ({
             </span>
           </form>
         </div>
-        {exportButton}
+        <div className="container-index-options">
+          {exportButton}
+          <input type="button" id="showReportsButton" onClick={handleReportsModalClick} value="Reports"></input>          
+        </div>
         <div className="container-result-list">
           <ResultList data={data} />
         </div>
@@ -58,6 +64,11 @@ const App = ({
           submitCallback={handleModalSubmit}
           closeCallback={handleModalClose}
         />
+        <ReportsModal
+          showModal={showReportModal}          
+          submitCallback={handleRequestSubmit}
+          closeCallback={handleReportsModalClose}
+        />
         <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>
     </div>
@@ -75,7 +86,11 @@ App.propTypes = {
   showModal: PropTypes.bool.isRequired,
   totalHitsCount: PropTypes.number.isRequired,
   handleModalClose: PropTypes.func.isRequired,
-  handleModalSubmit: PropTypes.func.isRequired
+  handleModalSubmit: PropTypes.func.isRequired,
+  showReportModal : PropTypes.bool.isRequired,
+  handleReportsModalClick: PropTypes.func.isRequired,
+  handleReportsModalClose: PropTypes.func.isRequired,
+  handleRequestSubmit: PropTypes.func.isRequired
 };
 
 export default App;
