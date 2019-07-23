@@ -13,6 +13,7 @@ const AppContainer = () => {
   const [lastRequest, setLastRequest] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
 
   const handlePageChange = ({ selected }) => {
     if (isLoading) return;
@@ -68,6 +69,18 @@ const AppContainer = () => {
     }
   };
 
+  const handleReportsModalClick = () => {
+    setShowReportModal(true);    
+  };
+
+  const handleReportsModalClose = () => {
+    setShowReportModal(false);
+  };
+
+  const handleRequestSubmit = (mode,report) => {    
+    console.log(mode,report);    
+  };
+
   const appProps = {
     data,
     currentPage,
@@ -80,6 +93,10 @@ const AppContainer = () => {
     totalHitsCount,
     handleModalClose,
     handleModalSubmit,
+    showReportModal,
+    handleReportsModalClick,
+    handleReportsModalClose,
+    handleRequestSubmit,
     isLoading
   };
 

@@ -6,6 +6,7 @@ import ReactPaginate from "react-paginate";
 import ResultList from "../list/ResultList";
 import ExportResultsModal from "../modal/ExportResultsModal";
 import LoadingSpinner from '../../utilities/LoadingSpinner';
+import ReportsModal from "../reports/ReportsModal";
 
 const App = ({
   data,
@@ -19,12 +20,14 @@ const App = ({
   totalHitsCount,
   handleModalClose,
   handleModalSubmit,
+  showReportModal,
+  handleReportsModalClick,
+  handleReportsModalClose,
+  handleRequestSubmit,
   isLoading
 }) => {
-  const exportButton = data.length ? (
-    <div>
-      <button id="exportResultsButton" onClick={handleExportClick}>Export Results</button>
-    </div>
+  const exportButton = data.length ? (    
+      <input type="button" id="exportResultsButton" onClick={handleExportClick} value="Export Results"/>    
   ) : ("");
 
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
@@ -41,7 +44,11 @@ const App = ({
             </span>
           </form>
         </div>
-        {exportButton}
+
+        <div className="container-index-options">
+          {exportButton}
+          <input type="button" id="showReportsButton" onClick={handleReportsModalClick} value="Reports"></input>          
+        </div>
 
         <LoadingSpinner isDisplayed={isLoading} />
 
@@ -68,6 +75,11 @@ const App = ({
           submitCallback={handleModalSubmit}
           closeCallback={handleModalClose}
         />
+        <ReportsModal
+          showModal={showReportModal}          
+          submitCallback={handleRequestSubmit}
+          closeCallback={handleReportsModalClose}
+        />
       </div>
     </div>
   );
@@ -85,6 +97,10 @@ App.propTypes = {
   totalHitsCount: PropTypes.number.isRequired,
   handleModalClose: PropTypes.func.isRequired,
   handleModalSubmit: PropTypes.func.isRequired,
+  showReportModal : PropTypes.bool.isRequired,
+  handleReportsModalClick: PropTypes.func.isRequired,
+  handleReportsModalClose: PropTypes.func.isRequired,
+  handleRequestSubmit: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired
 };
 
