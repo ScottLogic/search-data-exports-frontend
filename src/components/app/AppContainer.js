@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useInputForm } from '../../utilities/hooks';
 import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
+import { handleEmailRequest } from '../../utilities/downloadRequest';
 import APICall from '../../utilities/APICall';
+import { toast } from 'react-toastify';
 import App from './App';
 
 const AppContainer = () => {
@@ -30,7 +32,7 @@ const AppContainer = () => {
   };
 
   //Make API call with request data
-  const fetchAndSetData = request => { 
+  const fetchAndSetData = request => {
     APICall(request).then( (result) => { 
       setMaxPages(Math.ceil(result.TotalResults / request.results));
       setData(result.Results);
@@ -41,24 +43,34 @@ const AppContainer = () => {
       setMaxPages(0);
       setData([]);
       setTotalHitsCount(0);
-    })
+      });
   };
 
   const handleExportClick = () => {
-    setShowModal(true);    
+    setShowModal(true);
   };
 
   const handleModalClose = () => {
     setShowModal(false);
   };
 
-  const handleModalSubmit = (modalData) => {
+  const handleModalSubmit = modalData => {
     handleModalClose();
     switch (modalData.selectedType) {
       case "directDownload": break;
-      case "email": break;
-      case "pushNotification": break;
-      default: break;
+      case "email":
+        handleEmailRequest(lastRequest, modalData.emailAddress)
+        .then(() =>
+            toast.success("Success! You will shortly receive an email."))
+        .catch(error => {
+            toast.error("Something went wrong, please try again.");
+            console.error(error);
+          });
+        break;
+      case "pushNotification":
+        break;
+      default:
+        break;
     }
   };
 
@@ -76,9 +88,7 @@ const AppContainer = () => {
     handleModalSubmit
   };
 
-  return (
-    <App {...appProps} />
-  );
+  return <App {...appProps} />;
 };
 
 export default AppContainer;

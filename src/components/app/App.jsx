@@ -5,6 +5,8 @@ import Header from "../header/Header";
 import ReactPaginate from "react-paginate";
 import ResultList from "../list/ResultList";
 import ExportResultsModal from "../modal/ExportResultsModal";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = ({
   data,
@@ -56,6 +58,7 @@ const App = ({
           submitCallback={handleModalSubmit}
           closeCallback={handleModalClose}
         />
+        <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>
     </div>
   );
