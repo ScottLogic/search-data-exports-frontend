@@ -1,24 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
-import useReportsModal from "./ReportsModalHook";
 import "./ReportsModal.css";
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement("#root");
 
 const ReportsModal = ({
   showModal,
-  closeCallback,
-  submitCallback
+  closeModal
 }) => {
-  const { handleSubmit,
-    viewReport,
-    requestDownload } = useReportsModal(submitCallback);
+  const handleSubmit = event => {
+    if (event) event.preventDefault();
+    console.log("Submit", event);
+  };
+  
+  const viewReport = reportName => {
+    console.log("View", reportName);
+  };
+
+  const requestDownload = reportName => {
+    console.log("Download", reportName);
+  };
 
   return (
     <ReactModal
       isOpen={showModal}
-      onRequestClose={closeCallback}      
+      onRequestClose={closeModal}      
       style={{
         overlay: {
           display: "flex",
@@ -49,7 +56,7 @@ const ReportsModal = ({
           })}
         </ul> 
         <hr/>       
-        <input type="button" onClick={closeCallback} value="Close"/>
+        <input type="button" onClick={closeModal} value="Close"/>
       </form>
     </ReactModal>
   );
@@ -75,8 +82,7 @@ const reportItem = ( { name, description, image = "default.png", onView, onDownl
 
 ReportsModal.propTypes = {
   showModal: PropTypes.bool.isRequired, 
-  closeCallback: PropTypes.func.isRequired, 
-  submitCallback: PropTypes.func.isRequired
+  closeModal: PropTypes.func.isRequired
 };
 
 export default ReportsModal;
