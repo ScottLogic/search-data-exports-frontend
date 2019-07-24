@@ -1,4 +1,4 @@
-import { UPDATE_MODAL_DISPLAYED } from '../actions/ReportsModal';
+import { UPDATE_REPORTS_MODAL_DISPLAYED } from '../actions/ReportsModal';
 
 const INITIAL_STATE = {
   modalDisplayed: false
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UPDATE_MODAL_DISPLAYED:
+    case UPDATE_REPORTS_MODAL_DISPLAYED:
       return {
         modalDisplayed: action.payload
       };
