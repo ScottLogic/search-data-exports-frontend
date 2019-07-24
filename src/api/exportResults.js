@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { DOWNLOAD_REQUEST_URL } from '../endpoints';
 
 const getDownloadRequest = (type, parameters, searchCriteria) => ({
   type,
@@ -11,7 +12,7 @@ const handleDirectDownloadRequest = async searchCriteria => {};
 
 const handleEmailRequest = async (searchCriteria, emailAddress) => {
   const request = getDownloadRequest("email", { emailAddress }, searchCriteria);
-  const response = await fetch(`${process.env.REACT_APP_API_URL || ""}/download-request/`,
+  const response = await fetch(DOWNLOAD_REQUEST_URL,
     {
       method: "POST",
       mode: "cors",

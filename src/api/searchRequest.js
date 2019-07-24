@@ -1,7 +1,8 @@
 import { searchResultsReceived } from '../actions/App';
+import { SEARCH_REQUEST_URL } from '../endpoints';
 
 export const fetchSearchResults = request => dispatch => {
-  fetch(`${process.env.REACT_APP_API_URL ||''}/search/`, {       
+  fetch(SEARCH_REQUEST_URL, {       
     method: 'POST',
     mode: 'cors'  ,
     body: JSON.stringify(request) ,       
