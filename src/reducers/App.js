@@ -4,8 +4,8 @@ const INITIAL_STATE = {
   data: [],
   totalHitsCount: 0,
   maxPages: 1,
-  currentPage,
-  lastRequest
+  currentPage: 0,
+  lastRequest: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
