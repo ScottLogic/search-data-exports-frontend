@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useInputForm } from '../../utilities/hooks';
 import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
+import { handleEmailRequest } from '../../api/exportResults';
 import APICall from '../../utilities/APICall';
+import { toast } from 'react-toastify';
 import App from './App';
 
 const AppContainer = () => {
@@ -52,20 +54,30 @@ const AppContainer = () => {
   };
 
   const handleExportClick = () => {
-    setShowModal(true);    
+    setShowModal(true);
   };
 
   const handleModalClose = () => {
     setShowModal(false);
   };
 
-  const handleModalSubmit = (modalData) => {
+  const handleModalSubmit = modalData => {
     handleModalClose();
     switch (modalData.selectedType) {
       case "directDownload": break;
-      case "email": break;
-      case "pushNotification": break;
-      default: break;
+      case "email":
+        handleEmailRequest(lastRequest, modalData.emailAddress)
+        .then(() =>
+            toast.success("Success! You will shortly receive an email."))
+        .catch(error => {
+            toast.error("Something went wrong, please try again.");
+            console.error(error);
+          });
+        break;
+      case "pushNotification":
+        break;
+      default:
+        break;
     }
   };
 
@@ -100,9 +112,7 @@ const AppContainer = () => {
     isLoading
   };
 
-  return (
-    <App {...appProps} />
-  );
+  return <App {...appProps} />;
 };
 
 export default AppContainer;
