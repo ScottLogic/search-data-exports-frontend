@@ -5,6 +5,7 @@ import Header from "../header/Header";
 import ReactPaginate from "react-paginate";
 import ResultList from "../list/ResultList";
 import ExportResultsModal from "../modal/ExportResultsModal";
+import LoadingSpinner from '../../utilities/LoadingSpinner';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from "../reports/ReportsModal";
@@ -24,11 +25,15 @@ const App = ({
   showReportModal,
   handleReportsModalClick,
   handleReportsModalClose,
-  handleRequestSubmit
+  handleRequestSubmit,
+  isLoading
 }) => {
   const exportButton = data.length ? (    
       <input type="button" id="exportResultsButton" onClick={handleExportClick} value="Export Results"/>    
   ) : ("");
+
+  const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
+
   return (
     <div className="app">
       <Header email="oforeman@scottlogic.com" />
@@ -37,14 +42,18 @@ const App = ({
           <form onSubmit={handleSearch}>    
             <span className="searchInputs">
               <input name="searchInput" placeholder="Input search criteria" type="text" {...searchCriteria} required />
-              <input type="submit" value="Search" />
+              <input type="submit" value="Search" disabled={isLoading} />
             </span>
           </form>
         </div>
+
         <div className="container-index-options">
           {exportButton}
           <input type="button" id="showReportsButton" onClick={handleReportsModalClick} value="Reports"></input>          
         </div>
+
+        <LoadingSpinner isDisplayed={isLoading} />
+
         <div className="container-result-list">
           <ResultList data={data} />
         </div>
@@ -53,6 +62,10 @@ const App = ({
           pageCount={maxPages}
           pageRangeDisplayed={5}
           marginPagesDisplayed={2}
+          breakClassName={pageNavigationClass}
+          previousClassName={pageNavigationClass}
+          nextClassName={pageNavigationClass}
+          pageClassName={pageNavigationClass}
           containerClassName={"pagination"}
           activeClassName={"active"}
           onPageChange={handlePageChange}
@@ -90,7 +103,8 @@ App.propTypes = {
   showReportModal : PropTypes.bool.isRequired,
   handleReportsModalClick: PropTypes.func.isRequired,
   handleReportsModalClose: PropTypes.func.isRequired,
-  handleRequestSubmit: PropTypes.func.isRequired
+  handleRequestSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default App;
