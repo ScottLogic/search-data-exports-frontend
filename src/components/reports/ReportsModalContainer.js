@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  closeModal: dispatch(updateModalDisplayed(false))
+  closeModal: () => dispatch(updateModalDisplayed(false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportsModal);
