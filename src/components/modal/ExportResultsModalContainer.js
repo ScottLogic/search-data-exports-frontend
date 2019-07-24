@@ -16,7 +16,7 @@ const useExportResultsModal = submitCallback => {
 
   const handleSubmit = event => {
     if (event) event.preventDefault();
-    submitCallback({ selectedType: selectedType, emailInput: emailInput });
+    submitCallback({ selectedType: selectedType, emailAddress: emailInput });
   };
 
   return {
