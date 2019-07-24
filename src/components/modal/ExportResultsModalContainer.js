@@ -1,31 +1,17 @@
-import { useState } from "react";
+import { connect } from 'react-redux';
+import ExportResultsModal from './ExportResultsModal';
+import { updateModalDisplayed } from '../../actions/ExportResultsModal';
+import { getModalDisplayed } from '../../selectors/ExportResultsModal';
+import { getLastRequest, getTotalHitsCount } from '../../selectors/App';
 
-const useExportResultsModal = submitCallback => {
-  const [emailInput, setEmailInput] = useState("");
-  const [selectedType, setSelectedType] = useState("pushNotification");
+const mapStateToProps = state => ({
+  showModal: getModalDisplayed(state),
+  lastRequest: getLastRequest(state),
+  totalHitsCount: getTotalHitsCount(state)
+});
 
-  const handleRadioInputChange = event => {
-    event.persist();
-    setSelectedType(event.target.id);
-  };
+const mapDispatchToProps = dispatch => ({
+  closeModal: () => dispatch(updateModalDisplayed(false))
+});
 
-  const handleEmailInputChange = event => {
-    event.persist();
-    setEmailInput(event.target.value);
-  };
-
-  const handleSubmit = event => {
-    if (event) event.preventDefault();
-    submitCallback({ selectedType: selectedType, emailAddress: emailInput });
-  };
-
-  return {
-    handleSubmit,
-    handleRadioInputChange,
-    handleEmailInputChange,
-    selectedType,
-    emailInput
-  };
-};
-
-export default useExportResultsModal;
+export default connect(mapStateToProps, mapDispatchToProps)(ExportResultsModal);
