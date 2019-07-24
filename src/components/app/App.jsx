@@ -4,31 +4,45 @@ import "./App.css";
 import Header from "../header/Header";
 import ReactPaginate from "react-paginate";
 import ResultList from "../list/ResultList";
-import ExportResultsModal from "../modal/ExportResultsModal";
+import ExportResultsModal from "../modal/ExportResultsModalContainer";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import ReportsModal from "../reports/ReportsModal";
+import ReportsModal from "../reports/ReportsModalContainer";
+import { useInputForm } from '../../utilities/hooks';
+import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
 
 const App = ({
   data,
-  currentPage,
   maxPages,
-  searchCriteria,
-  handleSearch,
-  handlePageChange,
-  handleExportClick,
-  showModal,
-  totalHitsCount,
-  handleModalClose,
-  handleModalSubmit,
-  showReportModal,
-  handleReportsModalClick,
-  handleReportsModalClose,
-  handleRequestSubmit
+  currentPage,
+  lastRequest,
+  setCurrentPage,
+  setLastRequest,
+  fetchSearchResults,
+  showExportResultsModal,
+  showReportsModal
 }) => {
+  const searchCriteria = useInputForm('');
+
+  const handlePageChange = ({ selected }) => {
+    const request = updateRequestPage(lastRequest, selected);
+    setCurrentPage(selected);
+    fetchSearchResults(request);
+  };
+  
+  const handleSearch = e => {
+    e.preventDefault();
+    setCurrentPage(0);
+
+    const request = createRequest("post", 10, 0, searchCriteria.value);
+    setLastRequest(request);
+    fetchSearchResults(request);
+  };
+
   const exportButton = data.length ? (    
-      <input type="button" id="exportResultsButton" onClick={handleExportClick} value="Export Results"/>    
+      <input type="button" id="exportResultsButton" onClick={showExportResultsModal} value="Export Results"/>    
   ) : ("");
+
   return (
     <div className="app">
       <Header email="oforeman@scottlogic.com" />
@@ -43,7 +57,7 @@ const App = ({
         </div>
         <div className="container-index-options">
           {exportButton}
-          <input type="button" id="showReportsButton" onClick={handleReportsModalClick} value="Reports"></input>          
+          <input type="button" id="showReportsButton" onClick={showReportsModal} value="Reports"></input>          
         </div>
         <div className="container-result-list">
           <ResultList data={data} />
@@ -58,17 +72,8 @@ const App = ({
           onPageChange={handlePageChange}
           forcePage={currentPage}
         />
-        <ExportResultsModal
-          showModal={showModal}
-          showDirectDownloadOption={totalHitsCount < (process.env.REACT_APP_DIRECT_DOWNLOAD_LIMIT || 100)}
-          submitCallback={handleModalSubmit}
-          closeCallback={handleModalClose}
-        />
-        <ReportsModal
-          showModal={showReportModal}          
-          submitCallback={handleRequestSubmit}
-          closeCallback={handleReportsModalClose}
-        />
+        <ExportResultsModal />
+        <ReportsModal />
         <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>
     </div>
@@ -77,20 +82,14 @@ const App = ({
 
 App.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentPage: PropTypes.number.isRequired,
   maxPages: PropTypes.number.isRequired,
-  searchCriteria: PropTypes.object.isRequired,
-  handleSearch: PropTypes.func.isRequired,
-  handlePageChange: PropTypes.func.isRequired,
-  handleExportClick: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
-  totalHitsCount: PropTypes.number.isRequired,
-  handleModalClose: PropTypes.func.isRequired,
-  handleModalSubmit: PropTypes.func.isRequired,
-  showReportModal : PropTypes.bool.isRequired,
-  handleReportsModalClick: PropTypes.func.isRequired,
-  handleReportsModalClose: PropTypes.func.isRequired,
-  handleRequestSubmit: PropTypes.func.isRequired
+  currentPage: PropTypes.number.isRequired,
+  lastRequest: PropTypes.object.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+  setLastRequest: PropTypes.func.isRequired,
+  fetchSearchResults: PropTypes.func.isRequired,
+  showExportResultsModal: PropTypes.func.isRequired,
+  showReportsModal: PropTypes.func.isRequired
 };
 
 export default App;
