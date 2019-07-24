@@ -1,6 +1,6 @@
-export const DISPLAY_EXPORT_RESULTS_MODAL_UPDATED = 'DISPLAY_EXPORT_RESULTS_MODAL_UPDATED';
+export const UPDATE_MODAL_DISPLAYED = 'UPDATE_MODAL_DISPLAYED';
 
-export const displayExportResultsModalUpdated = isDisplayed => ({
-  type: DISPLAY_EXPORT_RESULTS_MODAL_UPDATED,
+export const updateModalDisplayed = isDisplayed => ({
+  type: UPDATE_MODAL_DISPLAYED,
   payload: isDisplayed
 });
