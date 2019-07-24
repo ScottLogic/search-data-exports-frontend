@@ -24,7 +24,7 @@ export const fetchSearchResults = request => dispatch => {
     const results = {
       Results: [],
       TotalResults: 0,
-      MaxPages: 0
+      MaxPages: 1
     };
 
     dispatch(searchResultsReceived(results));
