@@ -56,6 +56,6 @@ describe("<ExportResultsModal />", () => {
     wrapper.find('input#emailInput').simulate('change', {target: {value: "hello@world.com"}, persist: jest.fn() });
     wrapper.find('form.export-results-form').simulate('submit');
     expect(submitCallback).toHaveBeenCalledTimes(1);
-    expect(submitCallback).toHaveBeenCalledWith({selectedType: "email", emailInput: "hello@world.com" });
+    expect(submitCallback).toHaveBeenCalledWith({selectedType: "email", emailAddress: "hello@world.com" });
   });
 });

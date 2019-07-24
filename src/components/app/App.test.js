@@ -18,7 +18,12 @@ describe('<App />', () => {
     showModal: false,
     totalHitsCount: 0,
     handleModalClose: jest.fn(),
-    handleModalSubmit: jest.fn()
+    handleModalSubmit: jest.fn(),
+    showReportModal: false,
+    handleReportsModalClick: jest.fn(),
+    handleReportsModalClose: jest.fn(),
+    handleRequestSubmit: jest.fn(),
+    isLoading: false
   };
   const testData = [
     {

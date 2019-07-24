@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useInputForm } from '../../utilities/hooks';
 import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
-import { handleEmailRequest } from '../../utilities/downloadRequest';
+import { handleEmailRequest } from '../../api/exportResults';
 import APICall from '../../utilities/APICall';
 import { toast } from 'react-toastify';
 import App from './App';
