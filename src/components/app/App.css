@@ -36,6 +36,9 @@
   cursor: pointer;
 }
 
+.container-index-select-form input[type="submit"]:disabled {
+  cursor: not-allowed;
+}
 
 .container-result-list {
   margin: 0 2vw 0 2vw;
@@ -47,7 +50,7 @@
   padding: 0;
 }
 
-.pagination li {
+.pages {
   display: inline-block;
   border: 1px solid rgb(200, 200, 200);
   font-size: 1em;
@@ -55,16 +58,21 @@
   cursor: pointer;
 }
 
-.pagination li:hover {
+.pages:hover {
   background-color: rgba(200, 200, 200, 0.5);
 }
 
-.pagination .disabled {
-  visibility: hidden;
+.pages.active {
+  background-color: rgb(200, 200, 200) !important;
 }
 
-.pagination .active {
-  background-color: rgb(200, 200, 200);
+.pages.loading, .pages.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.pages.loading:hover {
+  background: transparent;
 }
 
 .container-index-options {
