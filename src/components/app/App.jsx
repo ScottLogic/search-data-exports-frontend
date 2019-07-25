@@ -33,7 +33,7 @@ const App = ({
   };
   
   const handleSearch = e => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setCurrentPage(0);
 
     const request = createRequest("post", 10, 0, searchCriteria.value);
