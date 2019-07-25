@@ -1,13 +1,14 @@
-version: 2
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
   build:
-    working_directory: ~/sde-frontend
     docker:
       - image: circleci/node:10.15.1
     steps:
       - checkout
       - run:
-          name: Installations 
+          name: Installations
           command: npm ci
       - run:
           name: Run Tests
@@ -15,3 +16,32 @@ jobs:
       - run:
           name: Build Client
           command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+  deploy:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - attach_workspace:
+          at: .
+      - aws-s3/sync:
+          from: build
+          to: "s3://sde-dev-scott-logic-site"
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+          aws-region: $AWS_REGION
+          overwrite: true
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
