@@ -44,6 +44,7 @@ const ExportResultsModal = ({
         <input
           type="radio"
           name="exportType"
+          id="pushNotification"
           value="pushNotification"
           checked={selectedType === "pushNotification"}
           onChange={handleTypeChange}
@@ -54,6 +55,7 @@ const ExportResultsModal = ({
           <input
             type="radio"
             name="exportType"
+            id="directDownload"
             value="directDownload"
             checked={selectedType === "directDownload"}
             onChange={handleTypeChange}
@@ -64,6 +66,7 @@ const ExportResultsModal = ({
         <input
           type="radio"
           name="exportType"
+          id="email"
           value="email"
           checked={selectedType === "email"}
           onChange={handleTypeChange}
