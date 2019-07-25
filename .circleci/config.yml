@@ -29,9 +29,9 @@ jobs:
       - aws-s3/sync:
           from: build
           to: "s3://sde-dev-scott-logic-site"
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
-          aws-region: $AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_REGION
           overwrite: true
 
 workflows:
