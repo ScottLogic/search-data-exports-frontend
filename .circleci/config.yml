@@ -44,6 +44,4 @@ workflows:
             - build
           filters:
             branches:
-              only: 
-                - master
-                - SDE-78-circleci-build-deploy
+              only: master
