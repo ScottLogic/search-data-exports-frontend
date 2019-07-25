@@ -1,7 +1,8 @@
-import { searchResultsReceived } from '../actions/App';
+import { searchResultsReceived, isLoadingUpdated } from '../actions/App';
 import { SEARCH_REQUEST_URL } from '../endpoints';
 
 export const fetchSearchResults = request => dispatch => {
+  dispatch(isLoadingUpdated(true));
   fetch(SEARCH_REQUEST_URL, {       
     method: 'POST',
     mode: 'cors'  ,
@@ -28,5 +29,7 @@ export const fetchSearchResults = request => dispatch => {
     };
 
     dispatch(searchResultsReceived(results));
+  }).finally(() => {
+    dispatch(isLoadingUpdated(false));
   });
 };
