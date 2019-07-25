@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/sde-frontend
     docker:
       - image: circleci/node:10.15.1
     steps:
@@ -15,3 +14,25 @@ jobs:
       - run:
           name: Build Client
           command: npm run build
+  deploy:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
+          command: aws s3 sync build s3://sde-dev-scott-logic-site/ --delete
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
