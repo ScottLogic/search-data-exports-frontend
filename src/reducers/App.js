@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   totalHitsCount: 0,
   maxPages: 1,
   currentPage: 0,
-  lastRequest: {}
+  lastRequest: {},
+  isLoading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,6 +27,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         lastRequest: action.payload
+      };
+    case actions.IS_LOADING_UPDATED:
+      return {
+        ...state,
+        isLoading: action.payload
       };
     default:
       return state;
