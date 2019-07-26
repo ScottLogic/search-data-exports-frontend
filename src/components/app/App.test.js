@@ -7,24 +7,20 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('<App />', () => {
   let wrapper;
+
   const appProps = {
     data: [],
-    currentPage: 0,
     maxPages: 1,
-    searchCriteria: {},
-    handleSearch: jest.fn(),
-    handlePageChange: jest.fn(),
-    handleExportClick: jest.fn(),
-    showModal: false,
-    totalHitsCount: 0,
-    handleModalClose: jest.fn(),
-    handleModalSubmit: jest.fn(),
-    showReportModal: false,
-    handleReportsModalClick: jest.fn(),
-    handleReportsModalClose: jest.fn(),
-    handleRequestSubmit: jest.fn(),
-    isLoading: false
+    currentPage: 0,
+    lastRequest: {},
+    isLoading: false,
+    setCurrentPage: jest.fn(),
+    setLastRequest: jest.fn(),
+    fetchSearchResults: jest.fn(),
+    showExportResultsModal: jest.fn(),
+    showReportsModal: jest.fn()
   };
+
   const testData = [
     {
       Type: "posts",
@@ -65,9 +61,24 @@ describe('<App />', () => {
     expect(wrapper.find('.pagination')).toBeDefined();
   });
 
-  it('Calls the handleSearch function when the search form is submitted', () => {
+  it('Searching sets the current page and last request, and makes an API call', () => {
+    const expectedRequest = {
+      type: 'post',
+      results: 10,
+      page: 0,
+      search: [
+        { field: 'all', value: '' }
+      ]
+    };
+    
     wrapper.find('.container-index-select-form form').simulate('submit');
-    expect(appProps.handleSearch).toHaveBeenCalledTimes(1);
+
+    expect(appProps.setCurrentPage).toHaveBeenCalledTimes(1);
+    expect(appProps.setCurrentPage).toHaveBeenCalledWith(0);
+    expect(appProps.setLastRequest).toHaveBeenCalledTimes(1);
+    expect(appProps.setLastRequest).toHaveBeenCalledWith(expectedRequest);
+    expect(appProps.fetchSearchResults).toHaveBeenCalledTimes(1);
+    expect(appProps.fetchSearchResults).toHaveBeenCalledWith(expectedRequest);
   });
 
   it("Does not render the export button for an empty dataset", () => {
@@ -84,6 +95,6 @@ describe('<App />', () => {
     const newProps = {...appProps, data: testData}
     wrapper = shallow(<App {...newProps} />);
     wrapper.find("#exportResultsButton").simulate("click");    
-    expect(newProps.handleExportClick).toHaveBeenCalledTimes(1);
+    expect(newProps.showExportResultsModal).toHaveBeenCalledTimes(1);
   });
 });
