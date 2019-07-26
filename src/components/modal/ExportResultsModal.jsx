@@ -1,28 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
-import useExportResultsModal from "./ExportResultsModalContainer";
+import { useInputForm } from '../../utilities/hooks';
+import { handleModalSubmit } from '../../api/exportResults';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement("#root");
 
 const ExportResultsModal = ({
   showModal,
-  showDirectDownloadOption,
-  closeCallback,
-  submitCallback
+  lastRequest,
+  totalHitsCount,
+  closeModal
 }) => {
-  const {
-    handleSubmit,
-    handleRadioInputChange,
-    handleEmailInputChange,
-    selectedType,
-    emailInput
-  } = useExportResultsModal(submitCallback);
+  const emailInput = useInputForm('');
+  const { value: selectedType, onChange: handleTypeChange } = useInputForm('pushNotification');
+  const showDirectDownloadOption = totalHitsCount < (process.env.REACT_APP_DIRECT_DOWNLOAD_LIMIT || 100);
+
+  const handleSubmit = event => {
+    if (event) event.preventDefault();
+    closeModal();
+    handleModalSubmit({ selectedType, emailAddress: emailInput.value }, lastRequest);
+  };
 
   return (
     <ReactModal
       isOpen={showModal}
-      onRequestClose={closeCallback}
+      onRequestClose={closeModal}
       style={{
         overlay: {
           display: "flex",
@@ -42,8 +45,9 @@ const ExportResultsModal = ({
           type="radio"
           name="exportType"
           id="pushNotification"
+          value="pushNotification"
           checked={selectedType === "pushNotification"}
-          onChange={handleRadioInputChange}
+          onChange={handleTypeChange}
         />
         <label htmlFor="pushNotification">Push Notification</label>
         <br />
@@ -52,8 +56,9 @@ const ExportResultsModal = ({
             type="radio"
             name="exportType"
             id="directDownload"
+            value="directDownload"
             checked={selectedType === "directDownload"}
-            onChange={handleRadioInputChange}
+            onChange={handleTypeChange}
           />
           <label htmlFor="directDownload">Direct Download</label>
           <br />
@@ -62,8 +67,9 @@ const ExportResultsModal = ({
           type="radio"
           name="exportType"
           id="email"
+          value="email"
           checked={selectedType === "email"}
-          onChange={handleRadioInputChange}
+          onChange={handleTypeChange}
         />
         <label htmlFor="email">Email</label>
         <br />
@@ -72,13 +78,12 @@ const ExportResultsModal = ({
           <input
             type={selectedType === "email" ? "email" : "hidden"}
             id="emailInput"
-            onChange={handleEmailInputChange}
-            value={emailInput}
+            {...emailInput}
             required
           />
           <br />
         </div>
-        <button type="button" onClick={closeCallback}>Cancel</button>
+        <button type="button" onClick={closeModal}>Cancel</button>
         <button type="submit">Download</button>
       </form>
     </ReactModal>
@@ -87,8 +92,9 @@ const ExportResultsModal = ({
 
 ExportResultsModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
-  showDirectDownloadOption: PropTypes.bool.isRequired,
-  submitCallback: PropTypes.func.isRequired
+  lastRequest: PropTypes.object.isRequired,
+  totalHitsCount: PropTypes.number.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 
 export default ExportResultsModal;
