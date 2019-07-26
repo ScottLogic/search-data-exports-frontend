@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/ScottLogic/search-data-exports-frontend.svg?style=svg&circle-token=d7daa10ea7ae5395d3f8d70922fa62bfdb2a6e70)](https://circleci.com/gh/ScottLogic/search-data-exports-frontend)
+[![CircleCI Status](https://circleci.com/gh/ScottLogic/search-data-exports-frontend.svg?style=svg&circle-token=d7daa10ea7ae5395d3f8d70922fa62bfdb2a6e70)](https://circleci.com/gh/ScottLogic/search-data-exports-frontend)
 
 ## Notes - 19/07/2019 
 To run locally, create a local .env file based on the template in .env.local which will contain the URL of which to point to the search API gateway. 
