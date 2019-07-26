@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case UPDATE_RESULTS_MODAL_DISPLAYED:
       return {
         modalDisplayed: action.payload
