@@ -9,8 +9,11 @@
         "extensions": [".js", "jsx"]
       }
     ],
-    "prettier/prettier": "error",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "react/forbid-prop-types": "off",
+    "no-console": "off",
+    // Deprecated
+    "jsx-a11y/label-has-for": "off"
   },
   "env": {
     "browser": true,
