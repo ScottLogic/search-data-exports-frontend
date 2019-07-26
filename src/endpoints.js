@@ -1,4 +1,4 @@
-const rootURL = `${process.env.REACT_APP_API_URL || ""}`;
+const rootURL = `${process.env.REACT_APP_API_URL || ''}`;
 
 export const SEARCH_REQUEST_URL = `${rootURL}/search/`;
 

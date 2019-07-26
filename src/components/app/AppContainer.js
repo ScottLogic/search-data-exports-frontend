@@ -1,10 +1,16 @@
 import { connect } from 'react-redux';
 import App from './App';
-import { getData, getMaxPages, getCurrentPage, getLastRequest, getIsLoading } from '../../selectors/App';
+import {
+  getData,
+  getMaxPages,
+  getCurrentPage,
+  getLastRequest,
+  getIsLoading
+} from '../../selectors/App';
 import { pageUpdated, requestUpdated } from '../../actions/App';
 import { updateModalDisplayed as showExportResultsModal } from '../../actions/ExportResultsModal';
 import { updateModalDisplayed as showReportsModal } from '../../actions/ReportsModal';
-import { fetchSearchResults } from '../../api/searchRequest';
+import fetchSearchResults from '../../api/searchRequest';
 
 const mapStateToProps = state => ({
   data: getData(state),
@@ -22,4 +28,7 @@ const mapDispatchToProps = dispatch => ({
   showReportsModal: () => dispatch(showReportsModal(true))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

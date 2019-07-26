@@ -4,8 +4,8 @@ describe('Request Creator', () => {
   const type = 'user';
   const results = 10;
   const page = 0;
-  const searchVal = 'Test Search'
-  
+  const searchVal = 'Test Search';
+
   it('createRequest returns an API request object', () => {
     const expectedRequest = {
       type,

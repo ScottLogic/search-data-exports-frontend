@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ExportResultsModal from './ExportResultsModal';
 import { updateModalDisplayed } from '../../actions/ExportResultsModal';
-import { getModalDisplayed } from '../../selectors/ExportResultsModal';
+import getModalDisplayed from '../../selectors/ExportResultsModal';
 import { getLastRequest, getTotalHitsCount } from '../../selectors/App';
 
 const mapStateToProps = state => ({

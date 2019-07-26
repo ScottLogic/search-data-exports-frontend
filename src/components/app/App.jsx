@@ -1,16 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./App.css";
-import Header from "../header/Header";
-import ReactPaginate from "react-paginate";
-import ResultList from "../list/ResultList";
-import ExportResultsModal from "../modal/ExportResultsModalContainer";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './App.css';
+import ReactPaginate from 'react-paginate';
+import { ToastContainer } from 'react-toastify';
+import Header from '../header/Header';
+import ResultList from '../list/ResultList';
+import ExportResultsModal from '../modal/ExportResultsModalContainer';
 import LoadingSpinner from '../../utilities/LoadingSpinner';
-import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import ReportsModal from "../reports/ReportsModalContainer";
-import { useInputForm } from '../../utilities/hooks';
-import { createRequest, updateRequestPage } from '../../utilities/requestCreator';
+import ReportsModal from '../reports/ReportsModalContainer';
+import useInputForm from '../../utilities/hooks';
+import {
+  createRequest,
+  updateRequestPage
+} from '../../utilities/requestCreator';
 
 const App = ({
   data,
@@ -31,19 +34,26 @@ const App = ({
     setCurrentPage(selected);
     fetchSearchResults(request);
   };
-  
-  const handleSearch = e => {
+
+  const handleSearch = (e) => {
     if (e) e.preventDefault();
     setCurrentPage(0);
 
-    const request = createRequest("post", 10, 0, searchCriteria.value);
+    const request = createRequest('post', 10, 0, searchCriteria.value);
     setLastRequest(request);
     fetchSearchResults(request);
   };
 
-  const exportButton = data.length ? (    
-      <input type="button" id="exportResultsButton" onClick={showExportResultsModal} value="Export Results"/>    
-  ) : ("");
+  const exportButton = data.length ? (
+    <input
+      type="button"
+      id="exportResultsButton"
+      onClick={showExportResultsModal}
+      value="Export Results"
+    />
+  ) : (
+    ''
+  );
 
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
 
@@ -52,9 +62,15 @@ const App = ({
       <Header email="oforeman@scottlogic.com" />
       <div className="paper-display-page">
         <div className="container-index-select-form">
-          <form onSubmit={handleSearch}>    
+          <form onSubmit={handleSearch}>
             <span className="searchInputs">
-              <input name="searchInput" placeholder="Input search criteria" type="text" {...searchCriteria} required />
+              <input
+                name="searchInput"
+                placeholder="Input search criteria"
+                type="text"
+                {...searchCriteria}
+                required
+              />
               <input type="submit" value="Search" disabled={isLoading} />
             </span>
           </form>
@@ -62,7 +78,12 @@ const App = ({
 
         <div className="container-index-options">
           {exportButton}
-          <input type="button" id="showReportsButton" onClick={showReportsModal} value="Reports"></input>          
+          <input
+            type="button"
+            id="showReportsButton"
+            onClick={showReportsModal}
+            value="Reports"
+          />
         </div>
 
         <LoadingSpinner isDisplayed={isLoading} />
@@ -79,8 +100,8 @@ const App = ({
           previousClassName={pageNavigationClass}
           nextClassName={pageNavigationClass}
           pageClassName={pageNavigationClass}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
+          containerClassName="pagination"
+          activeClassName="active"
           onPageChange={handlePageChange}
           forcePage={currentPage}
         />

@@ -6,45 +6,42 @@ const getDownloadRequest = (type, parameters, searchCriteria) => ({
   parameters,
   searchCriteria
 });
-  
+
 // TODO: Placeholder for handling direct download export requests
-const handleDirectDownloadRequest = async searchCriteria => {};
+// const handleDirectDownloadRequest = async searchCriteria => {};
 
 const handleEmailRequest = async (searchCriteria, emailAddress) => {
-  const request = getDownloadRequest("email", { emailAddress }, searchCriteria);
-  const response = await fetch(DOWNLOAD_REQUEST_URL,
-    {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(request),
-      headers: { "Content-Type": "application/json" }
-    }
-  );
+  const request = getDownloadRequest('email', { emailAddress }, searchCriteria);
+  const response = await fetch(DOWNLOAD_REQUEST_URL, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify(request),
+    headers: { 'Content-Type': 'application/json' }
+  });
 
   if (!response.ok) throw Error(response.statusText);
 };
 
 // TODO: Placeholder for handling push notification export requests
-const handlePushNotificationRequest = async searchCriteria => {};
+// const handlePushNotificationRequest = async searchCriteria => {};
 
-export const handleModalSubmit = (modalData, lastRequest) => {
+export default (modalData, lastRequest) => {
   switch (modalData.selectedType) {
-    case "directDownload": 
-      handleDirectDownloadRequest();  
+    case 'directDownload':
+      // handleDirectDownloadRequest();
       break;
-    case "email":
+    case 'email':
       handleEmailRequest(lastRequest, modalData.emailAddress)
-      .then(() =>
-          toast.success("Success! You will shortly receive an email."))
-      .catch(error => {
-          toast.error("Something went wrong, please try again.");
+        .then(() => toast.success('Success! You will shortly receive an email.'))
+        .catch((error) => {
+          toast.error('Something went wrong, please try again.');
           console.error(error);
         });
       break;
-    case "pushNotification":
-      handlePushNotificationRequest();
+    case 'pushNotification':
+      // handlePushNotificationRequest();
       break;
     default:
       break;
-  };
+  }
 };
