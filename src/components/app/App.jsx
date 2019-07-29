@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import Header from '../header/Header';
 import ResultList from '../list/ResultList';
 import ExportResultsModal from '../modal/ExportResultsModalContainer';
-import LoadingSpinner from '../../utilities/LoadingSpinner';
+import LoadingSpinner from '../reusableComponents/LoadingSpinner';
 import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from '../reports/ReportsModalContainer';
 import useInputForm from '../../utilities/hooks';
