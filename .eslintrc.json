@@ -1,0 +1,24 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb"],
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", "jsx"]
+      }
+    ],
+    "comma-dangle": "off",
+    "react/forbid-prop-types": "off",
+    "no-console": "off",
+    // Deprecated
+    "jsx-a11y/label-has-for": "off"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "serviceworker": true,
+    "jest": true
+  }
+}

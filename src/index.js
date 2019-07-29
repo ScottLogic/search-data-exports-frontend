@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Provider } from 'react-redux';
 import App from './components/app/AppContainer';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 
 const store = configureStore();

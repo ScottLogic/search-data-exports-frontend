@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ReportsModal from './ReportsModal';
-import { getModalDisplayed } from '../../selectors/ReportsModal';
+import getModalDisplayed from '../../selectors/ReportsModal';
 import { updateModalDisplayed } from '../../actions/ReportsModal';
 
 const mapStateToProps = state => ({

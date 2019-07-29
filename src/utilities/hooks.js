@@ -1,11 +1,9 @@
 import { useState } from 'react';
 
-export const useInputForm = initValue => {
+export default (initValue) => {
   const [value, setValue] = useState(initValue);
 
-  const handleValueChange = e => {
-    setValue(e.target.value);
-  };
+  const handleValueChange = e => setValue(e.target.value);
 
   return {
     value,
