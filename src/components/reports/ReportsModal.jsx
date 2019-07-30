@@ -113,6 +113,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
         showModal={showDownloadModal}
         onSubmit={handleDownloadModalSubmit}
         onClose={handleDownloadModalClose}
+        capitaliseOutput
       />
     </ReactModal>
   );

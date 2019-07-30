@@ -8,7 +8,7 @@ const camelCaseToText = (text) => {
   return result.charAt(0).toUpperCase() + result.slice(1);
 };
 
-const radioButtonFormat = (option, selectedType, onChange) => (
+const radioButtonFormat = (option, selectedType, onChange, capitaliseOutput) => (
   <label htmlFor={option}>
     <input
       type="radio"
@@ -19,7 +19,7 @@ const radioButtonFormat = (option, selectedType, onChange) => (
       onChange={onChange}
       required
     />
-    {camelCaseToText(option)}
+    {capitaliseOutput ? option.toUpperCase() : camelCaseToText(option)}
   </label>
 );
 
@@ -44,7 +44,8 @@ const DownloadModal = ({
   options,
   showModal,
   onSubmit,
-  onClose
+  onClose,
+  capitaliseOutput = false
 }) => {
   const emailInput = useInputForm('');
   const { value: selectedType, onChange: handleTypeChange } = useInputForm(
@@ -72,7 +73,7 @@ const DownloadModal = ({
       <form className="download-options-form" onSubmit={onSubmit}>
         {options.map(option => (
           <React.Fragment key={option}>
-            {radioButtonFormat(option, selectedType, handleTypeChange)}
+            {radioButtonFormat(option, selectedType, handleTypeChange, capitaliseOutput)}
             <br />
           </React.Fragment>
         ))}
@@ -90,7 +91,8 @@ DownloadModal.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   showModal: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  capitaliseOutput: PropTypes.bool
 };
 
 export default DownloadModal;
