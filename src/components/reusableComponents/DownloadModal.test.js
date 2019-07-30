@@ -10,7 +10,6 @@ describe('<DownloadModal />', () => {
 
   const defaultProps = {
     options: ['optionOne', 'optionTwo', 'optionThree'],
-    defaultSelectedOption: 'optionOne',
     showModal: true,
     onSubmit: jest.fn(),
     onClose: jest.fn()
@@ -27,8 +26,8 @@ describe('<DownloadModal />', () => {
     }
   });
 
-  it('Checks the defaultSelectedOption', () => {
-    const radioElement = wrapper.find(`#${defaultProps.defaultSelectedOption}`).getElement();
+  it('Checks the first option as the default selected', () => {
+    const radioElement = wrapper.find(`#${defaultProps.options[0]}`).getElement();
     expect(radioElement.props.checked).toBeTruthy();
   });
 

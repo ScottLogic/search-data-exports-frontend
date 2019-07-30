@@ -42,14 +42,13 @@ const emailInputFormat = (selectedType, emailInput) => (
 
 const DownloadModal = ({
   options,
-  defaultSelectedOption,
   showModal,
   onSubmit,
   onClose
 }) => {
   const emailInput = useInputForm('');
   const { value: selectedType, onChange: handleTypeChange } = useInputForm(
-    defaultSelectedOption
+    options[0]
   );
 
   return (
@@ -89,7 +88,6 @@ const DownloadModal = ({
 
 DownloadModal.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  defaultSelectedOption: PropTypes.string.isRequired,
   showModal: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired

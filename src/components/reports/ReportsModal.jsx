@@ -110,7 +110,6 @@ const ReportsModal = ({ showModal, closeModal }) => {
       </form>
       <DownloadModal
         options={options}
-        defaultSelectedOption={options[0]}
         showModal={showDownloadModal}
         onSubmit={handleDownloadModalSubmit}
         onClose={handleDownloadModalClose}

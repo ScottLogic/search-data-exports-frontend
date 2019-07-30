@@ -36,7 +36,6 @@ const ExportResultsModal = ({
   return (
     <DownloadModal
       options={downloadOptions}
-      defaultSelectedOption={downloadOptions[0]}
       showModal={showModal}
       onSubmit={handleSubmit}
       onClose={closeModal}
