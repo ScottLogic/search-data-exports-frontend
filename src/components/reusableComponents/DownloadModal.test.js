@@ -22,7 +22,7 @@ describe('<DownloadModal />', () => {
 
   it('Renders all the options', () => {
     const elements = wrapper.find('[name="downloadType"]').getElements();
-    for (let i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i += 1) {
       expect(elements[i].props.value).toEqual(defaultProps.options[i]);
     }
   });
@@ -35,7 +35,7 @@ describe('<DownloadModal />', () => {
   it('Doesnt render an email input field if email is not an option', () => {
     const elements = wrapper.find('input').getElements();
     expect(elements).toHaveLength(defaultProps.options.length);
-    for (let i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i += 1) {
       expect(elements[i].props.id).toEqual(defaultProps.options[i]);
     }
   });
@@ -50,7 +50,7 @@ describe('<DownloadModal />', () => {
     const elements = wrapper.find('input').getElements();
 
     expect(elements).toHaveLength(updatedProps.options.length + 1);
-    for (let i = 0; i < elements.length - 1; i++) {
+    for (let i = 0; i < elements.length - 1; i += 1) {
       expect(elements[i].props.id).toEqual(updatedProps.options[i]);
     }
     expect(elements[elements.length - 1].props.id).toEqual('emailInput');
@@ -79,7 +79,7 @@ describe('<DownloadModal />', () => {
   });
 
   it('Calls the onClose function when the close button is clicked', () => {
-    wrapper.find('button').first().simulate('click')
+    wrapper.find('button').first().simulate('click');
     expect(defaultProps.onClose).toHaveBeenCalledTimes(1);
   });
 
