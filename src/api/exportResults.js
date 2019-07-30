@@ -7,8 +7,24 @@ const getDownloadRequest = (type, parameters, searchCriteria) => ({
   searchCriteria
 });
 
-// TODO: Placeholder for handling direct download export requests
-// const handleDirectDownloadRequest = async searchCriteria => {};
+const handleDirectDownloadRequest = async (searchCriteria) => {
+  const request = getDownloadRequest('direct', null, searchCriteria);
+  fetch(DOWNLOAD_REQUEST_URL, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify(request),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(result => result.json())
+    .then((resultJson) => {
+      console.log(resultJson);
+      toast.info('Download request sent, your download will be available soon.');
+    })
+    .catch((error) => {
+      console.error(error);
+      toast.error('Something went wrong, please try again.');
+    });
+};
 
 const handleEmailRequest = async (searchCriteria, emailAddress) => {
   const request = getDownloadRequest('email', { emailAddress }, searchCriteria);
@@ -28,7 +44,7 @@ const handleEmailRequest = async (searchCriteria, emailAddress) => {
 export default (modalData, lastRequest) => {
   switch (modalData.selectedType) {
     case 'directDownload':
-      // handleDirectDownloadRequest();
+      handleDirectDownloadRequest(lastRequest);
       break;
     case 'email':
       handleEmailRequest(lastRequest, modalData.emailAddress)
