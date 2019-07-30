@@ -45,7 +45,7 @@ const DownloadModal = ({
   showModal,
   onSubmit,
   onClose,
-  capitaliseOutput = false
+  capitaliseOutput
 }) => {
   const emailInput = useInputForm('');
   const { value: selectedType, onChange: handleTypeChange } = useInputForm(
@@ -93,6 +93,10 @@ DownloadModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   capitaliseOutput: PropTypes.bool
+};
+
+DownloadModal.defaultProps = {
+  capitaliseOutput: false
 };
 
 export default DownloadModal;
