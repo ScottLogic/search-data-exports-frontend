@@ -17,6 +17,7 @@ const radioButtonFormat = (option, selectedType, onChange) => (
       value={option}
       checked={selectedType === option}
       onChange={onChange}
+      required
     />
     {camelCaseToText(option)}
   </label>
