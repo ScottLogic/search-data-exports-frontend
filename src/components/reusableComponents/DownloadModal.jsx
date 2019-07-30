@@ -70,7 +70,7 @@ const DownloadModal = ({
       }}
     >
       <p>Select the download type:</p>
-      <form className="export-results-form" onSubmit={onSubmit}>
+      <form className="download-options-form" onSubmit={onSubmit}>
         {options.map(option => (
           <React.Fragment key={option}>
             {radioButtonFormat(option, selectedType, handleTypeChange)}

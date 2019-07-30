@@ -25,12 +25,12 @@ const ExportResultsModal = ({
   };
 
   const downloadOptions = [
-    'directDownload',
+    'pushNotification',
     'email'
   ];
 
   if (totalHitsCount < (process.env.REACT_APP_DIRECT_DOWNLOAD_LIMIT || 100)) {
-    downloadOptions.unshift('pushNotification');
+    downloadOptions.unshift('directDownload');
   }
 
   return (
