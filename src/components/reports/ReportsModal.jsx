@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import './ReportsModal.css';
+import DownloadModal from '../reusableComponents/DownloadModal';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
@@ -32,6 +33,22 @@ const reportItem = ({
 );
 
 const ReportsModal = ({ showModal, closeModal }) => {
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
+  const [selectedReport, setSelectedReport] = useState('');
+  const [options, setOptions] = useState(['pdf']);
+
+  const handleDownloadModalSubmit = (e) => {
+    if (e) e.preventDefault();
+    handleDownloadModalClose();
+    console.log('Report:', selectedReport);
+    console.log('Download Type:', e.target.downloadType.value);
+  };
+
+  const handleDownloadModalClose = () => {
+    setShowDownloadModal(false);
+    setOptions(['pdf']);
+  };
+
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
     console.log('Submit', event);
@@ -41,8 +58,12 @@ const ReportsModal = ({ showModal, closeModal }) => {
     console.log('View', reportName);
   };
 
-  const requestDownload = (reportName) => {
-    console.log('Download', reportName);
+  const requestDownload = (reportName, onlyPDF = false) => {
+    if (!onlyPDF) {
+      setOptions([...options, 'png', 'svg']);
+    }
+    setSelectedReport(reportName);
+    setShowDownloadModal(true);
   };
 
   return (
@@ -74,17 +95,26 @@ const ReportsModal = ({ showModal, closeModal }) => {
             name: 'Post Frequency Report',
             description:
               'Graph report of posts per hour for the last 24 hours.',
-            onView: () => viewReport('PostFreq')
+            onView: () => viewReport('PostFreq'),
+            onDownload: () => requestDownload('PostFreq')
           })}
           {reportItem({
             name: 'Trending Report',
             description: 'Report of the currently trending #tags.',
-            onDownload: () => requestDownload('Trending')
+            onView: () => viewReport('Trending'),
+            onDownload: () => requestDownload('Trending', true)
           })}
         </ul>
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
       </form>
+      <DownloadModal
+        options={options}
+        defaultSelectedOption={options[0]}
+        showModal={showDownloadModal}
+        onSubmit={handleDownloadModalSubmit}
+        onClose={handleDownloadModalClose}
+      />
     </ReactModal>
   );
 };
