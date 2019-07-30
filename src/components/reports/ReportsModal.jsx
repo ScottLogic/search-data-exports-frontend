@@ -37,16 +37,16 @@ const ReportsModal = ({ showModal, closeModal }) => {
   const [selectedReport, setSelectedReport] = useState('');
   const [options, setOptions] = useState(['pdf']);
 
+  const handleDownloadModalClose = () => {
+    setShowDownloadModal(false);
+    setOptions(['pdf']);
+  };
+
   const handleDownloadModalSubmit = (e) => {
     if (e) e.preventDefault();
     handleDownloadModalClose();
     console.log('Report:', selectedReport);
     console.log('Download Type:', e.target.downloadType.value);
-  };
-
-  const handleDownloadModalClose = () => {
-    setShowDownloadModal(false);
-    setOptions(['pdf']);
   };
 
   const handleSubmit = (event) => {
