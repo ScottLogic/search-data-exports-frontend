@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
-import { DOWNLOAD_REQUEST_URL, REPORT_STATUS_URL } from '../endpoints';
+import { DOWNLOAD_REQUEST_URL } from '../endpoints';
+import executionPoller from '../utilities/executionPoller';
 
 const getDownloadRequest = (type, parameters, searchCriteria) => ({
   type,
@@ -8,10 +9,8 @@ const getDownloadRequest = (type, parameters, searchCriteria) => ({
 });
 
 const handleDirectDownloadRequest = async (searchCriteria) => {
-  let executionArn;
-
   const request = getDownloadRequest('direct', null, searchCriteria);
-  await fetch(DOWNLOAD_REQUEST_URL, {
+  fetch(DOWNLOAD_REQUEST_URL, {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(request),
@@ -19,24 +18,17 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
   })
     .then(resultJson => resultJson.json())
     .then((result) => {
-      console.log(result);
       toast.info('Download request sent, your download will be available soon.');
-      executionArn = result.executionArn;
+      return executionPoller(result.executionArn, 500); 
+    })
+    .then((downloadLink) => {
+      console.log('Download Link:', downloadLink);
+      toast.info(`Click here to start your download: ${downloadLink}`);
     })
     .catch((error) => {
       console.error(error);
       toast.error('Something went wrong, please try again.');
     });
-
-  fetch(REPORT_STATUS_URL, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify({executionArn}),
-    headers: { 'Content-Type': 'application/json' }
-  })
-    .then(resultJson => resultJson.json())
-    .then(result => console.log(result))
-    .catch(err => console.error(err));
 };
 
 const handleEmailRequest = async (searchCriteria, emailAddress) => {
