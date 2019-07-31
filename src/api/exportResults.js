@@ -19,7 +19,7 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
     .then(resultJson => resultJson.json())
     .then((result) => {
       toast.info('Download request sent, your download will begin soon.');
-      return executionPoller(result.executionArn, 500); 
+      return executionPoller(result.executionArn, 500);
     })
     .then((downloadLink) => {
       console.log('Download Link:', downloadLink);
