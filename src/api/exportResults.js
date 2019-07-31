@@ -28,12 +28,10 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
       toast.error('Something went wrong, please try again.');
     });
 
-  console.log(executionArn);
-
   fetch(REPORT_STATUS_URL, {
     method: 'POST',
     mode: 'cors',
-    body: JSON.stringify(executionArn),
+    body: JSON.stringify({executionArn}),
     headers: { 'Content-Type': 'application/json' }
   })
     .then(resultJson => resultJson.json())
