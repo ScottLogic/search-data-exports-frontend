@@ -13,13 +13,15 @@ export default (executionArn, timeout) => {
         .then((result) => {
           if (result.status === 'RUNNING') {
             setTimeout(waitForURL, timeout);
+          } else if (result.status === 'FAILED') {
+            return reject('Error with step function execution');
           } else {
             return resolve(result.reportURL);
           }
         })
         .catch((err) => {
           console.error(err);
-          return reject();
+          return reject(err);
         });
     })();
   });
