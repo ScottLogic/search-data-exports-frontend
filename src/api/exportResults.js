@@ -18,12 +18,12 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
   })
     .then(resultJson => resultJson.json())
     .then((result) => {
-      toast.info('Download request sent, your download will be available soon.');
+      toast.info('Download request sent, your download will begin soon.');
       return executionPoller(result.executionArn, 500); 
     })
     .then((downloadLink) => {
       console.log('Download Link:', downloadLink);
-      toast.info(`Click here to start your download: ${downloadLink}`);
+      window.location.assign(downloadLink);
     })
     .catch((error) => {
       console.error(error);
