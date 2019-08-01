@@ -122,8 +122,13 @@ reportItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  onView: PropTypes.func.isRequired,
-  onDownload: PropTypes.func.isRequired
+  onView: PropTypes.func,
+  onDownload: PropTypes.func
+};
+
+reportItem.defaultProps = {
+  onView: undefined,
+  onDownload: undefined
 };
 
 ReportsModal.propTypes = {

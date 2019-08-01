@@ -5,7 +5,7 @@ const emptySearch = {
   search: []
 };
 
-const handleDownloadRequest = async (reportURL, searchCriteria) => {  
+const handleDownloadRequest = async (reportURL, searchCriteria) => {
   toast.info('Download request sent, your download will begin soon.');
   fetch(reportURL, {
     method: 'POST',
