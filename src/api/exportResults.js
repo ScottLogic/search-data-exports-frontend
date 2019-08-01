@@ -11,6 +11,7 @@ const getDownloadRequest = (type, parameters, searchCriteria) => ({
 
 const handleDirectDownloadRequest = async (searchCriteria) => {
   const request = getDownloadRequest('direct', null, searchCriteria);
+  toast.info('Download request sent, your download will begin soon.');
   fetch(DOWNLOAD_REQUEST_URL, {
     method: 'POST',
     mode: 'cors',
@@ -19,7 +20,6 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
   })
     .then(resultJson => resultJson.json())
     .then((result) => {
-      toast.info('Download request sent, your download will begin soon.');
       return executionPoller(result.executionArn, 500);
     })
     .then((downloadLink) => {
@@ -45,6 +45,7 @@ const handleEmailRequest = async (searchCriteria, emailAddress) => {
 
 const handlePushNotificationRequest = async (searchCriteria) => {
   const request = getDownloadRequest('push', null, searchCriteria);
+  toast.info('Request sent, you will receive a notification with your download shortly.');
   fetch(DOWNLOAD_REQUEST_URL, {
     method: 'POST',
     mode: 'cors',
@@ -53,7 +54,6 @@ const handlePushNotificationRequest = async (searchCriteria) => {
   })
     .then(resultJson => resultJson.json())
     .then((response) => {
-      toast.info('Request sent, you will receive a notification with your download shortly.');
       connectWebsocket(response);
     })
     .catch((error) => {
