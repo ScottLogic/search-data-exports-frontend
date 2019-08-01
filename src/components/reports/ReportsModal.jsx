@@ -46,7 +46,6 @@ const ReportsModal = ({ showModal, closeModal }) => {
   const handleDownloadModalSubmit = (e) => {
     if (e) e.preventDefault();
     handleDownloadModalClose();
-    console.log(e.target.downloadType.value);
     handleModalSubmit({
       selectedType: e.target.downloadType.value,
       reportName: selectedReport
