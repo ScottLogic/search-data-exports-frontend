@@ -46,6 +46,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
   const handleDownloadModalSubmit = (e) => {
     if (e) e.preventDefault();
     handleDownloadModalClose();
+    console.log(e.target.downloadType.value);
     handleModalSubmit({
       selectedType: e.target.downloadType.value,
       reportName: selectedReport
@@ -55,6 +56,14 @@ const ReportsModal = ({ showModal, closeModal }) => {
 
   const viewReport = (reportName) => {
     console.log('View', reportName);
+  };
+
+  const downloadPDF = (reportName) => {
+    handleModalSubmit({
+      selectedType: 'pdf',
+      reportName
+    });
+    closeModal();
   };
 
   const requestDownload = (reportName, onlyPDF = false) => {
@@ -100,8 +109,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
           {reportItem({
             name: 'Trending Report',
             description: 'Report of the currently trending #tags.',
-            onView: () => viewReport('Trending'),
-            onDownload: () => requestDownload('Trending', true)
+            onDownload: () => downloadPDF('Trending')
           })}
         </ul>
         <hr />
