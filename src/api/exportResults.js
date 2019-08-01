@@ -19,9 +19,7 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
     headers: { 'Content-Type': 'application/json' }
   })
     .then(resultJson => resultJson.json())
-    .then((result) => {
-      return executionPoller(result.executionArn, 500);
-    })
+    .then(result => executionPoller(result.executionArn, 500))
     .then((downloadLink) => {
       window.location.assign(downloadLink);
     })
