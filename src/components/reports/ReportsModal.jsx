@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import './ReportsModal.css';
 import DownloadModal from '../reusableComponents/DownloadModal';
+import handleModalSubmit from '../../api/reportResults';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
@@ -45,13 +46,11 @@ const ReportsModal = ({ showModal, closeModal }) => {
   const handleDownloadModalSubmit = (e) => {
     if (e) e.preventDefault();
     handleDownloadModalClose();
-    console.log('Report:', selectedReport);
-    console.log('Download Type:', e.target.downloadType.value);
-  };
-
-  const handleSubmit = (event) => {
-    if (event) event.preventDefault();
-    console.log('Submit', event);
+    handleModalSubmit({
+      selectedType: e.target.downloadType.value,
+      reportName: selectedReport
+    });
+    closeModal();
   };
 
   const viewReport = (reportName) => {
@@ -87,7 +86,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
         }
       }}
     >
-      <form className="reports-form" onSubmit={handleSubmit}>
+      <form className="reports-form">
         <h1>Available Reports</h1>
         <hr />
         <ul className="reports-list">
