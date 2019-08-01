@@ -53,7 +53,7 @@ const handlePushNotificationRequest = async (searchCriteria) => {
   })
     .then(resultJson => resultJson.json())
     .then((response) => {
-      toast.info('Request sent, you will receive a notification with your download shortly.')
+      toast.info('Request sent, you will receive a notification with your download shortly.');
       connectWebsocket(response);
     })
     .catch((error) => {
