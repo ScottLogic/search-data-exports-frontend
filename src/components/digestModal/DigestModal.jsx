@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OptionsModal from '../reusableComponents/OptionsModal';
+import digestRequest from '../../api/digestRequest';
 
-const DigestModal = ({ showModal, closeModal }) => {
+const DigestModal = ({ showModal, lastRequest, closeModal }) => {
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
     closeModal();
-    console.log('Subscribe modal submitted with option:', event.target.selectedOption.value);
+    digestRequest({
+      frequency: event.target.selectedOption.value,
+      searchCriteria: lastRequest
+    });
   };
 
-  const subscriptionOptions = ['Daily', 'Real-time'];
+  const subscriptionOptions = ['daily', 'realTime'];
 
   return (
     <OptionsModal
@@ -25,6 +29,7 @@ const DigestModal = ({ showModal, closeModal }) => {
 
 DigestModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
+  lastRequest: PropTypes.object.isRequired,
   closeModal: PropTypes.func.isRequired
 };
 
