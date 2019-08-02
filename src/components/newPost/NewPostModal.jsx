@@ -9,15 +9,18 @@ if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 const NewPostModal = ({ showModal, closeModal }) => {
   const newPostInput = useInputForm('');
   const newTagsInput = useInputForm('');
+
   const resetContent = (event) => {
     if (event) event.preventDefault();
     newPostInput.setValue('');
     newTagsInput.setValue('');
   };
+
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
     console.log('Form Submitted', newPostInput.value, newTagsInput.value);
   };
+
   return (
     <ReactModal
       isOpen={showModal}
