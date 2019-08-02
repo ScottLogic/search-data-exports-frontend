@@ -23,7 +23,7 @@ const handleDownloadRequest = async (reportURL, searchCriteria) => {
     });
 };
 
-export default (modalData) => {  
+export default (modalData) => {
   switch (modalData.reportName) {
     case 'PostFreq':
       handleDownloadRequest(GRAPHICAL_REQUEST_URL, emptySearch);
