@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import { DOWNLOAD_REQUEST_URL } from '../endpoints';
 import executionPoller from '../utilities/executionPoller';
+import connectWebsocket from '../utilities/websocket';
 
 const getDownloadRequest = (type, parameters, searchCriteria) => ({
   type,
@@ -10,6 +11,7 @@ const getDownloadRequest = (type, parameters, searchCriteria) => ({
 
 const handleDirectDownloadRequest = async (searchCriteria) => {
   const request = getDownloadRequest('direct', null, searchCriteria);
+  toast.info('Download request sent, your download will begin soon.');
   fetch(DOWNLOAD_REQUEST_URL, {
     method: 'POST',
     mode: 'cors',
@@ -17,12 +19,8 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
     headers: { 'Content-Type': 'application/json' }
   })
     .then(resultJson => resultJson.json())
-    .then((result) => {
-      toast.info('Download request sent, your download will begin soon.');
-      return executionPoller(result.executionArn, 500);
-    })
+    .then(result => executionPoller(result.executionArn, 500))
     .then((downloadLink) => {
-      console.log('Download Link:', downloadLink);
       window.location.assign(downloadLink);
     })
     .catch((error) => {
@@ -43,8 +41,22 @@ const handleEmailRequest = async (searchCriteria, emailAddress) => {
   if (!response.ok) throw Error(response.statusText);
 };
 
-// TODO: Placeholder for handling push notification export requests
-// const handlePushNotificationRequest = async searchCriteria => {};
+const handlePushNotificationRequest = async (searchCriteria) => {
+  const request = getDownloadRequest('push', null, searchCriteria);
+  toast.info('Request sent, you will receive a notification with your download shortly.');
+  fetch(DOWNLOAD_REQUEST_URL, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify(request),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(resultJson => resultJson.json())
+    .then(response => connectWebsocket(response))
+    .catch((error) => {
+      console.error(error);
+      toast.error('Something went wrong, please try again.');
+    });
+};
 
 export default (modalData, lastRequest) => {
   switch (modalData.selectedType) {
@@ -60,7 +72,7 @@ export default (modalData, lastRequest) => {
         });
       break;
     case 'pushNotification':
-      // handlePushNotificationRequest();
+      handlePushNotificationRequest(lastRequest);
       break;
     default:
       break;
