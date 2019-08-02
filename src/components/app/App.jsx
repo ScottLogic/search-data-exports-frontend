@@ -9,6 +9,7 @@ import ExportResultsModal from '../modal/ExportResultsModalContainer';
 import LoadingSpinner from '../reusableComponents/LoadingSpinner';
 import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from '../reports/ReportsModalContainer';
+import NewPostModal from '../newPost/NewPostModalContainer';
 import DigestModal from '../digestModal/DigestModalContainer';
 import useInputForm from '../../utilities/hooks';
 import {
@@ -27,6 +28,7 @@ const App = ({
   fetchSearchResults,
   showExportResultsModal,
   showReportsModal,
+  showNewPostModal,
   showDigestModal
 }) => {
   const searchCriteria = useInputForm('');
@@ -92,6 +94,12 @@ const App = ({
           {exportButton}
           <input
             type="button"
+            id="addPostButton"
+            onClick={showNewPostModal}
+            value="Add Post"
+          />
+          <input
+            type="button"
             id="showReportsButton"
             onClick={showReportsModal}
             value="Reports"
@@ -119,6 +127,7 @@ const App = ({
         />
         <ExportResultsModal />
         <ReportsModal />
+        <NewPostModal />
         <DigestModal />
         <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>
@@ -137,6 +146,7 @@ App.propTypes = {
   fetchSearchResults: PropTypes.func.isRequired,
   showExportResultsModal: PropTypes.func.isRequired,
   showReportsModal: PropTypes.func.isRequired,
+  showNewPostModal: PropTypes.func.isRequired,
   showDigestModal: PropTypes.func.isRequired
 };
 
