@@ -86,4 +86,22 @@ describe('<OptionsModal />', () => {
     wrapper.find('.download-options-form').simulate('submit');
     expect(defaultProps.onSubmit).toHaveBeenCalledTimes(1);
   });
+
+  it('Renders the correct title if the modalTitle prop is set', () => {
+    const expectedTitle = 'Test Title';
+    const updatedProps = { ...defaultProps, modalTitle: expectedTitle };
+
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
+
+    expect(wrapper.find('p').first().text()).toEqual(`${expectedTitle}:`);
+  });
+
+  it('Renders the correct text for the submit button if the submitButtonText prop is set', () => {
+    const expectedText = 'Test Button Text';
+    const updatedProps = { ...defaultProps, submitButtonText: expectedText };
+
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
+
+    expect(wrapper.find('button[type="submit"]').first().text()).toEqual(expectedText);
+  });
 });

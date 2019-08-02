@@ -18,7 +18,8 @@ describe('<App />', () => {
     setLastRequest: jest.fn(),
     fetchSearchResults: jest.fn(),
     showExportResultsModal: jest.fn(),
-    showReportsModal: jest.fn()
+    showReportsModal: jest.fn(),
+    showDigestModal: jest.fn()
   };
 
   const testData = [
@@ -94,5 +95,22 @@ describe('<App />', () => {
     wrapper = shallow(<App {...newProps} />);
     wrapper.find('#exportResultsButton').simulate('click');
     expect(newProps.showExportResultsModal).toHaveBeenCalledTimes(1);
+  });
+
+  it('Does not render the digest subscribe button for an empty dataset', () => {
+    expect(wrapper.find('#digestSubscribeButton')).toHaveLength(0);
+  });
+
+  it('Renders the digest subscribe button for a populated dataset', () => {
+    const newProps = { ...appProps, data: testData };
+    wrapper = shallow(<App {...newProps} />);
+    expect(wrapper.find('#digestSubscribeButton')).toHaveLength(1);
+  });
+
+  it('Calls showDigestModal when the digest subscribe button is clicked', () => {
+    const newProps = { ...appProps, data: testData };
+    wrapper = shallow(<App {...newProps} />);
+    wrapper.find('#digestSubscribeButton').simulate('click');
+    expect(newProps.showDigestModal).toHaveBeenCalledTimes(1);
   });
 });
