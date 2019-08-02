@@ -1,11 +1,11 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import DownloadModal from './DownloadModal';
+import OptionsModal from './OptionsModal';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('<DownloadModal />', () => {
+describe('<OptionsModal />', () => {
   let wrapper;
 
   const defaultProps = {
@@ -16,7 +16,7 @@ describe('<DownloadModal />', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallow(<DownloadModal {...defaultProps} />);
+    wrapper = shallow(<OptionsModal {...defaultProps} />);
   });
 
   it('Renders all the options', () => {
@@ -44,7 +44,7 @@ describe('<DownloadModal />', () => {
       ...defaultProps,
       options: [...defaultProps.options, 'email']
     };
-    wrapper = shallow(<DownloadModal {...updatedProps} />);
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
 
     const elements = wrapper.find('input').getElements();
 
@@ -60,7 +60,7 @@ describe('<DownloadModal />', () => {
       ...defaultProps,
       options: [...defaultProps.options, 'email']
     };
-    wrapper = shallow(<DownloadModal {...updatedProps} />);
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
 
     expect(wrapper.find('#emailInput').get(0).props.type).toEqual('hidden');
   });
@@ -70,7 +70,7 @@ describe('<DownloadModal />', () => {
       ...defaultProps,
       options: [...defaultProps.options, 'email']
     };
-    wrapper = shallow(<DownloadModal {...updatedProps} />);
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
 
     wrapper.find('#email').get(0).props.onChange({ target: { value: 'email' } });
 

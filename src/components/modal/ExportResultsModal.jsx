@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import handleModalSubmit from '../../api/exportResults';
-import DownloadModal from '../reusableComponents/DownloadModal';
+import OptionsModal from '../reusableComponents/OptionsModal';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
@@ -34,7 +34,7 @@ const ExportResultsModal = ({
   }
 
   return (
-    <DownloadModal
+    <OptionsModal
       options={downloadOptions}
       showModal={showModal}
       onSubmit={handleSubmit}

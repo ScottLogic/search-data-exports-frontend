@@ -40,7 +40,7 @@ const emailInputFormat = (selectedType, emailInput) => (
   </div>
 );
 
-const DownloadModal = ({
+const OptionsModal = ({
   options,
   showModal,
   onSubmit,
@@ -87,7 +87,7 @@ const DownloadModal = ({
   );
 };
 
-DownloadModal.propTypes = {
+OptionsModal.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   showModal: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
@@ -95,8 +95,8 @@ DownloadModal.propTypes = {
   capitaliseOutput: PropTypes.bool
 };
 
-DownloadModal.defaultProps = {
+OptionsModal.defaultProps = {
   capitaliseOutput: false
 };
 
-export default DownloadModal;
+export default OptionsModal;
