@@ -50,7 +50,6 @@ const ReportsModal = ({ showModal, closeModal }) => {
       selectedType: e.target.downloadType.value,
       reportName: selectedReport
     });
-    closeModal();
   };
 
   const viewReport = (reportName) => {
@@ -62,7 +61,6 @@ const ReportsModal = ({ showModal, closeModal }) => {
       selectedType: 'pdf',
       reportName
     });
-    closeModal();
   };
 
   const requestDownload = (reportName, onlyPDF = false) => {

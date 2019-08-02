@@ -23,11 +23,7 @@ const handleDownloadRequest = async (reportURL, searchCriteria) => {
     });
 };
 
-// TODO: Placeholder for handling push notification export requests
-// const handlePushNotificationRequest = async searchCriteria => {};
-
-export default (modalData) => {
-  console.log(modalData);
+export default (modalData) => {  
   switch (modalData.reportName) {
     case 'PostFreq':
       handleDownloadRequest(GRAPHICAL_REQUEST_URL, emptySearch);
