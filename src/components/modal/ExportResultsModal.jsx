@@ -17,7 +17,7 @@ const ExportResultsModal = ({
     closeModal();
     handleModalSubmit(
       {
-        selectedType: event.target.downloadType.value,
+        selectedType: event.target.selectedOption.value,
         emailAddress: event.target.emailInput.value
       },
       lastRequest
@@ -39,6 +39,8 @@ const ExportResultsModal = ({
       showModal={showModal}
       onSubmit={handleSubmit}
       onClose={closeModal}
+      modalTitle={'Select the download type'}
+      submitButtonText={'Download'}
     />
   );
 };

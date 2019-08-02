@@ -47,7 +47,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
     if (e) e.preventDefault();
     handleDownloadModalClose();
     handleModalSubmit({
-      selectedType: e.target.downloadType.value,
+      selectedType: e.target.selectedOption.value,
       reportName: selectedReport
     });
   };
@@ -118,6 +118,8 @@ const ReportsModal = ({ showModal, closeModal }) => {
         onSubmit={handleDownloadModalSubmit}
         onClose={handleDownloadModalClose}
         capitaliseOutput
+        modalTitle={'Select the download type'}
+        submitButtonText={'Download'}
       />
     </ReactModal>
   );
