@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import useInputForm from '../../utilities/hooks';
+import useInputForm from '../../utilities/editablehook';
 import './NewPostModal.css';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -9,6 +9,11 @@ if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 const NewPostModal = ({ showModal, closeModal }) => {
   const newPostInput = useInputForm('');
   const newTagsInput = useInputForm('');
+  const resetContent = (event) => {
+    if (event) event.preventDefault();
+    newPostInput.setValue('');
+    newTagsInput.setValue('');
+  };
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
     console.log('Form Submitted', newPostInput.value, newTagsInput.value);
@@ -35,12 +40,13 @@ const NewPostModal = ({ showModal, closeModal }) => {
       }}
     >
       <form className="reports-form" onSubmit={handleSubmit}>
-        <h1>New Post</h1>
+        <h1>Create New Post</h1>
         <hr />
-        <textarea id="NewPostText" className="FullTextInput" rows="7" {...newPostInput} />
-        <input id="NewPostTags" className="TagTextInput" type="text" {...newTagsInput} />
+        <textarea required id="NewPostText" className="FullTextInput" rows="7" onChange={newPostInput.onChange} value={newPostInput.value} />
+        <input id="NewPostTags" className="TagTextInput" type="text" required onChange={newTagsInput.onChange} value={newTagsInput.value} />
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
+        <input type="button" onClick={resetContent} value="Reset" />
         <input type="submit" value="Add" />
       </form>
     </ReactModal>
