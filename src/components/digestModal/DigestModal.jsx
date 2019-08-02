@@ -25,7 +25,7 @@ const DigestModal = ({ showModal, lastRequest, closeModal }) => {
       submitButtonText="Subscribe"
     />
   );
-}
+};
 
 DigestModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
