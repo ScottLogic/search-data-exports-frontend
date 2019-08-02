@@ -51,9 +51,7 @@ const handlePushNotificationRequest = async (searchCriteria) => {
     headers: { 'Content-Type': 'application/json' }
   })
     .then(resultJson => resultJson.json())
-    .then((response) => {
-      connectWebsocket(response);
-    })
+    .then(response => connectWebsocket(response))
     .catch((error) => {
       console.error(error);
       toast.error('Something went wrong, please try again.');
