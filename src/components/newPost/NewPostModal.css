@@ -1,0 +1,10 @@
+.FullTextInput {
+    width:-webkit-fill-available;
+    padding: 1vh 1vw !important;    
+}
+
+.TagTextInput {
+    width:-webkit-fill-available;
+    border-radius: 0px !important;
+    padding: 1vh 1vw !important;  
+}
