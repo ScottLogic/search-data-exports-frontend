@@ -10,6 +10,7 @@ import {
 import { pageUpdated, requestUpdated } from '../../actions/App';
 import { updateModalDisplayed as showExportResultsModal } from '../../actions/ExportResultsModal';
 import { updateModalDisplayed as showReportsModal } from '../../actions/ReportsModal';
+import { updateModalDisplayed as showNewPostModal } from '../../actions/NewPostModal';
 import fetchSearchResults from '../../api/searchRequest';
 
 const mapStateToProps = state => ({
@@ -25,7 +26,8 @@ const mapDispatchToProps = dispatch => ({
   setLastRequest: request => dispatch(requestUpdated(request)),
   fetchSearchResults: request => fetchSearchResults(request)(dispatch),
   showExportResultsModal: () => dispatch(showExportResultsModal(true)),
-  showReportsModal: () => dispatch(showReportsModal(true))
+  showReportsModal: () => dispatch(showReportsModal(true)),
+  showNewPostModal: () => dispatch(showNewPostModal(true))
 });
 
 export default connect(
