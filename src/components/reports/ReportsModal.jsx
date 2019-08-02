@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import './ReportsModal.css';
 import DownloadModal from '../reusableComponents/DownloadModal';
+import handleModalSubmit from '../../api/reportResults';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
@@ -45,17 +46,21 @@ const ReportsModal = ({ showModal, closeModal }) => {
   const handleDownloadModalSubmit = (e) => {
     if (e) e.preventDefault();
     handleDownloadModalClose();
-    console.log('Report:', selectedReport);
-    console.log('Download Type:', e.target.downloadType.value);
-  };
-
-  const handleSubmit = (event) => {
-    if (event) event.preventDefault();
-    console.log('Submit', event);
+    handleModalSubmit({
+      selectedType: e.target.downloadType.value,
+      reportName: selectedReport
+    });
   };
 
   const viewReport = (reportName) => {
     console.log('View', reportName);
+  };
+
+  const downloadPDF = (reportName) => {
+    handleModalSubmit({
+      selectedType: 'pdf',
+      reportName
+    });
   };
 
   const requestDownload = (reportName, onlyPDF = false) => {
@@ -87,7 +92,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
         }
       }}
     >
-      <form className="reports-form" onSubmit={handleSubmit}>
+      <form className="reports-form">
         <h1>Available Reports</h1>
         <hr />
         <ul className="reports-list">
@@ -101,8 +106,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
           {reportItem({
             name: 'Trending Report',
             description: 'Report of the currently trending #tags.',
-            onView: () => viewReport('Trending'),
-            onDownload: () => requestDownload('Trending', true)
+            onDownload: () => downloadPDF('Trending')
           })}
         </ul>
         <hr />
@@ -123,8 +127,13 @@ reportItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  onView: PropTypes.func.isRequired,
-  onDownload: PropTypes.func.isRequired
+  onView: PropTypes.func,
+  onDownload: PropTypes.func
+};
+
+reportItem.defaultProps = {
+  onView: undefined,
+  onDownload: undefined
 };
 
 ReportsModal.propTypes = {
