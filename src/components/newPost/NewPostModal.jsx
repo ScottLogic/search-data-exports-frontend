@@ -9,6 +9,10 @@ if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 const NewPostModal = ({ showModal, closeModal }) => {
   const newPostInput = useInputForm('');
   const newTagsInput = useInputForm('');
+  const handleSubmit = (event) => {
+    if (event) event.preventDefault();
+    console.log('Form Submitted', newPostInput.value, newTagsInput.value);
+  };
   return (
     <ReactModal
       isOpen={showModal}
@@ -30,13 +34,14 @@ const NewPostModal = ({ showModal, closeModal }) => {
         }
       }}
     >
-      <form className="reports-form">
+      <form className="reports-form" onSubmit={handleSubmit}>
         <h1>New Post</h1>
         <hr />
         <textarea id="NewPostText" className="FullTextInput" rows="7" {...newPostInput} />
         <input id="NewPostTags" className="TagTextInput" type="text" {...newTagsInput} />
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
+        <input type="submit" value="Add" />
       </form>
     </ReactModal>
   );
