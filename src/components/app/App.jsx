@@ -77,6 +77,12 @@ const App = ({
         </div>
 
         <div className="container-index-options">
+          <input
+            type="button"
+            id="addPostButton"
+            onClick={() => console.log('Done')}
+            value="Add Post"
+          />
           {exportButton}
           <input
             type="button"
