@@ -118,8 +118,8 @@ const ReportsModal = ({ showModal, closeModal }) => {
         onSubmit={handleDownloadModalSubmit}
         onClose={handleDownloadModalClose}
         capitaliseOutput
-        modalTitle={'Select the download type'}
-        submitButtonText={'Download'}
+        modalTitle="Select the download type"
+        submitButtonText="Download"
       />
     </ReactModal>
   );

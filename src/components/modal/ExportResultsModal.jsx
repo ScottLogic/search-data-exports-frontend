@@ -39,8 +39,8 @@ const ExportResultsModal = ({
       showModal={showModal}
       onSubmit={handleSubmit}
       onClose={closeModal}
-      modalTitle={'Select the download type'}
-      submitButtonText={'Download'}
+      modalTitle="Select the download type"
+      submitButtonText="Download"
     />
   );
 };
