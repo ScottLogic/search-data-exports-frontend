@@ -13,7 +13,6 @@ const showDownloadNotification = (reportURL) => {
 export default ({ executionArn, taskToken }) => {
   const socket = new WebSocket(WEBSOCKET_ENDPOINT);
   socket.onopen = () => {
-    console.log('Socket Connected');
     const payload = {
       action: 'OpenConnection',
       executionArn,
@@ -30,9 +29,5 @@ export default ({ executionArn, taskToken }) => {
     } else {
       console.error('Received unexpected message from websocket');
     }
-  };
-
-  socket.onclose = () => {
-    console.log('Socket Disconnected');
   };
 };
