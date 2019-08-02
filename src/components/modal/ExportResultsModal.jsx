@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactModal from 'react-modal';
 import handleModalSubmit from '../../api/exportResults';
-import DownloadModal from '../reusableComponents/DownloadModal';
-
-if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
+import OptionsModal from '../reusableComponents/OptionsModal';
 
 const ExportResultsModal = ({
   showModal,
@@ -17,7 +14,7 @@ const ExportResultsModal = ({
     closeModal();
     handleModalSubmit(
       {
-        selectedType: event.target.downloadType.value,
+        selectedType: event.target.selectedOption.value,
         emailAddress: event.target.emailInput.value
       },
       lastRequest
@@ -34,11 +31,13 @@ const ExportResultsModal = ({
   }
 
   return (
-    <DownloadModal
+    <OptionsModal
       options={downloadOptions}
       showModal={showModal}
       onSubmit={handleSubmit}
       onClose={closeModal}
+      modalTitle="Select the download type"
+      submitButtonText="Download"
     />
   );
 };

@@ -12,7 +12,7 @@ const radioButtonFormat = (option, selectedType, onChange, capitaliseOutput) => 
   <label htmlFor={option}>
     <input
       type="radio"
-      name="downloadType"
+      name="selectedOption"
       id={option}
       value={option}
       checked={selectedType === option}
@@ -40,12 +40,14 @@ const emailInputFormat = (selectedType, emailInput) => (
   </div>
 );
 
-const DownloadModal = ({
+const OptionsModal = ({
   options,
   showModal,
   onSubmit,
   onClose,
-  capitaliseOutput
+  capitaliseOutput,
+  modalTitle,
+  submitButtonText
 }) => {
   const emailInput = useInputForm('');
   const { value: selectedType, onChange: handleTypeChange } = useInputForm(
@@ -69,7 +71,7 @@ const DownloadModal = ({
         }
       }}
     >
-      <p>Select the download type:</p>
+      <p>{`${modalTitle}:`}</p>
       <form className="download-options-form" onSubmit={onSubmit}>
         {options.map(option => (
           <React.Fragment key={option}>
@@ -81,22 +83,26 @@ const DownloadModal = ({
         <button type="button" onClick={onClose}>
           Cancel
         </button>
-        <button type="submit">Download</button>
+        <button type="submit">{submitButtonText}</button>
       </form>
     </ReactModal>
   );
 };
 
-DownloadModal.propTypes = {
+OptionsModal.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   showModal: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  capitaliseOutput: PropTypes.bool
+  capitaliseOutput: PropTypes.bool,
+  modalTitle: PropTypes.string,
+  submitButtonText: PropTypes.string
 };
 
-DownloadModal.defaultProps = {
-  capitaliseOutput: false
+OptionsModal.defaultProps = {
+  capitaliseOutput: false,
+  modalTitle: 'Select an option',
+  submitButtonText: 'Submit'
 };
 
-export default DownloadModal;
+export default OptionsModal;

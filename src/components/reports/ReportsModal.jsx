@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import './ReportsModal.css';
-import DownloadModal from '../reusableComponents/DownloadModal';
+import OptionsModal from '../reusableComponents/OptionsModal';
 import handleModalSubmit from '../../api/reportResults';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -47,7 +47,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
     if (e) e.preventDefault();
     handleDownloadModalClose();
     handleModalSubmit({
-      selectedType: e.target.downloadType.value,
+      selectedType: e.target.selectedOption.value,
       reportName: selectedReport
     });
   };
@@ -112,12 +112,14 @@ const ReportsModal = ({ showModal, closeModal }) => {
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
       </form>
-      <DownloadModal
+      <OptionsModal
         options={options}
         showModal={showDownloadModal}
         onSubmit={handleDownloadModalSubmit}
         onClose={handleDownloadModalClose}
         capitaliseOutput
+        modalTitle="Select the download type"
+        submitButtonText="Download"
       />
     </ReactModal>
   );

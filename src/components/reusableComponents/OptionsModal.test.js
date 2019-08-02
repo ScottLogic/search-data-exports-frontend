@@ -1,11 +1,11 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import DownloadModal from './DownloadModal';
+import OptionsModal from './OptionsModal';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('<DownloadModal />', () => {
+describe('<OptionsModal />', () => {
   let wrapper;
 
   const defaultProps = {
@@ -16,7 +16,7 @@ describe('<DownloadModal />', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallow(<DownloadModal {...defaultProps} />);
+    wrapper = shallow(<OptionsModal {...defaultProps} />);
   });
 
   it('Renders all the options', () => {
@@ -44,7 +44,7 @@ describe('<DownloadModal />', () => {
       ...defaultProps,
       options: [...defaultProps.options, 'email']
     };
-    wrapper = shallow(<DownloadModal {...updatedProps} />);
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
 
     const elements = wrapper.find('input').getElements();
 
@@ -60,7 +60,7 @@ describe('<DownloadModal />', () => {
       ...defaultProps,
       options: [...defaultProps.options, 'email']
     };
-    wrapper = shallow(<DownloadModal {...updatedProps} />);
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
 
     expect(wrapper.find('#emailInput').get(0).props.type).toEqual('hidden');
   });
@@ -70,7 +70,7 @@ describe('<DownloadModal />', () => {
       ...defaultProps,
       options: [...defaultProps.options, 'email']
     };
-    wrapper = shallow(<DownloadModal {...updatedProps} />);
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
 
     wrapper.find('#email').get(0).props.onChange({ target: { value: 'email' } });
 
@@ -85,5 +85,23 @@ describe('<DownloadModal />', () => {
   it('Calls the onSubmit function when the form is submitted', () => {
     wrapper.find('.download-options-form').simulate('submit');
     expect(defaultProps.onSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it('Renders the correct title if the modalTitle prop is set', () => {
+    const expectedTitle = 'Test Title';
+    const updatedProps = { ...defaultProps, modalTitle: expectedTitle };
+
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
+
+    expect(wrapper.find('p').first().text()).toEqual(`${expectedTitle}:`);
+  });
+
+  it('Renders the correct text for the submit button if the submitButtonText prop is set', () => {
+    const expectedText = 'Test Button Text';
+    const updatedProps = { ...defaultProps, submitButtonText: expectedText };
+
+    wrapper = shallow(<OptionsModal {...updatedProps} />);
+
+    expect(wrapper.find('button[type="submit"]').first().text()).toEqual(expectedText);
   });
 });
