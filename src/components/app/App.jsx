@@ -9,6 +9,7 @@ import ExportResultsModal from '../modal/ExportResultsModalContainer';
 import LoadingSpinner from '../reusableComponents/LoadingSpinner';
 import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from '../reports/ReportsModalContainer';
+import DigestModal from '../digestModal/DigestModalContainer';
 import useInputForm from '../../utilities/hooks';
 import {
   createRequest,
@@ -25,7 +26,8 @@ const App = ({
   setLastRequest,
   fetchSearchResults,
   showExportResultsModal,
-  showReportsModal
+  showReportsModal,
+  showDigestModal
 }) => {
   const searchCriteria = useInputForm('');
 
@@ -55,6 +57,15 @@ const App = ({
     ''
   );
 
+  const digestSubscribeButton = data.length > 0 && (
+    <input
+      type="button"
+      id="digestSubscribeButton"
+      onClick={showDigestModal}
+      value="Subscribe to digest"
+    />
+  );
+
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
 
   return (
@@ -77,6 +88,7 @@ const App = ({
         </div>
 
         <div className="container-index-options">
+          {digestSubscribeButton}
           {exportButton}
           <input
             type="button"
@@ -107,6 +119,7 @@ const App = ({
         />
         <ExportResultsModal />
         <ReportsModal />
+        <DigestModal />
         <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>
     </div>
@@ -123,7 +136,8 @@ App.propTypes = {
   setLastRequest: PropTypes.func.isRequired,
   fetchSearchResults: PropTypes.func.isRequired,
   showExportResultsModal: PropTypes.func.isRequired,
-  showReportsModal: PropTypes.func.isRequired
+  showReportsModal: PropTypes.func.isRequired,
+  showDigestModal: PropTypes.func.isRequired
 };
 
 export default App;
