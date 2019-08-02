@@ -26,6 +26,7 @@ export default ({ executionArn, taskToken }) => {
     const data = JSON.parse(msg.data);
     if (data.reportURL) {
       showDownloadNotification(data.reportURL);
+      socket.close();
     } else {
       console.error('Received unexpected message from websocket');
     }
