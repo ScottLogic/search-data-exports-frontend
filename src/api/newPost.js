@@ -4,12 +4,12 @@ import { NEW_POST_URL } from '../endpoints';
 const buildRequestJSON = inputFields => ({
   UserID: 1,
   Post: inputFields.Post,
-  Tags: inputFields.Tags
+  Tags: inputFields.Tags.split(' ').map(tag => `${((tag.charAt(0) !== '#') ? '#' : '')}${tag}`)
 });
 
 const newPost = (postData) => {
   const request = buildRequestJSON(postData);
-  toast.info('New Post sent.');
+  toast.info('New Post Sent.');
   fetch(NEW_POST_URL, {
     method: 'POST',
     mode: 'cors',
