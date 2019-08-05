@@ -45,8 +45,14 @@ const NewPostModal = ({ showModal, closeModal }) => {
       <form className="reports-form" onSubmit={handleSubmit}>
         <h1>Create New Post</h1>
         <hr />
-        <textarea required id="NewPostText" className="FullTextInput" rows="7" onChange={newPostInput.onChange} value={newPostInput.value} />
-        <input id="NewPostTags" className="TagTextInput" type="text" required onChange={newTagsInput.onChange} value={newTagsInput.value} />
+        <label htmlFor="NewPostText">
+          New Helix:
+          <textarea required id="NewPostText" className="FullTextInput" rows="7" onChange={newPostInput.onChange} value={newPostInput.value} placeholder="What is happening?" />
+        </label>
+        <label htmlFor="NewPostTags">
+          Tags:
+          <input id="NewPostTags" className="TagTextInput" type="text" required onChange={newTagsInput.onChange} value={newTagsInput.value} placeholder="Helix Tags" />
+        </label>
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
         <input type="button" onClick={resetContent} value="Reset" />
