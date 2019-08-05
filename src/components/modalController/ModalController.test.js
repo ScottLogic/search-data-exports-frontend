@@ -23,6 +23,9 @@ describe('<ModalController />', () => {
 
   beforeEach(() => {
     wrapper = shallow(<ModalController {...noDataProps} />);
+  });
+
+  afterEach(() => {
     jest.clearAllMocks();
   });
 
