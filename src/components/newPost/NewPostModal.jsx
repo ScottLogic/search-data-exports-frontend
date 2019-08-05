@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import useInputForm from '../../utilities/editablehook';
+import handleModalSubmit from '../../api/newPost';
 import './NewPostModal.css';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -19,6 +20,10 @@ const NewPostModal = ({ showModal, closeModal }) => {
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
     console.log('Form Submitted', newPostInput.value, newTagsInput.value);
+    handleModalSubmit({
+      Post: newPostInput.value,
+      Tags: newTagsInput.value
+    });
   };
 
   return (
