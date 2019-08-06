@@ -16,31 +16,8 @@ describe('<App />', () => {
     isLoading: false,
     setCurrentPage: jest.fn(),
     setLastRequest: jest.fn(),
-    fetchSearchResults: jest.fn(),
-    showExportResultsModal: jest.fn(),
-    showReportsModal: jest.fn(),
-    showDigestModal: jest.fn()
+    fetchSearchResults: jest.fn()
   };
-
-  const testData = [
-    {
-      Type: 'posts',
-      uuid: '9yEH0msBcSVQ8Ni1lRpT',
-      UserID: '52',
-      DateCreated: '2019-02-13T21:14:17.7Z',
-      Content: 'The sky is clear; the stars are twinkling.',
-      Tags: ['#percent', '#experiment']
-    },
-    {
-      Type: 'posts',
-      uuid: '-CEH0msBcSVQ8Ni1lRpT',
-      UserID: '65',
-      DateCreated: '2018-07-20T14:23:28.505Z',
-      Content:
-        "What was the person thinking when they discovered cow's milk was fine for human consumptionâ€¦ and why did they do it in the first place!?",
-      Tags: ['#democratic', '#crusade', '#progress', '#channel']
-    }
-  ];
 
   beforeEach(() => {
     wrapper = shallow(<App {...appProps} />);
@@ -78,39 +55,5 @@ describe('<App />', () => {
     expect(appProps.setLastRequest).toHaveBeenCalledWith(expectedRequest);
     expect(appProps.fetchSearchResults).toHaveBeenCalledTimes(1);
     expect(appProps.fetchSearchResults).toHaveBeenCalledWith(expectedRequest);
-  });
-
-  it('Does not render the export button for an empty dataset', () => {
-    expect(wrapper.find('#exportResultsButton')).toHaveLength(0);
-  });
-
-  it('Renders the export button for a populated dataset', () => {
-    const newProps = { ...appProps, data: testData };
-    wrapper = shallow(<App {...newProps} />);
-    expect(wrapper.find('#exportResultsButton')).toHaveLength(1);
-  });
-
-  it('Calls handleExportClick when the export results button is clicked', () => {
-    const newProps = { ...appProps, data: testData };
-    wrapper = shallow(<App {...newProps} />);
-    wrapper.find('#exportResultsButton').simulate('click');
-    expect(newProps.showExportResultsModal).toHaveBeenCalledTimes(1);
-  });
-
-  it('Does not render the digest subscribe button for an empty dataset', () => {
-    expect(wrapper.find('#digestSubscribeButton')).toHaveLength(0);
-  });
-
-  it('Renders the digest subscribe button for a populated dataset', () => {
-    const newProps = { ...appProps, data: testData };
-    wrapper = shallow(<App {...newProps} />);
-    expect(wrapper.find('#digestSubscribeButton')).toHaveLength(1);
-  });
-
-  it('Calls showDigestModal when the digest subscribe button is clicked', () => {
-    const newProps = { ...appProps, data: testData };
-    wrapper = shallow(<App {...newProps} />);
-    wrapper.find('#digestSubscribeButton').simulate('click');
-    expect(newProps.showDigestModal).toHaveBeenCalledTimes(1);
   });
 });
