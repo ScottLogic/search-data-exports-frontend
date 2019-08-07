@@ -18,7 +18,7 @@ const NewPostModal = ({ showModal, closeModal }) => {
   };
 
   const handleSubmit = (event) => {
-    if (event) event.preventDefault();    
+    if (event) event.preventDefault();
     handleModalSubmit({
       Post: newPostInput.value,
       Tags: newTagsInput.value
