@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from '../reports/ReportsModalContainer';
 import NewPostModal from '../newPost/NewPostModalContainer';
 import DigestModal from '../digestModal/DigestModalContainer';
+import ModalController from '../modalController/ModalControllerContainer';
 import useInputForm from '../../utilities/hooks';
 import {
   createRequest,
@@ -25,11 +26,7 @@ const App = ({
   isLoading,
   setCurrentPage,
   setLastRequest,
-  fetchSearchResults,
-  showExportResultsModal,
-  showReportsModal,
-  showNewPostModal,
-  showDigestModal
+  fetchSearchResults
 }) => {
   const searchCriteria = useInputForm('');
 
@@ -47,26 +44,6 @@ const App = ({
     setLastRequest(request);
     fetchSearchResults(request);
   };
-
-  const exportButton = data.length ? (
-    <input
-      type="button"
-      id="exportResultsButton"
-      onClick={showExportResultsModal}
-      value="Export Results"
-    />
-  ) : (
-    ''
-  );
-
-  const digestSubscribeButton = data.length > 0 && (
-    <input
-      type="button"
-      id="digestSubscribeButton"
-      onClick={showDigestModal}
-      value="Subscribe to digest"
-    />
-  );
 
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
 
@@ -89,23 +66,7 @@ const App = ({
           </form>
         </div>
 
-        <div className="container-index-options">
-          {digestSubscribeButton}
-          {exportButton}
-          <input
-            type="button"
-            id="addPostButton"
-            onClick={showNewPostModal}
-            value="Add Post"
-          />
-          <input
-            type="button"
-            id="showReportsButton"
-            onClick={showReportsModal}
-            value="Reports"
-          />
-        </div>
-
+        <ModalController hasData={data.length > 0} />
         <LoadingSpinner isDisplayed={isLoading} />
 
         <div className="container-result-list">
@@ -143,11 +104,7 @@ App.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   setCurrentPage: PropTypes.func.isRequired,
   setLastRequest: PropTypes.func.isRequired,
-  fetchSearchResults: PropTypes.func.isRequired,
-  showExportResultsModal: PropTypes.func.isRequired,
-  showReportsModal: PropTypes.func.isRequired,
-  showNewPostModal: PropTypes.func.isRequired,
-  showDigestModal: PropTypes.func.isRequired
+  fetchSearchResults: PropTypes.func.isRequired
 };
 
 export default App;
