@@ -7,7 +7,7 @@ const buildRequestJSON = inputFields => ({
   Tags: inputFields.Tags.split(' ').map(tag => `${((tag.charAt(0) !== '#') ? '#' : '')}${tag}`)
 });
 
-const newPost = (postData) => {
+export default (postData) => {
   const request = buildRequestJSON(postData);
   toast.info('New Post Sent.');
   fetch(NEW_POST_URL, {
@@ -17,16 +17,9 @@ const newPost = (postData) => {
     headers: { 'Content-Type': 'application/json' }
   })
     .then(resultJson => resultJson.json())
-    .then((response) => {
-      console.log('response', response);
-      toast.success('New Post Successful');
-    })
+    .then(() => toast.success('New Post Successful'))
     .catch((error) => {
       console.error(error);
       toast.error('Something went wrong, please try again.');
     });
-};
-
-export default (postData) => {
-  newPost(postData);
 };
