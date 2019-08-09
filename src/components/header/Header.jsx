@@ -44,7 +44,7 @@ const Header = () => {
               <PersonIcon />
               Profile
             </MenuItem>
-            <MenuItem onClick={() => console.log('Clicked 2')}>              
+            <MenuItem onClick={() => console.log('Clicked 2')}>
               Digests
             </MenuItem>
             <MenuItem onClick={signOut}>Sign Out</MenuItem>
