@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import useInputForm from '../../utilities/editablehook';
+import handleModalSubmit from '../../api/newPost';
 import './NewPostModal.css';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -18,7 +19,10 @@ const NewPostModal = ({ showModal, closeModal }) => {
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
-    console.log('Form Submitted', newPostInput.value, newTagsInput.value);
+    handleModalSubmit({
+      Post: newPostInput.value,
+      Tags: newTagsInput.value
+    });
   };
 
   return (
@@ -45,8 +49,14 @@ const NewPostModal = ({ showModal, closeModal }) => {
       <form className="reports-form" onSubmit={handleSubmit}>
         <h1>Create New Post</h1>
         <hr />
-        <textarea required id="NewPostText" className="FullTextInput" rows="7" onChange={newPostInput.onChange} value={newPostInput.value} />
-        <input id="NewPostTags" className="TagTextInput" type="text" required onChange={newTagsInput.onChange} value={newTagsInput.value} />
+        <label htmlFor="NewPostText">
+          New Helix:
+          <textarea required id="NewPostText" className="FullTextInput" rows="7" onChange={newPostInput.onChange} value={newPostInput.value} placeholder="What is happening?" />
+        </label>
+        <label htmlFor="NewPostTags">
+          Tags:
+          <input id="NewPostTags" className="TagTextInput" type="text" required onChange={newTagsInput.onChange} value={newTagsInput.value} placeholder="Helix Tags" />
+        </label>
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
         <input type="button" onClick={resetContent} value="Reset" />
