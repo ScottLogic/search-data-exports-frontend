@@ -10,4 +10,6 @@ export const GRAPHICAL_REQUEST_URL = `${rootURL}/report/graphical`;
 
 export const HYBRID_REQUEST_URL = `${rootURL}/report/hybrid`;
 
+export const NEW_POST_URL = `${rootURL}/posts/`;
+
 export const WEBSOCKET_ENDPOINT = `${process.env.REACT_APP_WEBSOCKET_ENDPOINT || ''}`;
