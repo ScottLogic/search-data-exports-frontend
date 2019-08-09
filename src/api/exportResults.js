@@ -1,3 +1,4 @@
+import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { DOWNLOAD_REQUEST_URL } from '../endpoints';
 import executionPoller from '../utilities/executionPoller';
@@ -12,15 +13,12 @@ const getDownloadRequest = (type, parameters, searchCriteria) => ({
 const handleDirectDownloadRequest = async (searchCriteria) => {
   const request = getDownloadRequest('direct', null, searchCriteria);
   toast.info('Download request sent, your download will begin soon.');
-  fetch(DOWNLOAD_REQUEST_URL, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(request),
-    headers: { 'Content-Type': 'application/json' }
+  API.post('APIGateway', DOWNLOAD_REQUEST_URL, {
+    body: request
   })
-    .then(resultJson => resultJson.json())
     .then(result => executionPoller(result.executionArn, 500))
     .then((downloadLink) => {
+      console.log(downloadLink);
       window.location.assign(downloadLink);
     })
     .catch((error) => {
@@ -31,11 +29,8 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
 
 const handleEmailRequest = async (searchCriteria, emailAddress) => {
   const request = getDownloadRequest('email', { emailAddress }, searchCriteria);
-  const response = await fetch(DOWNLOAD_REQUEST_URL, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(request),
-    headers: { 'Content-Type': 'application/json' }
+  const response = await API.post('APIGateway', DOWNLOAD_REQUEST_URL, {
+    body: request
   });
 
   if (!response.ok) throw Error(response.statusText);
@@ -44,13 +39,9 @@ const handleEmailRequest = async (searchCriteria, emailAddress) => {
 const handlePushNotificationRequest = async (searchCriteria) => {
   const request = getDownloadRequest('push', null, searchCriteria);
   toast.info('Request sent, you will receive a notification with your download shortly.');
-  fetch(DOWNLOAD_REQUEST_URL, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(request),
-    headers: { 'Content-Type': 'application/json' }
+  API.post('APIGateway', DOWNLOAD_REQUEST_URL, {
+    body: request
   })
-    .then(resultJson => resultJson.json())
     .then(response => connectWebsocket(response))
     .catch((error) => {
       console.error(error);

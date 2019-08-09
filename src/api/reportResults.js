@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { API } from 'aws-amplify';
 import { GRAPHICAL_REQUEST_URL, HYBRID_REQUEST_URL } from '../endpoints';
 
 const emptySearch = {
@@ -7,13 +8,10 @@ const emptySearch = {
 
 const handleDownloadRequest = async (reportURL, searchCriteria) => {
   toast.info('Download request sent, your download will begin soon.');
-  fetch(reportURL, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(searchCriteria),
-    headers: { 'Content-Type': 'application/json' }
+
+  API.post('APIGateway', reportURL, {
+    body: searchCriteria
   })
-    .then(resultJson => resultJson.json())
     .then((downloadLink) => {
       window.location.assign(downloadLink.result);
     })

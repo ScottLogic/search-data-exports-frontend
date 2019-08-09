@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withAuthenticator } from 'aws-amplify-react';
 import App from './App';
 import {
   getData,
@@ -24,7 +25,16 @@ const mapDispatchToProps = dispatch => ({
   fetchSearchResults: request => fetchSearchResults(request)(dispatch)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default withAuthenticator(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App),
+  {
+    usernameAttributes: 'email',
+    includeGreetings: false,
+    signUpConfig: {
+      hiddenDefaults: ['phone_number']
+    }
+  }
+);

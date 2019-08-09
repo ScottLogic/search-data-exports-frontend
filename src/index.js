@@ -6,28 +6,9 @@ import { Provider } from 'react-redux';
 import App from './components/app/AppContainer';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
-import config from './utilities/cognito';
+import awsConfig from './aws-config';
 
-
-Amplify.configure({
-  Auth: {
-    mandatorySignIn: true,
-    region: config.cognito.REGION,
-    userPoolId: config.cognito.USER_POOL_ID,
-    identityPoolId: config.cognito.IDENTITY_POOL_ID,
-    userPoolWebClientId: config.cognito.APP_CLIENT_ID
-  },
-  federationTarget: 'COGNITO_USER_POOLS',
-  API: {
-    endpoints: [
-      {
-        name: 'API',
-        endpoint: config.apiGateway.URL,
-        region: config.apiGateway.REGION
-      }
-    ]
-  }
-});
+Amplify.configure(awsConfig);
 const store = configureStore();
 
 function renderPage() {
