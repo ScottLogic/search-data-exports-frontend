@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PersonIcon from '@material-ui/icons/PersonOutline';
 import './Header.css';
 
 const Header = () => {
@@ -39,8 +40,13 @@ const Header = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={() => console.log('Clicked 1')}>Profile</MenuItem>
-            <MenuItem onClick={() => console.log('Clicked 2')}>Digests</MenuItem>
+            <MenuItem onClick={() => console.log('Clicked 1')}>
+              <PersonIcon />
+              Profile
+            </MenuItem>
+            <MenuItem onClick={() => console.log('Clicked 2')}>              
+              Digests
+            </MenuItem>
             <MenuItem onClick={signOut}>Sign Out</MenuItem>
           </Menu>
         </li>
