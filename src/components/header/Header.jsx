@@ -19,14 +19,10 @@ const Header = () => {
     getUserDetails();
   }, []);
 
-  function handleMenuOpen(event) {
-    console.log(event.currentTarget);
-    setAnchorEl(event.currentTarget);
-  }
+  const handleMenuOpen = event => (setAnchorEl(event.currentTarget));
 
-  function handleClose() {
-    setAnchorEl(null);
-  }
+  const handleClose = () => (setAnchorEl(null));
+
   return (
     <header className="container-header">
       <ul className="header-list" role="navigation">
