@@ -7,10 +7,9 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('<Header />', () => {
   let wrapper;
-  const testEmail = 'test@example.com';
 
   beforeEach(() => {
-    wrapper = shallow(<Header email={testEmail} />);
+    wrapper = shallow(<Header />);
   });
 
   it('Renders the title', () => {
@@ -20,6 +19,5 @@ describe('<Header />', () => {
   it('Renders the email prop', () => {
     const emailNode = wrapper.find('.email-header');
     expect(emailNode).toBeDefined();
-    expect(emailNode.text()).toEqual(testEmail);
   });
 });
