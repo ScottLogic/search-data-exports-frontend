@@ -1,4 +1,4 @@
-export const SEARCH_REQUEST_URL = '/search/';
+export const SEARCH_REQUEST_URL = '/search';
 
 export const DOWNLOAD_REQUEST_URL = '/download-request';
 
@@ -8,6 +8,6 @@ export const GRAPHICAL_REQUEST_URL = '/report/graphical';
 
 export const HYBRID_REQUEST_URL = '/report/hybrid';
 
-export const NEW_POST_URL = `${rootURL}/posts/`;
+export const NEW_POST_URL = '/posts';
 
 export const WEBSOCKET_ENDPOINT = `${process.env.REACT_APP_WEBSOCKET_ENDPOINT || ''}`;

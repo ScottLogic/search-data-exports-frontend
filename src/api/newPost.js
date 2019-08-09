@@ -1,3 +1,4 @@
+import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { NEW_POST_URL } from '../endpoints';
 
@@ -10,13 +11,9 @@ const buildRequestJSON = inputFields => ({
 export default (postData) => {
   const request = buildRequestJSON(postData);
   toast.info('New Post Sent.');
-  fetch(NEW_POST_URL, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(request),
-    headers: { 'Content-Type': 'application/json' }
+  API.post('APIGateway', NEW_POST_URL, {
+    body: request
   })
-    .then(resultJson => resultJson.json())
     .then(() => toast.success('New Post Successful'))
     .catch((error) => {
       console.error(error);
