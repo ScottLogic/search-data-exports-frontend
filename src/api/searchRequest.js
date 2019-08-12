@@ -1,11 +1,11 @@
 import { API } from 'aws-amplify';
 import { searchResultsReceived, isLoadingUpdated } from '../actions/App';
-import { SEARCH_REQUEST_URL } from '../endpoints';
+import { SEARCH_REQUEST } from '../endpoints';
 
 export default request => (dispatch) => {
   dispatch(isLoadingUpdated(true));
 
-  API.post('APIGateway', SEARCH_REQUEST_URL, {
+  API.post('APIGateway', SEARCH_REQUEST, {
     body: request
   })
     .then((response) => {

@@ -1,6 +1,6 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
-import { NEW_POST_URL } from '../endpoints';
+import { NEW_POST } from '../endpoints';
 
 const buildRequestJSON = inputFields => ({
   UserID: 1,
@@ -11,7 +11,7 @@ const buildRequestJSON = inputFields => ({
 export default (postData) => {
   const request = buildRequestJSON(postData);
   toast.info('New Post Sent.');
-  API.post('APIGateway', NEW_POST_URL, {
+  API.post('APIGateway', NEW_POST, {
     body: request
   })
     .then(() => toast.success('New Post Successful'))
