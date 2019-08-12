@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './App.css';
 import ReactPaginate from 'react-paginate';
 import { ToastContainer } from 'react-toastify';
-import Header from '../header/Header';
+import Header from '../header/HeaderContainer';
 import ResultList from '../list/ResultList';
 import ExportResultsModal from '../modal/ExportResultsModalContainer';
 import LoadingSpinner from '../reusableComponents/LoadingSpinner';
@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from '../reports/ReportsModalContainer';
 import NewPostModal from '../newPost/NewPostModalContainer';
 import DigestModal from '../digestModal/DigestModalContainer';
+import DigestListModal from '../digestListModal/DigestListModalContainer';
 import ModalController from '../modalController/ModalControllerContainer';
 import useInputForm from '../../utilities/hooks';
 import {
@@ -90,6 +91,7 @@ const App = ({
         <ReportsModal />
         <NewPostModal />
         <DigestModal />
+        <DigestListModal />
         <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>
     </div>
