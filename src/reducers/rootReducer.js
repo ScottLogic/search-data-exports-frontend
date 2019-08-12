@@ -5,6 +5,7 @@ import reportsModal from './ReportsModal';
 import newPostModal from './NewPostModal';
 import digestModal from './DigestModal';
 import digestListModal from './DigestListModal';
+import digestList from './DigestList';
 
 const rootReducer = combineReducers({
   app,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   reportsModal,
   newPostModal,
   digestModal,
-  digestListModal
+  digestListModal,
+  digestList
 });
 
 export default rootReducer;

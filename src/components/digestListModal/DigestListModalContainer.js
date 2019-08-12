@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import ReportsModal from './DigestListModal';
 import getModalDisplayed from '../../selectors/DigestListModal';
+import getDigestList from '../../selectors/DigestList';
 import { updateModalDisplayed } from '../../actions/DigestListModal';
 
 const mapStateToProps = state => ({
-  showModal: getModalDisplayed(state)
+  showModal: getModalDisplayed(state),
+  digestList: getDigestList(state)
 });
 
 const mapDispatchToProps = dispatch => ({
