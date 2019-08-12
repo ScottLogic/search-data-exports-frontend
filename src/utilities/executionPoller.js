@@ -1,14 +1,11 @@
-import { REPORT_STATUS_URL } from '../endpoints';
+import { API } from 'aws-amplify';
+import { REPORT_STATUS } from '../endpoints';
 
 export default (executionArn, timeout) => new Promise((resolve, reject) => {
   (function waitForURL() {
-    fetch(REPORT_STATUS_URL, {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify({ executionArn }),
-      headers: { 'Content-Type': 'application/json' }
+    API.post('APIGateway', REPORT_STATUS, {
+      body: { executionArn }
     })
-      .then(resultJson => resultJson.json())
       // eslint-disable-next-line consistent-return
       .then((result) => {
         if (result.status === 'RUNNING') {

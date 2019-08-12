@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
-import { GRAPHICAL_REQUEST_URL, HYBRID_REQUEST_URL } from '../endpoints';
+import { API } from 'aws-amplify';
+import { GRAPHICAL_REQUEST, HYBRID_REQUEST } from '../endpoints';
 
 const emptySearch = {
   search: []
@@ -7,13 +8,10 @@ const emptySearch = {
 
 const handleDownloadRequest = async (reportURL, searchCriteria) => {
   toast.info('Download request sent, your download will begin soon.');
-  fetch(reportURL, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(searchCriteria),
-    headers: { 'Content-Type': 'application/json' }
+
+  API.post('APIGateway', reportURL, {
+    body: searchCriteria
   })
-    .then(resultJson => resultJson.json())
     .then((downloadLink) => {
       window.location.assign(downloadLink.result);
     })
@@ -26,10 +24,10 @@ const handleDownloadRequest = async (reportURL, searchCriteria) => {
 export default (modalData) => {
   switch (modalData.reportName) {
     case 'PostFreq':
-      handleDownloadRequest(GRAPHICAL_REQUEST_URL, emptySearch);
+      handleDownloadRequest(GRAPHICAL_REQUEST, emptySearch);
       break;
     case 'Trending':
-      handleDownloadRequest(HYBRID_REQUEST_URL, emptySearch);
+      handleDownloadRequest(HYBRID_REQUEST, emptySearch);
       break;
     default:
       break;

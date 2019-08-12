@@ -17,10 +17,14 @@
 
 .title-header {
   margin: auto; 
-  font-size: 3vmax;
+  font-size: 4vmax;
 }
 
 .email-header {
   margin: auto;
-  font-size: 1vmax;
+  font-size: 2vmax;
+}
+
+.MenuButton {
+  padding:0px;
 }

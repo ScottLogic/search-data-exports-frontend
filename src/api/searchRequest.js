@@ -1,17 +1,13 @@
+import { API } from 'aws-amplify';
 import { searchResultsReceived, isLoadingUpdated } from '../actions/App';
-import { SEARCH_REQUEST_URL } from '../endpoints';
+import { SEARCH_REQUEST } from '../endpoints';
 
 export default request => (dispatch) => {
   dispatch(isLoadingUpdated(true));
-  fetch(SEARCH_REQUEST_URL, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(request),
-    headers: {
-      'Content-Type': 'application/json'
-    }
+
+  API.post('APIGateway', SEARCH_REQUEST, {
+    body: request
   })
-    .then(response => response.json())
     .then((response) => {
       const results = {
         ...response,
@@ -21,7 +17,7 @@ export default request => (dispatch) => {
       dispatch(searchResultsReceived(results));
     })
     .catch((error) => {
-      console.log('Error in Search API:', error);
+      console.error('Error in Search API:', error);
 
       const results = {
         Results: [],

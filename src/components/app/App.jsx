@@ -49,7 +49,7 @@ const App = ({
 
   return (
     <div className="app">
-      <Header email="oforeman@scottlogic.com" />
+      <Header />
       <div className="paper-display-page">
         <div className="container-index-select-form">
           <form onSubmit={handleSearch}>
