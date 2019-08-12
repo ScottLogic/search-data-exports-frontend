@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { API } from 'aws-amplify';
-import { GRAPHICAL_REQUEST_URL, HYBRID_REQUEST_URL } from '../endpoints';
+import { GRAPHICAL_REQUEST, HYBRID_REQUEST } from '../endpoints';
 
 const emptySearch = {
   search: []
@@ -24,10 +24,10 @@ const handleDownloadRequest = async (reportURL, searchCriteria) => {
 export default (modalData) => {
   switch (modalData.reportName) {
     case 'PostFreq':
-      handleDownloadRequest(GRAPHICAL_REQUEST_URL, emptySearch);
+      handleDownloadRequest(GRAPHICAL_REQUEST, emptySearch);
       break;
     case 'Trending':
-      handleDownloadRequest(HYBRID_REQUEST_URL, emptySearch);
+      handleDownloadRequest(HYBRID_REQUEST, emptySearch);
       break;
     default:
       break;

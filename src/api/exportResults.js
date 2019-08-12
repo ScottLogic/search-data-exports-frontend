@@ -1,6 +1,6 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
-import { DOWNLOAD_REQUEST_URL } from '../endpoints';
+import { DOWNLOAD_REQUEST } from '../endpoints';
 import executionPoller from '../utilities/executionPoller';
 import connectWebsocket from '../utilities/websocket';
 
@@ -13,7 +13,7 @@ const getDownloadRequest = (type, parameters, searchCriteria) => ({
 const handleDirectDownloadRequest = async (searchCriteria) => {
   const request = getDownloadRequest('direct', null, searchCriteria);
   toast.info('Download request sent, your download will begin soon.');
-  API.post('APIGateway', DOWNLOAD_REQUEST_URL, {
+  API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
   })
     .then(result => executionPoller(result.executionArn, 500))
@@ -26,7 +26,7 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
 
 const handleEmailRequest = async (searchCriteria, emailAddress) => {
   const request = getDownloadRequest('email', { emailAddress }, searchCriteria);
-  const response = await API.post('APIGateway', DOWNLOAD_REQUEST_URL, {
+  const response = await API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
   });
 
@@ -36,7 +36,7 @@ const handleEmailRequest = async (searchCriteria, emailAddress) => {
 const handlePushNotificationRequest = async (searchCriteria) => {
   const request = getDownloadRequest('push', null, searchCriteria);
   toast.info('Request sent, you will receive a notification with your download shortly.');
-  API.post('APIGateway', DOWNLOAD_REQUEST_URL, {
+  API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
   })
     .then(response => connectWebsocket(response))

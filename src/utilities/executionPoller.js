@@ -1,9 +1,9 @@
 import { API } from 'aws-amplify';
-import { REPORT_STATUS_URL } from '../endpoints';
+import { REPORT_STATUS } from '../endpoints';
 
 export default (executionArn, timeout) => new Promise((resolve, reject) => {
   (function waitForURL() {
-    API.post('APIGateway', REPORT_STATUS_URL, {
+    API.post('APIGateway', REPORT_STATUS, {
       body: { executionArn }
     })
       // eslint-disable-next-line consistent-return
