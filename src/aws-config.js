@@ -2,10 +2,10 @@ import { Auth } from 'aws-amplify';
 
 export default {
   Auth: {
-    region: `${process.env.REACT_APP_AUTH_REGION || ''}`,
-    userPoolId: `${process.env.REACT_APP_AUTH_USER_POOL || ''}`,
-    userPoolWebClientId: `${process.env.REACT_APP_AUTH_CLIENT || ''}`,
-    identityPoolId: `${process.env.REACT_APP_AUTH_IDENT || ''}`
+    region: process.env.REACT_APP_AUTH_REGION,
+    userPoolId: process.env.REACT_APP_AUTH_USER_POOL,
+    userPoolWebClientId: process.env.REACT_APP_AUTH_CLIENT,
+    identityPoolId: process.env.REACT_APP_AUTH_IDENT
   },
   API: {
     endpoints: [

@@ -17,10 +17,7 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
     body: request
   })
     .then(result => executionPoller(result.executionArn, 500))
-    .then((downloadLink) => {
-      console.log(downloadLink);
-      window.location.assign(downloadLink);
-    })
+    .then(downloadLink => window.location.assign(downloadLink))
     .catch((error) => {
       console.error(error);
       toast.error('Something went wrong, please try again.');
