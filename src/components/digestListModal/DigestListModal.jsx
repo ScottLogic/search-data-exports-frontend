@@ -28,7 +28,11 @@ const DigestListModal = ({ showModal, closeModal }) => (
     <form className="reports-form">
       <h1>Currently Subscribed Digests</h1>
       <hr />
-      <ul className="reports-list">Test</ul>
+      <ul className="reports-list">
+        <li>Report 1</li>
+        <li>Report 2</li>
+        <li>Report 3</li>
+      </ul>
       <hr />
       <input type="button" onClick={closeModal} value="Close" />
     </form>
