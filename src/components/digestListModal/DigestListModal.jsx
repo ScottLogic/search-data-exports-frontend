@@ -1,15 +1,29 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import getDigestList from '../../api/digestSearch';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-const DigestListModal = ({ showModal, closeModal, digestList }) => {
+const DigestItem = ({ field, value }) => (
+  <li>
+    <div className="digest-list-item">
+      <div className="digest-list-item-details">
+        <p>{field}</p>
+        <p>{value}</p>
+      </div>
+      <div className="digest-list-item-details">
+        <button type="button">Delete</button>
+      </div>
+    </div>
+  </li>
+);
+
+const DigestListModal = ({
+  showModal, closeModal, digestList, fetchDigestList
+}) => {
   useEffect(() => {
-    console.log('Use Effect');
-    getDigestList();
-  }, []);
+    fetchDigestList();
+  }, [fetchDigestList]);
 
   return (
     <ReactModal
@@ -35,12 +49,10 @@ const DigestListModal = ({ showModal, closeModal, digestList }) => {
       <form className="reports-form">
         <h1>Currently Subscribed Digests</h1>
         <hr />
-        <ul className="reports-list">
-          {digestList.map((digest) => {
-            console.log('Digest List ', digest);
-            console.log('A.N.Other');
-            return <li>TEST</li>;
-          })}
+        <ul className="digest-list">
+          {digestList.map((digest, index) => (
+            <DigestItem key={index} {...digest} />
+          ))}
         </ul>
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
@@ -49,10 +61,16 @@ const DigestListModal = ({ showModal, closeModal, digestList }) => {
   );
 };
 
+DigestItem.propTypes = {
+  field: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired
+};
+
 DigestListModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  digestList: PropTypes.array.isRequired
+  digestList: PropTypes.array.isRequired,
+  fetchDigestList: PropTypes.func.isRequired
 };
 
 export default DigestListModal;
