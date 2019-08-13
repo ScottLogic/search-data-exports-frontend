@@ -1,11 +1,11 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
-import { DIGEST } from '../endpoints';
+import { DIGEST_SUBSCRIPTIONS } from '../endpoints';
 
 const handleDailyRequest = (request) => {
   const fieldValues = request.searchCriteria.search[0];
   toast.info('Subscribing to digest.');
-  API.post('APIGateway', DIGEST, {
+  API.post('APIGateway', DIGEST_SUBSCRIPTIONS, {
     body: fieldValues
   })
     .then(() => toast.success('Subscription successful'))
