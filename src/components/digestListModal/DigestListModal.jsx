@@ -37,8 +37,10 @@ const DigestListModal = ({
   showModal, closeModal, digestList, fetchDigestList
 }) => {
   useEffect(() => {
-    fetchDigestList();
-  }, [fetchDigestList]);
+    if (showModal) {
+      fetchDigestList();
+    }
+  }, [fetchDigestList, showModal]);
 
   return (
     <ReactModal
