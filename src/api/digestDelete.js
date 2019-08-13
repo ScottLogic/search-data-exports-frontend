@@ -1,13 +1,17 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { DIGEST_SUBSCRIPTIONS } from '../endpoints';
+import fetchDigestList from './digestSearch';
 
-const deleteDailyDigest = ( request ) => {
+const deleteDailyDigest = (request) => {
   console.log(request);
   API.delete('APIGateway', DIGEST_SUBSCRIPTIONS, {
     body: request
   })
-    .then(() => toast.success('Delete Subscription successful'))
+    .then(() => {
+      toast.success('Delete Subscription successful');
+      fetchDigestList();
+    })
     .catch((error) => {
       const errorMessage = (error.response && error.response.data && error.response.data.message) || '';
       if (errorMessage.length > 0) {
