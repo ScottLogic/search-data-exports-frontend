@@ -1,8 +1,15 @@
+.digest-form {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+}
+
 .digest-list {
   padding: 0;
   list-style: none;
   width: 100%;
-  height: 100%;
+  flex-grow: 1;
+  overflow-y: scroll;
 }
 
 .digest-list-item {

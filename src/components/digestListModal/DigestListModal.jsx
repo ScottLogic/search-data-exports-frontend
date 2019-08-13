@@ -63,7 +63,7 @@ const DigestListModal = ({
         }
       }}
     >
-      <form className="reports-form">
+      <form className="digest-form">
         <h1>Currently Subscribed Digests</h1>
         <hr />
         <ul className="digest-list">
