@@ -13,7 +13,8 @@ export default {
         name: 'APIGateway',
         endpoint: `${process.env.REACT_APP_API_URL || ''}`,
         custom_header: async () => ({
-          Authorization: (await Auth.currentSession()).idToken.jwtToken
+          Authorization: (await Auth.currentSession()).idToken.jwtToken,
+          'Content-Type': 'application/json'
         })
       }
     ]
