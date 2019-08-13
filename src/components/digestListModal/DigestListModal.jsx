@@ -5,15 +5,28 @@ import './DigestListModal.css';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-const DigestItem = ({ field, value }) => (
+const deleteDigest = (deleteObject) => {
+  console.log('Delete Digest Placeholder', deleteObject);
+};
+
+const DigestItem = ({ field, value, frequency }) => (
   <li>
     <div className="digest-list-item">
-      <div className="digest-list-item-details">
-        <p>{field}</p>
-        <p>{value}</p>
+      <div className="digest-list-frequency">
+        {frequency}
       </div>
       <div className="digest-list-item-details">
-        <button type="button">Delete</button>
+        <p>
+          <span>Fields: </span>
+          {field}
+        </p>
+        <p>
+          <span>Search Criteria: </span>
+          {value}
+        </p>
+      </div>
+      <div className="reports-list-item-options">
+        <button type="button" onClick={() => deleteDigest({ field, value, frequency })}>Delete</button>
       </div>
     </div>
   </li>
@@ -53,7 +66,7 @@ const DigestListModal = ({
         <ul className="digest-list">
           {digestList.map((digest, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DigestItem key={index} {...digest} />
+            <DigestItem key={index} {...digest} frequency="Daily" />
           ))}
         </ul>
         <hr />
@@ -65,7 +78,8 @@ const DigestListModal = ({
 
 DigestItem.propTypes = {
   field: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
+  frequency: PropTypes.string.isRequired
 };
 
 DigestListModal.propTypes = {
