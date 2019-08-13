@@ -10,7 +10,8 @@ const handleDailyRequest = (request) => {
   })
     .then(() => toast.success('Subscription successful'))
     .catch((error) => {
-      const errorMessage = error.response.data.message;
+      console.log(error.response);
+      const errorMessage = (error.response && error.response.data && error.response.data.message) || '';
       if (errorMessage.length > 0) {
         toast.error(errorMessage);
       } else {
