@@ -25,9 +25,9 @@ const deleteDailyDigest = (request) => {
 
 export default (request) => {
   console.log('Delete Digest Request:', request);
-  switch (request.freqency) {
+  switch (request.frequency) {
     case 'Daily':
-      deleteDailyDigest(request) 
+      deleteDailyDigest(request);
       break;
     default:
       console.warn(`Unknown method passed to delete ${request.frequency}`);

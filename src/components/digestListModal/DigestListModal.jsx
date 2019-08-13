@@ -6,11 +6,9 @@ import deleteDigest from '../../api/digestDelete';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-const handleDelete = (deleteObject) => {
-  deleteDigest(deleteObject);
-};
-
-const DigestItem = ({ field, value, frequency }) => (
+const DigestItem = ({ 
+  field, value, frequency, handleDelete
+}) => (
   <li>
     <div className="digest-list-item">
       <div className="digest-list-frequency">
@@ -42,6 +40,10 @@ const DigestListModal = ({
     }
   }, [fetchDigestList, showModal]);
 
+  const handleDelete = (deleteObject) => {
+    deleteDigest(deleteObject);
+  };
+
   return (
     <ReactModal
       isOpen={showModal}
@@ -69,7 +71,7 @@ const DigestListModal = ({
         <ul className="digest-list">
           {digestList.map((digest, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DigestItem key={index} {...digest} frequency="Daily" />
+            <DigestItem key={index} {...digest} frequency="Daily" handleDelete={handleDelete} />
           ))}
         </ul>
         <hr />
@@ -82,7 +84,8 @@ const DigestListModal = ({
 DigestItem.propTypes = {
   field: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  frequency: PropTypes.string.isRequired
+  frequency: PropTypes.string.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
 
 DigestListModal.propTypes = {
