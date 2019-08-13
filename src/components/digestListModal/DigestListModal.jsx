@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+import './DigestListModal.css';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
@@ -51,6 +52,7 @@ const DigestListModal = ({
         <hr />
         <ul className="digest-list">
           {digestList.map((digest, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <DigestItem key={index} {...digest} />
           ))}
         </ul>
