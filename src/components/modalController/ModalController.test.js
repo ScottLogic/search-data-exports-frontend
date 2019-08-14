@@ -10,6 +10,7 @@ describe('<ModalController />', () => {
 
   const noDataProps = {
     hasData: false,
+    searchPerformed: {},
     showExportResultsModal: jest.fn(),
     showReportsModal: jest.fn(),
     showNewPostModal: jest.fn(),
@@ -18,7 +19,12 @@ describe('<ModalController />', () => {
 
   const dataProps = {
     ...noDataProps,
-    hasData: true
+    hasData: true,
+  };
+
+  const postSearchProps = {
+    ...noDataProps,
+    searchPerformed: { value: 'test' },
   };
 
   beforeEach(() => {
@@ -54,17 +60,17 @@ describe('<ModalController />', () => {
     expect(dataProps.showExportResultsModal).toHaveBeenCalledTimes(1);
   });
 
-  it('Does not render the Subscribe to digest button when hasData is false', () => {
+  it('Does not render the Subscribe to digest button when searchPerformed is empty', () => {
     expect(wrapper.find('#digestSubscribeButton')).toHaveLength(0);
   });
 
-  it('Renders the Subscribe to digest button when hasData is true', () => {
-    wrapper = shallow(<ModalController {...dataProps} />);
+  it('Renders the Subscribe to digest button when hasData is not empty', () => {
+    wrapper = shallow(<ModalController {...postSearchProps} />);
     expect(wrapper.find('#digestSubscribeButton')).toHaveLength(1);
   });
 
   it('Calls showDigestModal when the Subscribe to digest button is clicked', () => {
-    wrapper = shallow(<ModalController {...dataProps} />);
+    wrapper = shallow(<ModalController {...postSearchProps} />);
     wrapper.find('#digestSubscribeButton').simulate('click');
     expect(dataProps.showDigestModal).toHaveBeenCalledTimes(1);
   });
