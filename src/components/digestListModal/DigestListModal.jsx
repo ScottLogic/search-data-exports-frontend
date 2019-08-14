@@ -6,7 +6,7 @@ import deleteDigest from '../../api/digestDelete';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-const DigestItem = ({ 
+const DigestItem = ({
   field, value, frequency, handleDelete
 }) => (
   <li>
@@ -41,7 +41,7 @@ const DigestListModal = ({
   }, [fetchDigestList, showModal]);
 
   const handleDelete = (deleteObject) => {
-    deleteDigest(deleteObject);
+    deleteDigest(deleteObject, fetchDigestList);
   };
 
   return (

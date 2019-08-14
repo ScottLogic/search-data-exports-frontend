@@ -1,16 +1,14 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { DIGEST_SUBSCRIPTIONS } from '../endpoints';
-import fetchDigestList from './digestSearch';
 
-const deleteDailyDigest = (request) => {
-  console.log(request);
-  API.delete('APIGateway', DIGEST_SUBSCRIPTIONS, {
+const deleteDailyDigest = (request, callback) => {
+  API.del('APIGateway', DIGEST_SUBSCRIPTIONS, {
     body: request
   })
     .then(() => {
       toast.success('Delete Subscription successful');
-      fetchDigestList();
+      callback();
     })
     .catch((error) => {
       const errorMessage = (error.response && error.response.data && error.response.data.message) || '';
@@ -23,11 +21,10 @@ const deleteDailyDigest = (request) => {
     });
 };
 
-export default (request) => {
-  console.log('Delete Digest Request:', request);
+export default (request, callback) => {
   switch (request.frequency) {
     case 'Daily':
-      deleteDailyDigest(request);
+      deleteDailyDigest(request, callback);
       break;
     default:
       console.warn(`Unknown method passed to delete ${request.frequency}`);
