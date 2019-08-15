@@ -6,10 +6,6 @@ import deleteDigest from '../../api/digestDelete';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-// const handleDelete = (deleteObject) => {
-//   deleteDigest(deleteObject);
-// };
-
 const DigestItem = ({ field, value, frequency }) => (
   <li>
     <div className="digest-list-item">
