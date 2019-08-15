@@ -7,7 +7,7 @@ const emptySearch = {
 };
 
 const handleDownloadRequest = async (reportURL, searchCriteria, callback) => {
-  toast.info(`Request sent, ${(!callback) ? 'your download will begin soon.' : 'you image will display shortly.'}`);
+  toast.info(`Request sent, ${(callback) ? 'your image will display shortly.' : 'your download will begin soon.'}`);
 
   API.post('APIGateway', reportURL, {
     body: {
