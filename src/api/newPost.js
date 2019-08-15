@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { NEW_POST } from '../endpoints';
 
 const buildRequestJSON = inputFields => ({
-  UserID: 1,
   Post: inputFields.Post,
   Tags: inputFields.Tags.split(' ').map(tag => `${((tag.charAt(0) !== '#') ? '#' : '')}${tag}`)
 });
