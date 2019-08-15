@@ -12,23 +12,33 @@ const reportItem = ({
   description,
   image = 'default.png',
   onView,
-  onDownload
+  onDownload,
+  viewURL,
+  onHide
 }) => (
   <li>
-    <div className="reports-list-item">
-      <div className="reports-list-item-image">
-        <img src={`/images/icons/${image}`} alt={name} />
+    <div className="reports-list-item-holder">
+      <div className="reports-list-item">
+        <div className="reports-list-item-image">
+          <img src={`/images/icons/${image}`} alt={name} />
+        </div>
+        <div className="reports-list-item-details">
+          <p>{name}</p>
+          <p>{description}</p>
+        </div>
+        <div className="reports-list-item-options">
+          {onView && <input type="button" value={(!viewURL) ? 'View' : 'Hide'} onClick={(!viewURL) ? onView : onHide} />}
+          {onDownload && (
+            <input type="button" value="Download" onClick={onDownload} />
+          )}
+        </div>
       </div>
-      <div className="reports-list-item-details">
-        <p>{name}</p>
-        <p>{description}</p>
-      </div>
-      <div className="reports-list-item-options">
-        {onView && <input type="button" value="View" onClick={onView} />}
-        {onDownload && (
-          <input type="button" value="Download" onClick={onDownload} />
-        )}
-      </div>
+      {viewURL && (
+        <div className="reports-list-item-content">
+          <img src={viewURL} width="100%" height="auto" alt="Report Chart" />
+        </div>
+      )
+        }
     </div>
   </li>
 );
@@ -37,6 +47,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [selectedReport, setSelectedReport] = useState('');
   const [options, setOptions] = useState(['pdf']);
+  const [graphicalReportURL, setGraphicalReportURL] = useState('');
 
   const handleDownloadModalClose = () => {
     setShowDownloadModal(false);
@@ -52,8 +63,11 @@ const ReportsModal = ({ showModal, closeModal }) => {
     });
   };
 
-  const viewReport = (reportName) => {
-    console.log('View', reportName);
+  const viewReport = (reportName, callback) => {
+    handleModalSubmit({
+      selectedType: 'svg',
+      reportName
+    }, callback);
   };
 
   const downloadPDF = (reportName) => {
@@ -100,8 +114,10 @@ const ReportsModal = ({ showModal, closeModal }) => {
             name: 'Post Frequency Report',
             description:
               'Graph report of posts per hour for the last 24 hours.',
-            onView: () => viewReport('PostFreq'),
-            onDownload: () => requestDownload('PostFreq')
+            onView: () => viewReport('PostFreq', setGraphicalReportURL),
+            onDownload: () => requestDownload('PostFreq'),
+            viewURL: graphicalReportURL,
+            onHide: () => setGraphicalReportURL('')
           })}
           {reportItem({
             name: 'Trending Report',
@@ -130,12 +146,16 @@ reportItem.propTypes = {
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   onView: PropTypes.func,
-  onDownload: PropTypes.func
+  onDownload: PropTypes.func,
+  viewURL: PropTypes.string,
+  onHide: PropTypes.func
 };
 
 reportItem.defaultProps = {
   onView: undefined,
-  onDownload: undefined
+  onDownload: undefined,
+  viewURL: '',
+  onHide: undefined
 };
 
 ReportsModal.propTypes = {

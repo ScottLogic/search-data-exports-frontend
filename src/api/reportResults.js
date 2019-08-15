@@ -6,14 +6,21 @@ const emptySearch = {
   search: []
 };
 
-const handleDownloadRequest = async (reportURL, searchCriteria) => {
-  toast.info('Download request sent, your download will begin soon.');
+const handleDownloadRequest = async (reportURL, searchCriteria, callback) => {
+  toast.info(`Request sent, ${(!callback) ? 'your download will begin soon.' : 'you image will display shortly.'}`);
 
   API.post('APIGateway', reportURL, {
-    body: searchCriteria
+    body: {
+      ...searchCriteria,
+      download: (!callback)
+    }
   })
     .then((downloadLink) => {
-      window.location.assign(downloadLink.result);
+      if (callback) {
+        callback(downloadLink);
+      } else {
+        window.location.assign(downloadLink);
+      }
     })
     .catch((error) => {
       console.error(error);
@@ -21,13 +28,13 @@ const handleDownloadRequest = async (reportURL, searchCriteria) => {
     });
 };
 
-export default (modalData) => {
+export default (modalData, callback) => {
   switch (modalData.reportName) {
     case 'PostFreq':
-      handleDownloadRequest(GRAPHICAL_REQUEST, emptySearch);
+      handleDownloadRequest(GRAPHICAL_REQUEST, emptySearch, callback);
       break;
     case 'Trending':
-      handleDownloadRequest(HYBRID_REQUEST, emptySearch);
+      handleDownloadRequest(HYBRID_REQUEST, emptySearch, callback);
       break;
     default:
       break;
