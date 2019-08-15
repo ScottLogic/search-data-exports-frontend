@@ -4,13 +4,17 @@ import exportResultsModal from './ExportResultsModal';
 import reportsModal from './ReportsModal';
 import newPostModal from './NewPostModal';
 import digestModal from './DigestModal';
+import digestListModal from './DigestListModal';
+import digestList from './DigestList';
 
 const rootReducer = combineReducers({
   app,
   exportResultsModal,
   reportsModal,
   newPostModal,
-  digestModal
+  digestModal,
+  digestListModal,
+  digestList
 });
 
 export default rootReducer;
