@@ -6,9 +6,9 @@ import deleteDigest from '../../api/digestDelete';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-const handleDelete = (deleteObject) => {
-  deleteDigest(deleteObject);
-};
+// const handleDelete = (deleteObject) => {
+//   deleteDigest(deleteObject);
+// };
 
 const DigestItem = ({ field, value, frequency }) => (
   <li>
@@ -27,7 +27,7 @@ const DigestItem = ({ field, value, frequency }) => (
         </p>
       </div>
       <div className="reports-list-item-options">
-        <button type="button" onClick={() => handleDelete({ field, value, frequency })}>Delete</button>
+        <button type="button" onClick={() => deleteDigest({ field, value, frequency })}>Delete</button>
       </div>
     </div>
   </li>

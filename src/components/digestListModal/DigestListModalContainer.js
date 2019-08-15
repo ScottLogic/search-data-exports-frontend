@@ -13,7 +13,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(updateModalDisplayed(false)),
   fetchDigestList: () => fetchDigestList()(dispatch)
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportsModal);
