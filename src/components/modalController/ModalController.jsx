@@ -4,6 +4,7 @@ import './ModalController.css';
 
 const ModalController = ({
   hasData,
+  searchPerformed,
   showExportResultsModal,
   showReportsModal,
   showNewPostModal,
@@ -18,7 +19,7 @@ const ModalController = ({
     />
   );
 
-  const digestSubscribeButton = hasData && (
+  const digestSubscribeButton = (Object.keys(searchPerformed).length > 0) && (
     <input
       type="button"
       id="digestSubscribeButton"
@@ -49,6 +50,7 @@ const ModalController = ({
 
 ModalController.propTypes = {
   hasData: PropTypes.bool.isRequired,
+  searchPerformed: PropTypes.object.isRequired,
   showExportResultsModal: PropTypes.func.isRequired,
   showReportsModal: PropTypes.func.isRequired,
   showNewPostModal: PropTypes.func.isRequired,

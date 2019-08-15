@@ -67,7 +67,7 @@ const App = ({
           </form>
         </div>
 
-        <ModalController hasData={data.length > 0} />
+        <ModalController hasData={data.length > 0} searchPerformed={lastRequest} />
         <LoadingSpinner isDisplayed={isLoading} />
 
         <div className="container-result-list">

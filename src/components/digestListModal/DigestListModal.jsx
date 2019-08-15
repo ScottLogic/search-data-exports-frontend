@@ -25,7 +25,7 @@ const DigestItem = ({
         </p>
       </div>
       <div className="reports-list-item-options">
-        <button type="button" onClick={() => handleDelete({ field, value, frequency })}>Delete</button>
+        <button type="button" onClick={() => deleteDigest({ field, value, frequency })}>Delete</button>
       </div>
     </div>
   </li>
