@@ -36,7 +36,7 @@ describe('App Actions', () => {
       type: 'post',
       results: 20,
       page: 1,
-      search: [{ field: 'all', value: 'Test' }]
+      search: [{ value: 'Test' }]
     };
 
     const expectedAction = {

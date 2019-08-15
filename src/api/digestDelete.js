@@ -4,7 +4,7 @@ import { DIGEST_SUBSCRIPTIONS } from '../endpoints';
 
 const deleteDailyDigest = (request, callback) => {
   API.del('APIGateway', DIGEST_SUBSCRIPTIONS, {
-    body: request
+    body: { value: request.value }
   })
     .then(() => {
       toast.success('Delete Subscription successful');
