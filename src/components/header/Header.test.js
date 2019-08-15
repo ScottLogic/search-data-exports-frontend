@@ -8,8 +8,12 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('<Header />', () => {
   let wrapper;
 
+  const appProps = {
+    updateModalDisplayed: jest.fn()
+  };
+
   beforeEach(() => {
-    wrapper = shallow(<Header />);
+    wrapper = shallow(<Header {...appProps} />);
   });
 
   it('Renders the title', () => {
