@@ -44,7 +44,7 @@ describe('<App />', () => {
       type: 'post',
       results: 10,
       page: 0,
-      search: [{ field: 'all', value: '' }]
+      search: [{ value: '' }]
     };
 
     wrapper.find('.container-index-select-form form').simulate('submit');

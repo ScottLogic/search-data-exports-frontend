@@ -6,7 +6,7 @@ import deleteDigest from '../../api/digestDelete';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-const DigestItem = ({ field, value, frequency }) => (
+const DigestItem = ({ value, frequency }) => (
   <li>
     <div className="digest-list-item">
       <div className="digest-list-frequency">
@@ -14,16 +14,12 @@ const DigestItem = ({ field, value, frequency }) => (
       </div>
       <div className="digest-list-item-details">
         <p>
-          <span>Fields: </span>
-          {field}
-        </p>
-        <p>
           <span>Search Criteria: </span>
           {value}
         </p>
       </div>
       <div className="reports-list-item-options">
-        <button type="button" onClick={() => deleteDigest({ field, value, frequency })}>Delete</button>
+        <button type="button" onClick={() => deleteDigest({ value, frequency })}>Delete</button>
       </div>
     </div>
   </li>
@@ -76,7 +72,6 @@ const DigestListModal = ({
 };
 
 DigestItem.propTypes = {
-  field: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   frequency: PropTypes.string.isRequired
 };

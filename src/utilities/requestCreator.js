@@ -1,8 +1,8 @@
-export const createRequest = (type, results, page, searchVal) => ({
+export const createRequest = (type, results, page, value) => ({
   type,
   results,
   page,
-  search: [{ field: 'all', value: searchVal }]
+  search: [{ value }]
 });
 
 export const updateRequestPage = (request, page) => ({

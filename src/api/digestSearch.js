@@ -6,7 +6,7 @@ import { updateDigestList } from '../actions/DigestList';
 export default () => (dispatch) => {
   API.get('APIGateway', DIGEST_SUBSCRIPTIONS, {})
     .then((response) => {
-      dispatch(updateDigestList(response));
+      dispatch(updateDigestList(response.map(value => ({ value }))));
     })
     .catch((error) => {
       console.error('Error in Digest List API:', error);
