@@ -5,9 +5,7 @@ import { updateDigestList, updateRealTimeList } from '../actions/DigestList';
 
 const getSubscriptions = async (dispatch, endpoint, updateFunc) => {
   API.get('APIGateway', endpoint, {})
-    .then((response) => {
-      dispatch(updateFunc(response.map(value => ({ value }))));
-    })
+    .then(response => dispatch(updateFunc(response.map(value => ({ value })))))
     .catch((error) => {
       console.error('Error in Daily Digest List API:', error);
       toast.error(`Error in Daily Digest List API. ${error}`);
@@ -15,6 +13,6 @@ const getSubscriptions = async (dispatch, endpoint, updateFunc) => {
 };
 
 export default () => (dispatch) => {
-  getSubscriptions(dispatch, DIGEST_SUBSCRIPTIONS, updateDigestList);
   getSubscriptions(dispatch, REALTIME_SUBSCRIPTIONS, updateRealTimeList);
+  getSubscriptions(dispatch, DIGEST_SUBSCRIPTIONS, updateDigestList);
 };

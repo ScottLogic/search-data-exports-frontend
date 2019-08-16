@@ -38,7 +38,9 @@ const DigestListModal = ({
 
   const handleDelete = (deleteObject) => {
     deleteDigest(deleteObject)
-      .then(() => fetchDigestList());
+      .then(() => {
+        fetchDigestList();
+      });
   };
 
   return (
@@ -72,7 +74,7 @@ const DigestListModal = ({
           ))}
           {realtimeDigestList.map((digest, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DigestItem key={index} {...digest} frequency="Real Time" />
+            <DigestItem key={index} {...digest} frequency="Real Time" handleDelete={handleDelete} />
           ))}
         </ul>
         <hr />
