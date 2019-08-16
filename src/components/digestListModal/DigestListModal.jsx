@@ -26,7 +26,7 @@ const DigestItem = ({ value, frequency }) => (
 );
 
 const DigestListModal = ({
-  showModal, closeModal, digestList, fetchDigestList
+  showModal, closeModal, digestList, fetchDigestList, realtimeDigestList
 }) => {
   useEffect(() => {
     if (showModal) {
@@ -63,6 +63,10 @@ const DigestListModal = ({
             // eslint-disable-next-line react/no-array-index-key
             <DigestItem key={index} {...digest} frequency="Daily" />
           ))}
+          {realtimeDigestList.map((digest, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <DigestItem key={index} {...digest} frequency="Real Time" />
+          ))}
         </ul>
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
@@ -80,7 +84,8 @@ DigestListModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   digestList: PropTypes.array.isRequired,
-  fetchDigestList: PropTypes.func.isRequired
+  fetchDigestList: PropTypes.func.isRequired,
+  realtimeDigestList: PropTypes.array.isRequired
 };
 
 export default DigestListModal;
