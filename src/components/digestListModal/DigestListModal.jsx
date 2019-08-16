@@ -37,7 +37,8 @@ const DigestListModal = ({
   }, [fetchDigestList, showModal]);
 
   const handleDelete = (deleteObject) => {
-    deleteDigest(deleteObject, fetchDigestList);
+    deleteDigest(deleteObject)
+      .then(() => fetchDigestList());
   };
 
   return (
