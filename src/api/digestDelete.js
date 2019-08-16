@@ -24,6 +24,6 @@ export default async (request) => {
       return deleteDailyDigest(request);
     default:
       console.warn(`Unknown method passed to delete ${request.frequency}`);
-      return false;
+      throw Error(`Unknown method passed to delete ${request.frequency}`);
   }
 };
