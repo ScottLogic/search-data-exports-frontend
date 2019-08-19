@@ -14,8 +14,7 @@ const ExportResultsModal = ({
     closeModal();
     handleModalSubmit(
       {
-        selectedType: event.target.selectedOption.value,
-        emailAddress: event.target.emailInput.value
+        selectedType: event.target.selectedOption.value
       },
       lastRequest
     );

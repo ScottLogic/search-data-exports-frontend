@@ -30,7 +30,9 @@ const handleEmailRequest = async (searchCriteria, emailAddress) => {
     body: request
   });
 
-  if (!response.ok) throw Error(response.statusText);
+  // Because of how the API.post clips off the headers we cannot use response.ok.
+  // So we are checking an actual executionARN is replied to confirm it exited correctly.
+  if (!response.executionArn) throw Error(response.statusText);
 };
 
 const handlePushNotificationRequest = async (searchCriteria) => {
