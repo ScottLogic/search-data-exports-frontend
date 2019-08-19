@@ -65,9 +65,6 @@ describe('<ExportResultsModal />', () => {
       target: {
         selectedOption: {
           value: 'direct'
-        },
-        emailInput: {
-          value: 'test@example.com'
         }
       }
     });
@@ -75,8 +72,7 @@ describe('<ExportResultsModal />', () => {
     expect(exportResultsRequest).toHaveBeenCalledTimes(1);
     expect(exportResultsRequest).toHaveBeenCalledWith(
       {
-        selectedType: 'direct',
-        emailAddress: 'test@example.com'
+        selectedType: 'direct'
       },
       modalProps.lastRequest
     );

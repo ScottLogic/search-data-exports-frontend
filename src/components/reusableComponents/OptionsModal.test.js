@@ -31,50 +31,12 @@ describe('<OptionsModal />', () => {
     expect(radioElement.props.checked).toBeTruthy();
   });
 
-  it('Doesnt render an email input field if email is not an option', () => {
+  it('Renders all expected input fields', () => {
     const elements = wrapper.find('input').getElements();
     expect(elements).toHaveLength(defaultProps.options.length);
     for (let i = 0; i < elements.length; i += 1) {
       expect(elements[i].props.id).toEqual(defaultProps.options[i]);
     }
-  });
-
-  it('Includes an email input field if email is an option', () => {
-    const updatedProps = {
-      ...defaultProps,
-      options: [...defaultProps.options, 'email']
-    };
-    wrapper = shallow(<OptionsModal {...updatedProps} />);
-
-    const elements = wrapper.find('input').getElements();
-
-    expect(elements).toHaveLength(updatedProps.options.length + 1);
-    for (let i = 0; i < elements.length - 1; i += 1) {
-      expect(elements[i].props.id).toEqual(updatedProps.options[i]);
-    }
-    expect(elements[elements.length - 1].props.id).toEqual('emailInput');
-  });
-
-  it('Hides the email form input text field when the email radio is not selected', () => {
-    const updatedProps = {
-      ...defaultProps,
-      options: [...defaultProps.options, 'email']
-    };
-    wrapper = shallow(<OptionsModal {...updatedProps} />);
-
-    expect(wrapper.find('#emailInput').get(0).props.type).toEqual('hidden');
-  });
-
-  it('Shows the email form input text field when the email radio is selected', () => {
-    const updatedProps = {
-      ...defaultProps,
-      options: [...defaultProps.options, 'email']
-    };
-    wrapper = shallow(<OptionsModal {...updatedProps} />);
-
-    wrapper.find('#email').get(0).props.onChange({ target: { value: 'email' } });
-
-    expect(wrapper.find('#emailInput').get(0).props.type).toEqual('email');
   });
 
   it('Calls the onClose function when the close button is clicked', () => {

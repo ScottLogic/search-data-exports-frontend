@@ -23,23 +23,6 @@ const radioButtonFormat = (option, selectedType, onChange, capitaliseOutput) => 
   </label>
 );
 
-const emailInputFormat = (selectedType, emailInput) => (
-  <div
-    className="email"
-    style={selectedType === 'email' ? {} : { display: 'none' }}
-  >
-    <label htmlFor="emailInput">
-      Enter your email:
-      <input
-        type={selectedType === 'email' ? 'email' : 'hidden'}
-        id="emailInput"
-        {...emailInput}
-        required
-      />
-    </label>
-  </div>
-);
-
 const OptionsModal = ({
   options,
   showModal,
@@ -49,7 +32,6 @@ const OptionsModal = ({
   modalTitle,
   submitButtonText
 }) => {
-  const emailInput = useInputForm('');
   const { value: selectedType, onChange: handleTypeChange } = useInputForm(
     options[0]
   );
@@ -79,7 +61,6 @@ const OptionsModal = ({
             <br />
           </React.Fragment>
         ))}
-        {options.includes('email') && emailInputFormat(selectedType, emailInput)}
         <button type="button" onClick={onClose}>
           Cancel
         </button>

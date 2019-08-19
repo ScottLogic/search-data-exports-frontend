@@ -4,14 +4,13 @@ import { DOWNLOAD_REQUEST } from '../endpoints';
 import executionPoller from '../utilities/executionPoller';
 import connectWebsocket from '../utilities/websocket';
 
-const getDownloadRequest = (type, parameters, searchCriteria) => ({
+const getDownloadRequest = (type, searchCriteria) => ({
   type,
-  parameters,
   searchCriteria
 });
 
 const handleDirectDownloadRequest = async (searchCriteria) => {
-  const request = getDownloadRequest('direct', null, searchCriteria);
+  const request = getDownloadRequest('direct', searchCriteria);
   toast.info('Download request sent, your download will begin soon.');
   API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
@@ -24,17 +23,19 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
     });
 };
 
-const handleEmailRequest = async (searchCriteria, emailAddress) => {
-  const request = getDownloadRequest('email', { emailAddress }, searchCriteria);
+const handleEmailRequest = async (searchCriteria) => {
+  const request = getDownloadRequest('email', searchCriteria);
   const response = await API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
   });
 
-  if (!response.ok) throw Error(response.statusText);
+  // Because of how the API.post clips off the headers we cannot use response.ok.
+  // So we are checking an actual executionARN is replied to confirm it exited correctly.
+  if (!response.executionArn) throw Error(response.statusText);
 };
 
 const handlePushNotificationRequest = async (searchCriteria) => {
-  const request = getDownloadRequest('push', null, searchCriteria);
+  const request = getDownloadRequest('push', searchCriteria);
   toast.info('Request sent, you will receive a notification with your download shortly.');
   API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
