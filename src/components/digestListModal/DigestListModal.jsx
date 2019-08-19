@@ -6,7 +6,9 @@ import deleteDigest from '../../api/digestDelete';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-const DigestItem = ({ value, frequency }) => (
+const DigestItem = ({
+  value, frequency, handleDelete
+}) => (
   <li>
     <div className="digest-list-item">
       <div className="digest-list-frequency">
@@ -19,20 +21,27 @@ const DigestItem = ({ value, frequency }) => (
         </p>
       </div>
       <div className="reports-list-item-options">
-        <button type="button" onClick={() => deleteDigest({ value, frequency })}>Delete</button>
+        <button type="button" onClick={() => handleDelete({ value, frequency })}>Delete</button>
       </div>
     </div>
   </li>
 );
 
 const DigestListModal = ({
-  showModal, closeModal, digestList, fetchDigestList
+  showModal, closeModal, digestList, fetchDigestList, realtimeDigestList
 }) => {
   useEffect(() => {
     if (showModal) {
       fetchDigestList();
     }
   }, [fetchDigestList, showModal]);
+
+  const handleDelete = (deleteObject) => {
+    deleteDigest(deleteObject)
+      .then(() => {
+        fetchDigestList();
+      });
+  };
 
   return (
     <ReactModal
@@ -61,7 +70,11 @@ const DigestListModal = ({
         <ul className="digest-list">
           {digestList.map((digest, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DigestItem key={index} {...digest} frequency="Daily" />
+            <DigestItem key={index} {...digest} frequency="Daily" handleDelete={handleDelete} />
+          ))}
+          {realtimeDigestList.map((digest, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <DigestItem key={index} {...digest} frequency="Real Time" handleDelete={handleDelete} />
           ))}
         </ul>
         <hr />
@@ -73,14 +86,16 @@ const DigestListModal = ({
 
 DigestItem.propTypes = {
   value: PropTypes.string.isRequired,
-  frequency: PropTypes.string.isRequired
+  frequency: PropTypes.string.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
 
 DigestListModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   digestList: PropTypes.array.isRequired,
-  fetchDigestList: PropTypes.func.isRequired
+  fetchDigestList: PropTypes.func.isRequired,
+  realtimeDigestList: PropTypes.array.isRequired
 };
 
 export default DigestListModal;
