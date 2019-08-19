@@ -4,14 +4,13 @@ import { DOWNLOAD_REQUEST } from '../endpoints';
 import executionPoller from '../utilities/executionPoller';
 import connectWebsocket from '../utilities/websocket';
 
-const getDownloadRequest = (type, parameters, searchCriteria) => ({
+const getDownloadRequest = (type, searchCriteria) => ({
   type,
-  parameters,
   searchCriteria
 });
 
 const handleDirectDownloadRequest = async (searchCriteria) => {
-  const request = getDownloadRequest('direct', null, searchCriteria);
+  const request = getDownloadRequest('direct', searchCriteria);
   toast.info('Download request sent, your download will begin soon.');
   API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
@@ -24,8 +23,8 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
     });
 };
 
-const handleEmailRequest = async (searchCriteria, emailAddress) => {
-  const request = getDownloadRequest('email', { emailAddress }, searchCriteria);
+const handleEmailRequest = async (searchCriteria) => {
+  const request = getDownloadRequest('email', searchCriteria);
   const response = await API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
   });
@@ -36,7 +35,7 @@ const handleEmailRequest = async (searchCriteria, emailAddress) => {
 };
 
 const handlePushNotificationRequest = async (searchCriteria) => {
-  const request = getDownloadRequest('push', null, searchCriteria);
+  const request = getDownloadRequest('push', searchCriteria);
   toast.info('Request sent, you will receive a notification with your download shortly.');
   API.post('APIGateway', DOWNLOAD_REQUEST, {
     body: request
