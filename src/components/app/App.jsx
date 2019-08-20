@@ -60,6 +60,7 @@ const App = ({
       handleSearch();
     }
     if (unsubscribeParam) showDigestModal();
+    // eslint-disable-next-line
   }, []);
 
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
