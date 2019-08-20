@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './App.css';
 import ReactPaginate from 'react-paginate';
 import { ToastContainer } from 'react-toastify';
-import { withRouter } from 'react-router';
 import Header from '../header/HeaderContainer';
 import ResultList from '../list/ResultList';
 import ExportResultsModal from '../modal/ExportResultsModalContainer';
@@ -127,4 +126,4 @@ App.propTypes = {
   showDigestModal: PropTypes.func.isRequired
 };
 
-export default withRouter(App);
+export default App;

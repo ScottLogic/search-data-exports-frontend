@@ -48,8 +48,6 @@ describe('<App />', () => {
       search: [{ value: '' }]
     };
 
-    console.log(wrapper.find('.container-index-select-form').getElements());
-
     wrapper.find('.container-index-select-form form').simulate('submit');
 
     expect(appProps.setCurrentPage).toHaveBeenCalledTimes(1);
