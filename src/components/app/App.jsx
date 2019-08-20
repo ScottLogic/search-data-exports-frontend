@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import ReactPaginate from 'react-paginate';
 import { ToastContainer } from 'react-toastify';
+import { withRouter } from 'react-router';
 import Header from '../header/HeaderContainer';
 import ResultList from '../list/ResultList';
 import ExportResultsModal from '../modal/ExportResultsModalContainer';
@@ -27,7 +28,8 @@ const App = ({
   isLoading,
   setCurrentPage,
   setLastRequest,
-  fetchSearchResults
+  fetchSearchResults,
+  showDigestModal
 }) => {
   const searchCriteria = useInputForm('');
 
@@ -45,6 +47,21 @@ const App = ({
     setLastRequest(request);
     fetchSearchResults(request);
   };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
+    const unsubscribeParam = urlParams.get('unsubscribe');
+    if (searchParam) {
+      /* For some reason, setting the value make the handleSearch work ok, yet not
+         update the field on screen, so we trigger an on change as well to force both,
+         as it doesnt cause redraws or anything this should be fine. */
+      searchCriteria.value = searchParam;
+      searchCriteria.onChange({ target: { value: searchParam } });
+      handleSearch();
+    }
+    if (unsubscribeParam) showDigestModal();
+  }, []);
 
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
 
@@ -106,7 +123,8 @@ App.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   setCurrentPage: PropTypes.func.isRequired,
   setLastRequest: PropTypes.func.isRequired,
-  fetchSearchResults: PropTypes.func.isRequired
+  fetchSearchResults: PropTypes.func.isRequired,
+  showDigestModal: PropTypes.func.isRequired
 };
 
-export default App;
+export default withRouter(App);
