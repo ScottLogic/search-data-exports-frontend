@@ -3,21 +3,17 @@ import ReactDOM from 'react-dom';
 import Amplify from 'aws-amplify';
 import './index.css';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import App from './components/app/AppContainer';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 import awsConfig from './aws-config';
-
 
 Amplify.configure(awsConfig);
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />    
   </Provider>,
   document.getElementById('root')
 );

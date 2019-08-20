@@ -60,7 +60,7 @@ const App = ({
       handleSearch();
     }
     if (unsubscribeParam) showDigestModal();
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
