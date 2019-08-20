@@ -16,7 +16,8 @@ describe('<App />', () => {
     isLoading: false,
     setCurrentPage: jest.fn(),
     setLastRequest: jest.fn(),
-    fetchSearchResults: jest.fn()
+    fetchSearchResults: jest.fn(),
+    showDigestModal: jest.fn()
   };
 
   beforeEach(() => {
@@ -46,6 +47,8 @@ describe('<App />', () => {
       page: 0,
       search: [{ value: '' }]
     };
+
+    console.log(wrapper.find('.container-index-select-form').getElements());
 
     wrapper.find('.container-index-select-form form').simulate('submit');
 
