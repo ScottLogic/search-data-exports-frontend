@@ -7,7 +7,7 @@ const buildRequestJSON = inputFields => ({
   Tags: inputFields.Tags.split(' ').map(tag => `${((tag.charAt(0) !== '#') ? '#' : '')}${tag}`)
 });
 
-export default (postData) => {
+export default async (postData) => {
   const request = buildRequestJSON(postData);
   toast.info('New Post Sent.');
   API.post('APIGateway', NEW_POST, {

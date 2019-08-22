@@ -16,17 +16,16 @@ describe('newPost API', () => {
   });
 
   it('displays a success toast when the request is successful', async () => {
-    API.post.mockResolvedValue('');
+    API.post.mockResolvedValue();
     await newPost(testPost);
     expect(toast.info).toHaveBeenCalledTimes(1);
     expect(toast.success).toHaveBeenCalledTimes(1);
   });
 
   it('displays an error toast when the request fails', async () => {
-    API.post.mockRejectedValue(new Error('Something went wrong'));
+    API.post.mockRejectedValue({ message: 'A terrible API error' });
     await newPost(testPost);
     expect(toast.info).toHaveBeenCalledTimes(1);
-    expect(toast.success).toHaveBeenCalledTimes(1);
     expect(toast.error).toHaveBeenCalledTimes(1);
   });
 });
