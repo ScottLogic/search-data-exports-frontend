@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import './ReportsModal.css';
-import OptionsModal from '../reusableComponents/OptionsModal';
 import handleModalSubmit from '../../api/reportResults';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -44,24 +43,7 @@ const reportItem = ({
 );
 
 const ReportsModal = ({ showModal, closeModal }) => {
-  const [showDownloadModal, setShowDownloadModal] = useState(false);
-  const [selectedReport, setSelectedReport] = useState('');
-  const [options, setOptions] = useState(['pdf']);
   const [graphicalReportURL, setGraphicalReportURL] = useState('');
-
-  const handleDownloadModalClose = () => {
-    setShowDownloadModal(false);
-    setOptions(['pdf']);
-  };
-
-  const handleDownloadModalSubmit = (e) => {
-    if (e) e.preventDefault();
-    handleDownloadModalClose();
-    handleModalSubmit({
-      selectedType: e.target.selectedOption.value,
-      reportName: selectedReport
-    });
-  };
 
   const viewReport = (reportName, callback) => {
     handleModalSubmit({
@@ -70,19 +52,18 @@ const ReportsModal = ({ showModal, closeModal }) => {
     }, callback);
   };
 
+  const downloadReport = (reportName) => {
+    handleModalSubmit({
+      selectedType: 'svg',
+      reportName
+    });
+  };
+
   const downloadPDF = (reportName) => {
     handleModalSubmit({
       selectedType: 'pdf',
       reportName
     });
-  };
-
-  const requestDownload = (reportName, onlyPDF = false) => {
-    if (!onlyPDF) {
-      setOptions([...options, 'png', 'svg']);
-    }
-    setSelectedReport(reportName);
-    setShowDownloadModal(true);
   };
 
   return (
@@ -115,7 +96,7 @@ const ReportsModal = ({ showModal, closeModal }) => {
             description:
               'Graph report of posts per hour for the last 24 hours.',
             onView: () => viewReport('PostFreq', setGraphicalReportURL),
-            onDownload: () => requestDownload('PostFreq'),
+            onDownload: () => downloadReport('PostFreq'),
             viewURL: graphicalReportURL,
             onHide: () => setGraphicalReportURL('')
           })}
@@ -128,15 +109,6 @@ const ReportsModal = ({ showModal, closeModal }) => {
         <hr />
         <input type="button" onClick={closeModal} value="Close" />
       </form>
-      <OptionsModal
-        options={options}
-        showModal={showDownloadModal}
-        onSubmit={handleDownloadModalSubmit}
-        onClose={handleDownloadModalClose}
-        capitaliseOutput
-        modalTitle="Select the download type"
-        submitButtonText="Download"
-      />
     </ReactModal>
   );
 };
