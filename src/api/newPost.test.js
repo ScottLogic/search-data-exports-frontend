@@ -23,7 +23,7 @@ describe('newPost API', () => {
   });
 
   it('displays an error toast when the request fails', async () => {
-    API.post.mockRejectedValue({ message: 'A terrible API error' });
+    API.post.mockRejectedValue();
     await newPost(testPost);
     expect(toast.info).toHaveBeenCalledTimes(1);
     expect(toast.error).toHaveBeenCalledTimes(1);
