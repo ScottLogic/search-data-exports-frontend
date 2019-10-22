@@ -33,19 +33,11 @@ describe('<ReportsModal />', () => {
   });
 
   it('Clicking download in the download modal calls the api with the correct parameters', () => {
-    wrapper.children().at(1).props().onSubmit({
-      preventDefault: jest.fn(),
-      target: {
-        selectedOption: {
-          value: 'test'
-        }
-      }
-    });
-
+    wrapper.find('input[value="View"]').at(0).simulate('click');
     expect(reportResultsRequest).toHaveBeenCalledTimes(1);
     expect(reportResultsRequest).toHaveBeenCalledWith({
-      selectedType: 'test',
-      reportName: ''
-    });
+      selectedType: 'svg',
+      reportName: 'PostFreq'
+    }, expect.anything());
   });
 });

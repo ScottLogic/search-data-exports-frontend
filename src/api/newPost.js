@@ -14,8 +14,7 @@ export default async (postData) => {
     body: request
   })
     .then(() => toast.success('New Post Successful'))
-    .catch((error) => {
-      console.error(error);
+    .catch(() => {
       toast.error('Something went wrong, please try again.');
     });
 };

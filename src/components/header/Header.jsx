@@ -46,7 +46,7 @@ const Header = ({ updateModalDisplayed }) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={() => console.log('Clicked 1')}>
+            <MenuItem onClick={() => {}}>
               <PersonIcon />
               Profile
             </MenuItem>

@@ -17,8 +17,7 @@ const handleDirectDownloadRequest = async (searchCriteria) => {
   })
     .then(result => executionPoller(result.executionArn, 500))
     .then(downloadLink => window.location.assign(downloadLink))
-    .catch((error) => {
-      console.error(error);
+    .catch(() => {
       toast.error('Something went wrong, please try again.');
     });
 };
@@ -41,8 +40,7 @@ const handlePushNotificationRequest = async (searchCriteria) => {
     body: request
   })
     .then(response => connectWebsocket(response))
-    .catch((error) => {
-      console.error(error);
+    .catch(() => {
       toast.error('Something went wrong, please try again.');
     });
 };
@@ -55,9 +53,8 @@ export default (modalData, lastRequest) => {
     case 'email':
       handleEmailRequest(lastRequest, modalData.emailAddress)
         .then(() => toast.success('Success! You will shortly receive an email.'))
-        .catch((error) => {
+        .catch(() => {
           toast.error('Something went wrong, please try again.');
-          console.error(error);
         });
       break;
     case 'pushNotification':

@@ -22,8 +22,7 @@ const handleDownloadRequest = async (reportURL, searchCriteria, callback) => {
         window.location.assign(downloadLink);
       }
     })
-    .catch((error) => {
-      console.error(error);
+    .catch(() => {
       toast.error('Something went wrong, please try again.');
     });
 };

@@ -16,7 +16,8 @@ describe('<App />', () => {
     isLoading: false,
     setCurrentPage: jest.fn(),
     setLastRequest: jest.fn(),
-    fetchSearchResults: jest.fn()
+    fetchSearchResults: jest.fn(),
+    showDigestModal: jest.fn()
   };
 
   beforeEach(() => {

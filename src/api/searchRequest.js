@@ -16,9 +16,7 @@ export default request => (dispatch) => {
 
       dispatch(searchResultsReceived(results));
     })
-    .catch((error) => {
-      console.error('Error in Search API:', error);
-
+    .catch(() => {
       const results = {
         Results: [],
         TotalResults: 0,
