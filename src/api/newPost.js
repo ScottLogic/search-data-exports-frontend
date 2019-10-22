@@ -10,7 +10,7 @@ const buildRequestJSON = inputFields => ({
 export default async (postData) => {
   const request = buildRequestJSON(postData);
   toast.info('New Post Sent.');
-  API.post('APIGateway', NEW_POST, {
+  return API.post('APIGateway', NEW_POST, {
     body: request
   })
     .then(() => toast.success('New Post Successful'))
