@@ -27,7 +27,7 @@ export default ({ executionArn, taskToken }) => {
       showDownloadNotification(data.reportURL);
       socket.close();
     } else {
-      console.error('Received unexpected message from websocket');
+      throw Error('Received unexpected message from websocket');
     }
   };
 };

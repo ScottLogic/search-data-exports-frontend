@@ -12,7 +12,6 @@ const deleteDigest = async (request, endpoint) => {
       if (errorMessage.length > 0) {
         toast.error(errorMessage);
       } else {
-        console.error(error);
         toast.error(`Something went wrong, ${error}.`);
       }
     });
@@ -25,7 +24,6 @@ export default async (request) => {
     case 'Real Time':
       return deleteDigest(request, REALTIME_SUBSCRIPTIONS);
     default:
-      console.warn(`Unknown method passed to delete ${request.frequency}`);
       throw Error(`Unknown method passed to delete ${request.frequency}`);
   }
 };
