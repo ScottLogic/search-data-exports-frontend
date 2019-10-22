@@ -7,7 +7,6 @@ const getSubscriptions = async (dispatch, endpoint, updateFunc) => {
   API.get('APIGateway', endpoint, {})
     .then(response => dispatch(updateFunc(response.map(value => ({ value })))))
     .catch((error) => {
-      console.error('Error in Daily Digest List API:', error);
       toast.error(`Error in Daily Digest List API. ${error}`);
     });
 };

@@ -14,7 +14,6 @@ const sendRequest = (request, endpoint) => {
       if (errorMessage.length > 0) {
         toast.error(errorMessage);
       } else {
-        console.error(error);
         toast.error(`Something went wrong, ${error}.`);
       }
     });
@@ -29,6 +28,6 @@ export default (request) => {
       sendRequest(request, REALTIME_SUBSCRIPTIONS);
       break;
     default:
-      console.warn('Unknown method on digest request');
+      throw Error('Unknown method on digest request');
   }
 };

@@ -16,9 +16,6 @@ export default (executionArn, timeout) => new Promise((resolve, reject) => {
           return resolve(result.reportURL);
         }
       })
-      .catch((err) => {
-        console.error(err);
-        return reject(err);
-      });
+      .catch(err => reject(err));
   }());
 });
