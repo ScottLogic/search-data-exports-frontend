@@ -2,9 +2,9 @@ import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { DIGEST_SUBSCRIPTIONS, REALTIME_SUBSCRIPTIONS } from '../endpoints';
 
-const deleteDigest = async (request, endpoint) => {
+const deleteDigest = async (value, endpoint) => {
   await API.del('APIGateway', endpoint, {
-    body: { value: request.value }
+    body: { value }
   })
     .then(() => toast.success('Delete Subscription successful'))
     .catch((error) => {
@@ -20,9 +20,9 @@ const deleteDigest = async (request, endpoint) => {
 export default async (request) => {
   switch (request.frequency) {
     case 'Daily':
-      return deleteDigest(request, DIGEST_SUBSCRIPTIONS);
+      return deleteDigest(request.value, DIGEST_SUBSCRIPTIONS);
     case 'Real Time':
-      return deleteDigest(request, REALTIME_SUBSCRIPTIONS);
+      return deleteDigest(request.value, REALTIME_SUBSCRIPTIONS);
     default:
       throw Error(`Unknown method passed to delete ${request.frequency}`);
   }
