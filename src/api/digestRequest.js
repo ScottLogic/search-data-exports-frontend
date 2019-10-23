@@ -2,10 +2,10 @@ import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { DIGEST_SUBSCRIPTIONS, REALTIME_SUBSCRIPTIONS } from '../endpoints';
 
-const sendRequest = (request, endpoint) => {
+const sendRequest = async (request, endpoint) => {
   const fieldValues = request.searchCriteria.search[0];
   toast.info('Subscribing to digest.');
-  API.post('APIGateway', endpoint, {
+  return API.post('APIGateway', endpoint, {
     body: fieldValues
   })
     .then(() => toast.success('Subscription successful'))
@@ -19,7 +19,7 @@ const sendRequest = (request, endpoint) => {
     });
 };
 
-export default (request) => {
+export default async (request) => {
   switch (request.frequency) {
     case 'daily':
       sendRequest(request, DIGEST_SUBSCRIPTIONS);
@@ -28,6 +28,6 @@ export default (request) => {
       sendRequest(request, REALTIME_SUBSCRIPTIONS);
       break;
     default:
-      throw Error('Unknown method on digest request');
+      throw Error(`Unknown method on digest request ${request.frequency}`);
   }
 };
