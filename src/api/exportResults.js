@@ -10,27 +10,31 @@ const getDownloadRequest = (type, searchCriteria) => ({
 });
 
 const handleDirectDownloadRequest = async (searchCriteria) => {
-  const request = getDownloadRequest('direct', searchCriteria);
-  toast.info('Download request sent, your download will begin soon.');
-  API.post('APIGateway', DOWNLOAD_REQUEST, {
-    body: request
-  })
-    .then(result => executionPoller(result.executionArn, 500))
-    .then(downloadLink => window.location.assign(downloadLink))
-    .catch(() => {
-      toast.error('Something went wrong, please try again.');
-    });
+  const body = getDownloadRequest('direct', searchCriteria);
+  try {
+    const result = await API.post('APIGateway', DOWNLOAD_REQUEST, { body });
+    toast.info('Download request sent, your download will begin soon.');
+    const downloadLink = await executionPoller(result.executionArn, 500);
+    window.location.assign(downloadLink);
+  } catch {
+    toast.error('Something went wrong, please try again.');
+  }
 };
 
 const handleEmailRequest = async (searchCriteria) => {
-  const request = getDownloadRequest('email', searchCriteria);
-  const response = await API.post('APIGateway', DOWNLOAD_REQUEST, {
-    body: request
-  });
-
-  // Because of how the API.post clips off the headers we cannot use response.ok.
-  // So we are checking an actual executionARN is replied to confirm it exited correctly.
-  if (!response.executionArn) throw Error(response.statusText);
+  const body = getDownloadRequest('email', searchCriteria);
+  try {
+    const response = await API.post('APIGateway', DOWNLOAD_REQUEST, { body });
+    // Because of how the API.post clips off the headers we cannot use response.ok.
+    // So we are checking an actual executionARN is replied to confirm it exited correctly.
+    if (response.executionArn) {
+      toast.success('Success! You will shortly receive an email.');
+    } else {
+      toast.error(`Something went wrong, please try again. ${response.statusText}`);
+    }
+  } catch (error) {
+    toast.error(`Something went wrong, please try again. ${error}`);
+  }
 };
 
 const handlePushNotificationRequest = async (searchCriteria) => {
@@ -45,22 +49,18 @@ const handlePushNotificationRequest = async (searchCriteria) => {
     });
 };
 
-export default (modalData, lastRequest) => {
+export default async (modalData, lastRequest) => {
   switch (modalData.selectedType) {
     case 'directDownload':
-      handleDirectDownloadRequest(lastRequest);
+      await handleDirectDownloadRequest(lastRequest);
       break;
     case 'email':
-      handleEmailRequest(lastRequest, modalData.emailAddress)
-        .then(() => toast.success('Success! You will shortly receive an email.'))
-        .catch(() => {
-          toast.error('Something went wrong, please try again.');
-        });
+      await handleEmailRequest(lastRequest);
       break;
     case 'pushNotification':
-      handlePushNotificationRequest(lastRequest);
+      await handlePushNotificationRequest(lastRequest);
       break;
     default:
-      break;
+      throw Error(`Unknown export type selected: ${modalData.selectedType}`);
   }
 };
