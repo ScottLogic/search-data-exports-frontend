@@ -1,5 +1,6 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
+import { NEW_POST } from '../endpoints';
 import newPost from './newPost';
 
 jest.mock('react-toastify');
@@ -8,11 +9,20 @@ jest.mock('aws-amplify');
 describe('newPost API', () => {
   const testPost = {
     Post: 'a post',
-    Tags: 'some hash tags'
+    Tags: 'some hash #tags'
   };
 
   afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  it('ensures tags sent to endpoint have the # character prefixed', async () => {
+    API.post.mockResolvedValue();
+    await newPost(testPost);
+
+    expect(API.post).toHaveBeenCalledWith('APIGateway', NEW_POST, {
+      body: { Post: 'a post', Tags: ['#some', '#hash', '#tags'] }
+    });
   });
 
   it('displays a success toast when the request is successful', async () => {
