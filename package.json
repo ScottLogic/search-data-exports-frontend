@@ -50,5 +50,14 @@
     "eslint-plugin-react": "^7.16.0",
     "prettier": "^1.18.2",
     "redux-mock-store": "^1.5.3"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!/node_modules/",
+      "!src/index.js",
+      "!src/serviceWorker.js",
+      "!src/aws-config.js"
+    ]
   }
 }
