@@ -1,6 +1,6 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
-import { DIGEST_SUBSCRIPTIONS, REALTIME_SUBSCRIPTIONS } from '../endpoints';
+import { DAILY_SUBSCRIPTIONS, REAL_TIME_SUBSCRIPTIONS } from '../endpoints';
 import digestRequest from './digestRequest';
 
 jest.mock('react-toastify');
@@ -34,7 +34,7 @@ describe('digestRequest API', () => {
     API.post.mockResolvedValue();
     const request = { frequency: 'realTime', ...testSearchCriteria };
     digestRequest(request);
-    expect(API.post).toHaveBeenCalledWith('APIGateway', REALTIME_SUBSCRIPTIONS, {
+    expect(API.post).toHaveBeenCalledWith('APIGateway', REAL_TIME_SUBSCRIPTIONS, {
       body: { value: 'test' }
     });
   });
@@ -43,7 +43,7 @@ describe('digestRequest API', () => {
     API.post.mockResolvedValue();
     const request = { frequency: 'daily', ...testSearchCriteria };
     digestRequest(request);
-    expect(API.post).toHaveBeenCalledWith('APIGateway', DIGEST_SUBSCRIPTIONS, {
+    expect(API.post).toHaveBeenCalledWith('APIGateway', DAILY_SUBSCRIPTIONS, {
       body: { value: 'test' }
     });
   });

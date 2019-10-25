@@ -1,15 +1,15 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
-import { DIGEST_SUBSCRIPTIONS, REALTIME_SUBSCRIPTIONS } from '../endpoints';
-import { updateDigestList, updateRealTimeList } from '../actions/DigestList';
+import { DAILY_SUBSCRIPTIONS, REAL_TIME_SUBSCRIPTIONS } from '../endpoints';
+import { updateDailySubscriptionsList, updateRealTimeSubscriptionsList } from '../actions/SubscriptionsList';
 
 const getSubscriptions = async (dispatch, endpoint, updateAction) => API.get('APIGateway', endpoint, {})
   .then(response => dispatch(updateAction(response.map(value => ({ value })))))
   .catch((error) => {
-    toast.error(`Error in Daily Digest List API: ${error}`);
+    toast.error(`Error in Subscriptions List API: ${error}`);
   });
 
 export default () => async (dispatch) => {
-  getSubscriptions(dispatch, REALTIME_SUBSCRIPTIONS, updateRealTimeList);
-  getSubscriptions(dispatch, DIGEST_SUBSCRIPTIONS, updateDigestList);
+  getSubscriptions(dispatch, REAL_TIME_SUBSCRIPTIONS, updateRealTimeSubscriptionsList);
+  getSubscriptions(dispatch, DAILY_SUBSCRIPTIONS, updateDailySubscriptionsList);
 };

@@ -1,23 +1,23 @@
 import reducer from './DigestList';
-import * as types from '../actions/DigestList';
+import * as types from '../actions/SubscriptionsList';
 
-describe('DigestList Reducer', () => {
+describe('SubscriptionsList Reducer', () => {
   const initialState = {
-    userDigestList: []
+    dailySubscriptionsList: []
   };
 
   it('Should return the initial state when given an unknown action', () => {
     expect(reducer(initialState, {})).toEqual(initialState);
   });
 
-  it('Should handle the UPDATE_DIGEST_LIST action', () => {
+  it('Should handle the UPDATE_DAILY_SUBSCRIPTIONS_LIST action', () => {
     const action = {
-      type: types.UPDATE_DIGEST_LIST,
+      type: types.UPDATE_DAILY_SUBSCRIPTIONS_LIST,
       payload: [{ item: 'item' }]
     };
 
     const updatedState = {
-      userDigestList: [{ item: 'item' }]
+      dailySubscriptionsList: [{ item: 'item' }]
     };
 
     expect(reducer(initialState, action)).toEqual(updatedState);

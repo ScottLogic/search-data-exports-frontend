@@ -1,6 +1,6 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
-import { DIGEST_SUBSCRIPTIONS, REALTIME_SUBSCRIPTIONS } from '../endpoints';
+import { DAILY_SUBSCRIPTIONS, REAL_TIME_SUBSCRIPTIONS } from '../endpoints';
 import digestDelete from './digestDelete';
 
 jest.mock('react-toastify');
@@ -18,13 +18,13 @@ describe('digestDelete API', () => {
   it('calls deleteDigest with the real time endpoint when frequency is real time', async () => {
     API.del.mockResolvedValue();
     digestDelete({ frequency: 'Real Time', value: 'test' });
-    expect(API.del).toHaveBeenCalledWith('APIGateway', REALTIME_SUBSCRIPTIONS, { body: { value: 'test' } });
+    expect(API.del).toHaveBeenCalledWith('APIGateway', REAL_TIME_SUBSCRIPTIONS, { body: { value: 'test' } });
   });
 
   it('calls deleteDigest with the digest endpoint when frequency is daily', async () => {
     API.del.mockResolvedValue();
     digestDelete({ frequency: 'Daily', value: 'test' });
-    expect(API.del).toHaveBeenCalledWith('APIGateway', DIGEST_SUBSCRIPTIONS, { body: { value: 'test' } });
+    expect(API.del).toHaveBeenCalledWith('APIGateway', DAILY_SUBSCRIPTIONS, { body: { value: 'test' } });
   });
 
   it('displays a success toast when the delete request is successful', async () => {

@@ -1,21 +1,21 @@
-import { UPDATE_DIGEST_LIST, UPDATE_REALTIME_LIST } from '../actions/DigestList';
+import { UPDATE_DAILY_SUBSCRIPTIONS_LIST, UPDATE_REAL_TIME_SUBSCRIPTIONS_LIST } from '../actions/SubscriptionsList';
 
 const INITIAL_STATE = {
-  userDigestList: [],
-  realtimeDigestList: []
+  dailySubscriptionsList: [],
+  realTimeSubscriptionsList: []
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UPDATE_DIGEST_LIST:
+    case UPDATE_DAILY_SUBSCRIPTIONS_LIST:
       return {
         ...state,
-        userDigestList: action.payload
+        dailySubscriptionsList: action.payload
       };
-    case UPDATE_REALTIME_LIST:
+    case UPDATE_REAL_TIME_SUBSCRIPTIONS_LIST:
       return {
         ...state,
-        realtimeDigestList: action.payload
+        realTimeSubscriptionsList: action.payload
       };
     default:
       return state;

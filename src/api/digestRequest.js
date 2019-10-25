@@ -1,6 +1,6 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
-import { DIGEST_SUBSCRIPTIONS, REALTIME_SUBSCRIPTIONS } from '../endpoints';
+import { DAILY_SUBSCRIPTIONS, REAL_TIME_SUBSCRIPTIONS } from '../endpoints';
 
 const sendRequest = async (request, endpoint) => {
   const fieldValues = request.searchCriteria.search[0];
@@ -22,10 +22,10 @@ const sendRequest = async (request, endpoint) => {
 export default async (request) => {
   switch (request.frequency) {
     case 'daily':
-      sendRequest(request, DIGEST_SUBSCRIPTIONS);
+      sendRequest(request, DAILY_SUBSCRIPTIONS);
       break;
     case 'realTime':
-      sendRequest(request, REALTIME_SUBSCRIPTIONS);
+      sendRequest(request, REAL_TIME_SUBSCRIPTIONS);
       break;
     default:
       throw Error(`Unknown method on digest request ${request.frequency}`);
