@@ -14,11 +14,13 @@ jobs:
           name: Run ESLint
           command: npm run lint
       - run:
-          name: Run Tests
-          command: npm test
+          name: Run Tests & Collect Coverage
+          command: npm run coverage
       - run:
           name: Build Client
           command: npm run build
+      - store_artifacts:
+          path: coverage
       - persist_to_workspace:
           root: .
           paths:

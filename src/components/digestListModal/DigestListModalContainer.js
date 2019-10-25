@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ReportsModal from './DigestListModal';
+import DigestListModal from './DigestListModal';
 import getModalDisplayed from '../../selectors/DigestListModal';
 import getDigestList from '../../selectors/DigestList';
 import getRealtimeDigestList from '../../selectors/RealtimeDigestList';
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => ({
   fetchDigestList: () => fetchDigestList()(dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReportsModal);
+export default connect(mapStateToProps, mapDispatchToProps)(DigestListModal);

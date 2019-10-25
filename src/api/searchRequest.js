@@ -5,7 +5,7 @@ import { SEARCH_REQUEST } from '../endpoints';
 export default request => (dispatch) => {
   dispatch(isLoadingUpdated(true));
 
-  API.post('APIGateway', SEARCH_REQUEST, {
+  return API.post('APIGateway', SEARCH_REQUEST, {
     body: request
   })
     .then((response) => {
