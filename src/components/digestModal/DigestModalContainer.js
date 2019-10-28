@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import DigestModal from './DigestModal';
-import getModalDisplayed from '../../selectors/DigestModal';
-import { updateModalDisplayed } from '../../actions/DigestModal';
+import getModalDisplayed from '../../selectors/SubscriptionsModal';
+import { updateModalDisplayed } from '../../actions/SubscriptionsModal';
 import { getLastRequest } from '../../selectors/App';
 
 const mapStateToProps = state => ({

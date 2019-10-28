@@ -1,4 +1,4 @@
-import reducer from './DigestList';
+import reducer from './SubscriptionsList';
 import * as types from '../actions/SubscriptionsList';
 
 describe('SubscriptionsList Reducer', () => {

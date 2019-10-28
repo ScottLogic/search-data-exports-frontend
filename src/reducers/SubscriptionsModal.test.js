@@ -1,7 +1,7 @@
-import reducer from './DigestModal';
-import * as types from '../actions/DigestModal';
+import reducer from './SubscriptionsModal';
+import * as types from '../actions/SubscriptionsModal';
 
-describe('DigestModal Reducer', () => {
+describe('SubscriptionsModal Reducer', () => {
   const initialState = {
     modalDisplayed: false
   };
@@ -12,7 +12,7 @@ describe('DigestModal Reducer', () => {
 
   it('Should handle the UPDATE_DIGEST_MODAL_DISPLAYED action', () => {
     const action = {
-      type: types.UPDATE_DIGEST_MODAL_DISPLAYED,
+      type: types.UPDATE_SUBSCRIPTIONS_MODAL_DISPLAYED,
       payload: true
     };
 

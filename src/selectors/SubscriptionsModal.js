@@ -1,3 +1,3 @@
-const root = state => state.digestListModal;
+const root = state => state.subscriptionsModal;
 
 export default state => root(state).modalDisplayed;

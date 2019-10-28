@@ -8,7 +8,7 @@ const ModalController = ({
   showExportResultsModal,
   showReportsModal,
   showNewPostModal,
-  showDigestModal
+  showSubscriptionsModal
 }) => {
   const exportButton = hasData && (
     <input
@@ -23,7 +23,7 @@ const ModalController = ({
     <input
       type="button"
       id="digestSubscribeButton"
-      onClick={showDigestModal}
+      onClick={showSubscriptionsModal}
       value="Subscribe to digest"
     />
   );
@@ -54,7 +54,7 @@ ModalController.propTypes = {
   showExportResultsModal: PropTypes.func.isRequired,
   showReportsModal: PropTypes.func.isRequired,
   showNewPostModal: PropTypes.func.isRequired,
-  showDigestModal: PropTypes.func.isRequired
+  showSubscriptionsModal: PropTypes.func.isRequired
 };
 
 export default ModalController;

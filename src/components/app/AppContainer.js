@@ -10,7 +10,7 @@ import {
 } from '../../selectors/App';
 import { pageUpdated, requestUpdated } from '../../actions/App';
 import fetchSearchResults from '../../api/searchRequest';
-import { updateModalDisplayed as showDigestList } from '../../actions/DigestListModal';
+import { updateModalDisplayed as showSubscriptionsModal } from '../../actions/SubscriptionsListModal';
 
 const mapStateToProps = state => ({
   data: getData(state),
@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
   setCurrentPage: pageNum => dispatch(pageUpdated(pageNum)),
   setLastRequest: request => dispatch(requestUpdated(request)),
   fetchSearchResults: request => fetchSearchResults(request)(dispatch),
-  showDigestModal: () => dispatch(showDigestList(true))
+  showSubscriptionsModal: () => dispatch(showSubscriptionsModal(true))
 });
 
 export default withAuthenticator(

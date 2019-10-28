@@ -1,4 +1,4 @@
-import { UPDATE_DIGEST_MODAL_DISPLAYED } from '../actions/DigestModal';
+import { UPDATE_SUBSCRIPTIONS_LIST_MODAL_DISPLAYED } from '../actions/SubscriptionsListModal';
 
 const INITIAL_STATE = {
   modalDisplayed: false
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UPDATE_DIGEST_MODAL_DISPLAYED:
+    case UPDATE_SUBSCRIPTIONS_LIST_MODAL_DISPLAYED:
       return {
         modalDisplayed: action.payload
       };

@@ -28,18 +28,18 @@ const DigestItem = ({
 );
 
 const DigestListModal = ({
-  showModal, closeModal, digestList, fetchDigestList, realtimeDigestList
+  showModal, closeModal, dailySubscriptionsList, getSubscriptions, realTimeSubscriptionsList
 }) => {
   useEffect(() => {
     if (showModal) {
-      fetchDigestList();
+      getSubscriptions();
     }
-  }, [fetchDigestList, showModal]);
+  }, [getSubscriptions, showModal]);
 
   const handleDelete = (deleteObject) => {
     deleteDigest(deleteObject)
       .then(() => {
-        fetchDigestList();
+        getSubscriptions();
       });
   };
 
@@ -65,16 +65,16 @@ const DigestListModal = ({
       }}
     >
       <form className="digest-form">
-        <h1>Currently Subscribed Digests</h1>
+        <h1>Your active subscriptions</h1>
         <hr />
         <ul className="digest-list">
-          {digestList.map((digest, index) => (
+          {dailySubscriptionsList.map((subscription, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DigestItem key={index} {...digest} frequency="Daily" handleDelete={handleDelete} />
+            <DigestItem key={index} {...subscription} frequency="Daily" handleDelete={handleDelete} />
           ))}
-          {realtimeDigestList.map((digest, index) => (
+          {realTimeSubscriptionsList.map((subscription, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DigestItem key={index} {...digest} frequency="Real Time" handleDelete={handleDelete} />
+            <DigestItem key={index} {...subscription} frequency="Real Time" handleDelete={handleDelete} />
           ))}
         </ul>
         <hr />
@@ -93,9 +93,9 @@ DigestItem.propTypes = {
 DigestListModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  digestList: PropTypes.array.isRequired,
-  fetchDigestList: PropTypes.func.isRequired,
-  realtimeDigestList: PropTypes.array.isRequired
+  dailySubscriptionsList: PropTypes.array.isRequired,
+  getSubscriptions: PropTypes.func.isRequired,
+  realTimeSubscriptionsList: PropTypes.array.isRequired
 };
 
 export default DigestListModal;

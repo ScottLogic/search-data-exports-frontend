@@ -1,13 +1,13 @@
 import configureMockStore from 'redux-mock-store';
-import getModalDisplayed from './DigestModal';
+import getModalDisplayed from './SubscriptionsListModal';
 
 const mockStore = configureMockStore();
 
-describe('DigestModal selectors', () => {
+describe('SubscriptionsListModal selectors', () => {
   const modalDisplayed = true;
 
   const store = mockStore({
-    digestModal: {
+    subscriptionsListModal: {
       modalDisplayed
     }
   });

@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 import DigestListModal from './DigestListModal';
-import getModalDisplayed from '../../selectors/DigestListModal';
-import getDigestList from '../../selectors/DigestList';
-import getRealtimeDigestList from '../../selectors/RealtimeDigestList';
-import { updateModalDisplayed } from '../../actions/DigestListModal';
-import fetchDigestList from '../../api/digestSearch';
+import getModalDisplayed from '../../selectors/SubscriptionsListModal';
+import selectDailySubscriptions from '../../selectors/DailySubscriptionsList';
+import selectRealTimeSubscriptions from '../../selectors/RealTimeSubscriptionsList';
+import { updateModalDisplayed } from '../../actions/SubscriptionsListModal';
+import getSubscriptions from '../../api/getSubscriptions';
 
 const mapStateToProps = state => ({
   showModal: getModalDisplayed(state),
-  digestList: getDigestList(state),
-  realtimeDigestList: getRealtimeDigestList(state)
+  dailySubscriptionsList: selectDailySubscriptions(state),
+  realTimeSubscriptionsList: selectRealTimeSubscriptions(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(updateModalDisplayed(false)),
-  fetchDigestList: () => fetchDigestList()(dispatch)
+  getSubscriptions: () => getSubscriptions()(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DigestListModal);

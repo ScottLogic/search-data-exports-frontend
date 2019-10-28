@@ -14,7 +14,7 @@ describe('<ModalController />', () => {
     showExportResultsModal: jest.fn(),
     showReportsModal: jest.fn(),
     showNewPostModal: jest.fn(),
-    showDigestModal: jest.fn()
+    showSubscriptionsModal: jest.fn()
   };
 
   const dataProps = {
@@ -69,9 +69,9 @@ describe('<ModalController />', () => {
     expect(wrapper.find('#digestSubscribeButton')).toHaveLength(1);
   });
 
-  it('Calls showDigestModal when the Subscribe to digest button is clicked', () => {
+  it('Calls showSubscriptionsModal when the Subscribe to subscription button is clicked', () => {
     wrapper = shallow(<ModalController {...postSearchProps} />);
     wrapper.find('#digestSubscribeButton').simulate('click');
-    expect(dataProps.showDigestModal).toHaveBeenCalledTimes(1);
+    expect(dataProps.showSubscriptionsModal).toHaveBeenCalledTimes(1);
   });
 });

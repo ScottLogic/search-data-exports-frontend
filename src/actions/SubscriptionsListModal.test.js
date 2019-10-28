@@ -1,11 +1,11 @@
-import * as actions from './DigestListModal';
+import * as actions from './SubscriptionsListModal';
 
-describe('DigestListModal Actions', () => {
+describe('SubscriptionsListModal Actions', () => {
   it('updateModalDisplayed should return the display status in a payload', () => {
     const isDisplayed = true;
 
     const expectedAction = {
-      type: actions.UPDATE_DIGEST_LIST_MODAL_DISPLAYED,
+      type: actions.UPDATE_SUBSCRIPTIONS_LIST_MODAL_DISPLAYED,
       payload: isDisplayed
     };
 
