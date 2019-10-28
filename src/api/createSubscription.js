@@ -4,11 +4,11 @@ import { DAILY_SUBSCRIPTIONS, REAL_TIME_SUBSCRIPTIONS } from '../endpoints';
 
 const sendRequest = async (request, endpoint) => {
   const fieldValues = request.searchCriteria.search[0];
-  toast.info('Subscribing to digest.');
+  toast.info('Subscribing to search..');
   return API.post('APIGateway', endpoint, {
     body: fieldValues
   })
-    .then(() => toast.success('Subscription successful'))
+    .then(() => toast.success('Subscription created successfully'))
     .catch((error) => {
       const errorMessage = (error.response && error.response.data && error.response.data.message) || '';
       if (errorMessage.length > 0) {
@@ -28,6 +28,6 @@ export default async (request) => {
       sendRequest(request, REAL_TIME_SUBSCRIPTIONS);
       break;
     default:
-      throw Error(`Unknown method on digest request ${request.frequency}`);
+      throw Error(`Unknown frequency on create subscription: ${request.frequency}`);
   }
 };

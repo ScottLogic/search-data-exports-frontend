@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import './DigestListModal.css';
+import './SubscriptionsListModal.css';
 import deleteSubscription from '../../api/deleteSubscription';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-const DigestItem = ({
+const SubscriptionItem = ({
   value, frequency, handleDelete
 }) => (
   <li>
-    <div className="digest-list-item">
-      <div className="digest-list-frequency">
+    <div className="subscription-list-item">
+      <div className="subscription-list-frequency">
         {frequency}
       </div>
-      <div className="digest-list-item-details">
+      <div className="subscription-list-item-details">
         <p>
           <span>Search Criteria: </span>
           {value}
@@ -27,7 +27,7 @@ const DigestItem = ({
   </li>
 );
 
-const DigestListModal = ({
+const SubscriptionsListModal = ({
   showModal, closeModal, dailySubscriptionsList, getSubscriptions, realTimeSubscriptionsList
 }) => {
   useEffect(() => {
@@ -64,17 +64,17 @@ const DigestListModal = ({
         }
       }}
     >
-      <form className="digest-form">
+      <form className="subscription-form">
         <h1>Your active subscriptions</h1>
         <hr />
-        <ul className="digest-list">
+        <ul className="subscription-list">
           {dailySubscriptionsList.map((subscription, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DigestItem key={index} {...subscription} frequency="Daily" handleDelete={handleDelete} />
+            <SubscriptionItem key={index} {...subscription} frequency="Daily" handleDelete={handleDelete} />
           ))}
           {realTimeSubscriptionsList.map((subscription, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DigestItem key={index} {...subscription} frequency="Real Time" handleDelete={handleDelete} />
+            <SubscriptionItem key={index} {...subscription} frequency="Real Time" handleDelete={handleDelete} />
           ))}
         </ul>
         <hr />
@@ -84,13 +84,13 @@ const DigestListModal = ({
   );
 };
 
-DigestItem.propTypes = {
+SubscriptionItem.propTypes = {
   value: PropTypes.string.isRequired,
   frequency: PropTypes.string.isRequired,
   handleDelete: PropTypes.func.isRequired
 };
 
-DigestListModal.propTypes = {
+SubscriptionsListModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   dailySubscriptionsList: PropTypes.array.isRequired,
@@ -98,4 +98,4 @@ DigestListModal.propTypes = {
   realTimeSubscriptionsList: PropTypes.array.isRequired
 };
 
-export default DigestListModal;
+export default SubscriptionsListModal;

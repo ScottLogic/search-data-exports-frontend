@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from '../reports/ReportsModalContainer';
 import NewPostModal from '../newPost/NewPostModalContainer';
 import SubscriptionsModal from '../subscriptionsModal/SubscriptionsModalContainer';
-import DigestListModal from '../digestListModal/DigestListModalContainer';
+import SubscriptionsListModal from '../subscriptionsListModal/SubscriptionsListModalContainer';
 import ModalController from '../modalController/ModalControllerContainer';
 import useInputForm from '../../utilities/hooks';
 import {
@@ -108,7 +108,7 @@ const App = ({
         <ReportsModal />
         <NewPostModal />
         <SubscriptionsModal />
-        <DigestListModal />
+        <SubscriptionsListModal />
         <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>
     </div>

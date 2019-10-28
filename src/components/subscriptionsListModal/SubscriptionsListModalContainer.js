@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import DigestListModal from './DigestListModal';
+import DigestListModal from './SubscriptionsListModal';
 import getModalDisplayed from '../../selectors/SubscriptionsListModal';
 import selectDailySubscriptions from '../../selectors/DailySubscriptionsList';
 import selectRealTimeSubscriptions from '../../selectors/RealTimeSubscriptionsList';

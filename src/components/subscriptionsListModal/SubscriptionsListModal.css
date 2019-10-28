@@ -1,10 +1,10 @@
-.digest-form {
+.subscription-form {
   display: flex;
   flex-direction: column;
   height: 70vh;
 }
 
-.digest-list {
+.subscription-list {
   padding: 0;
   list-style: none;
   width: 100%;
@@ -12,7 +12,7 @@
   overflow-y: scroll;
 }
 
-.digest-list-item {
+.subscription-list-item {
   margin: 1vh 1vw;
   border-style: solid;
   border-width: 1px;
@@ -22,16 +22,16 @@
   flex-direction: row;
 }
 
-.digest-list-item-details {
+.subscription-list-item-details {
   flex-grow: 1;
 }
 
-.digest-list-item-details p {
+.subscription-list-item-details p {
     margin: 0 2vw;
 }
 
 .reports-list-item-options,
-.digest-list-frequency {
+.subscription-list-frequency {
   text-align: right;
   flex-shrink: 0;
   display: flex;

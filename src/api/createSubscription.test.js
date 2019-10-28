@@ -26,7 +26,7 @@ describe('createSubscription API', () => {
 
   it('throws an error when the frequency is unknown', async () => {
     expect(createSubscription({ frequency: 'Monthly' })).rejects.toThrow(
-      'Unknown method on digest request Monthly'
+      'Unknown frequency on create subscription: Monthly'
     );
   });
 
@@ -52,7 +52,7 @@ describe('createSubscription API', () => {
     API.post.mockResolvedValue();
     await createSubscription({ frequency: 'daily', ...testSearchCriteria });
     expect(toast.success).toHaveBeenCalledTimes(1);
-    expect(toast.success).toHaveBeenCalledWith('Subscription successful');
+    expect(toast.success).toHaveBeenCalledWith('Subscription created successfully');
   });
 
   it('displays an error toast when the request is successful and an error message is provided', async () => {
