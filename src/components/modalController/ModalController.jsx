@@ -8,7 +8,7 @@ const ModalController = ({
   showExportResultsModal,
   showReportsModal,
   showNewPostModal,
-  showDigestModal
+  showSubscriptionsModal
 }) => {
   const exportButton = hasData && (
     <input
@@ -19,18 +19,18 @@ const ModalController = ({
     />
   );
 
-  const digestSubscribeButton = (Object.keys(searchPerformed).length > 0) && (
+  const subscribeButton = (Object.keys(searchPerformed).length > 0) && (
     <input
       type="button"
-      id="digestSubscribeButton"
-      onClick={showDigestModal}
-      value="Subscribe to digest"
+      id="subscribeButton"
+      onClick={showSubscriptionsModal}
+      value="Subscribe to search"
     />
   );
 
   return (
     <div className="container-index-options">
-      {digestSubscribeButton}
+      {subscribeButton}
       {exportButton}
       <input
         type="button"
@@ -54,7 +54,7 @@ ModalController.propTypes = {
   showExportResultsModal: PropTypes.func.isRequired,
   showReportsModal: PropTypes.func.isRequired,
   showNewPostModal: PropTypes.func.isRequired,
-  showDigestModal: PropTypes.func.isRequired
+  showSubscriptionsModal: PropTypes.func.isRequired
 };
 
 export default ModalController;

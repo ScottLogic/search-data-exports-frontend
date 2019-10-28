@@ -10,8 +10,8 @@ import LoadingSpinner from '../reusableComponents/LoadingSpinner';
 import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from '../reports/ReportsModalContainer';
 import NewPostModal from '../newPost/NewPostModalContainer';
-import DigestModal from '../digestModal/DigestModalContainer';
-import DigestListModal from '../digestListModal/DigestListModalContainer';
+import SubscriptionsModal from '../subscriptionsModal/SubscriptionsModalContainer';
+import SubscriptionsListModal from '../subscriptionsListModal/SubscriptionsListModalContainer';
 import ModalController from '../modalController/ModalControllerContainer';
 import useInputForm from '../../utilities/hooks';
 import {
@@ -28,7 +28,7 @@ const App = ({
   setCurrentPage,
   setLastRequest,
   fetchSearchResults,
-  showDigestModal
+  showSubscriptionsModal
 }) => {
   const searchCriteria = useInputForm('');
 
@@ -59,7 +59,7 @@ const App = ({
       searchCriteria.onChange({ target: { value: searchParam } });
       handleSearch();
     }
-    if (unsubscribeParam) showDigestModal();
+    if (unsubscribeParam) showSubscriptionsModal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -107,8 +107,8 @@ const App = ({
         <ExportResultsModal />
         <ReportsModal />
         <NewPostModal />
-        <DigestModal />
-        <DigestListModal />
+        <SubscriptionsModal />
+        <SubscriptionsListModal />
         <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>
     </div>
@@ -124,7 +124,7 @@ App.propTypes = {
   setCurrentPage: PropTypes.func.isRequired,
   setLastRequest: PropTypes.func.isRequired,
   fetchSearchResults: PropTypes.func.isRequired,
-  showDigestModal: PropTypes.func.isRequired
+  showSubscriptionsModal: PropTypes.func.isRequired
 };
 
 export default App;

@@ -3,7 +3,7 @@ import getModalDisplayed from './NewPostModal';
 
 const mockStore = configureMockStore();
 
-describe('DigestModal selectors', () => {
+describe('NewPostModal selectors', () => {
   const modalDisplayed = true;
 
   const store = mockStore({

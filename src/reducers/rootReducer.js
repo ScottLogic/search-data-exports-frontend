@@ -3,18 +3,18 @@ import app from './App';
 import exportResultsModal from './ExportResultsModal';
 import reportsModal from './ReportsModal';
 import newPostModal from './NewPostModal';
-import digestModal from './DigestModal';
-import digestListModal from './DigestListModal';
-import digestList from './DigestList';
+import subscriptionsModal from './SubscriptionsModal';
+import subscriptionsListModal from './SubscriptionsListModal';
+import subscriptionsList from './SubscriptionsList';
 
 const rootReducer = combineReducers({
   app,
   exportResultsModal,
   reportsModal,
   newPostModal,
-  digestModal,
-  digestListModal,
-  digestList
+  subscriptionsModal,
+  subscriptionsListModal,
+  subscriptionsList
 });
 
 export default rootReducer;

@@ -57,7 +57,8 @@
       "!/node_modules/",
       "!src/index.js",
       "!src/serviceWorker.js",
-      "!src/aws-config.js"
+      "!src/aws-config.js",
+      "!src/store/configureStore.js"
     ]
   }
 }

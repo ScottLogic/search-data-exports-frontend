@@ -25,7 +25,7 @@ const Header = ({ updateModalDisplayed }) => {
 
   const handleClose = () => (setAnchorEl(null));
 
-  const handleShowDigestList = () => {
+  const handleShowSubscriptionsList = () => {
     updateModalDisplayed();
     handleClose();
   };
@@ -50,8 +50,8 @@ const Header = ({ updateModalDisplayed }) => {
               <PersonIcon />
               Profile
             </MenuItem>
-            <MenuItem onClick={handleShowDigestList}>
-              Digests
+            <MenuItem onClick={handleShowSubscriptionsList}>
+              Subscriptions
             </MenuItem>
             <MenuItem onClick={signOut}>Sign Out</MenuItem>
           </Menu>
