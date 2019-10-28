@@ -30,7 +30,7 @@ describe('createSubscription API', () => {
     );
   });
 
-  it('calls sendRequest with the real time endpoint when frequency is real time', async () => {
+  it('calls sendRequest with the real time subscriptions endpoint when frequency is real time', async () => {
     API.post.mockResolvedValue();
     const request = { frequency: 'realTime', ...testSearchCriteria };
     createSubscription(request);
@@ -39,7 +39,7 @@ describe('createSubscription API', () => {
     });
   });
 
-  it('calls deleteDigest with the digest endpoint when frequency is daily', async () => {
+  it('calls sendRequest with the daily subscriptions endpoint when frequency is daily', async () => {
     API.post.mockResolvedValue();
     const request = { frequency: 'daily', ...testSearchCriteria };
     createSubscription(request);

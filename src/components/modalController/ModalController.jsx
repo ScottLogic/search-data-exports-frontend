@@ -19,18 +19,18 @@ const ModalController = ({
     />
   );
 
-  const digestSubscribeButton = (Object.keys(searchPerformed).length > 0) && (
+  const subscribeButton = (Object.keys(searchPerformed).length > 0) && (
     <input
       type="button"
-      id="digestSubscribeButton"
+      id="subscribeButton"
       onClick={showSubscriptionsModal}
-      value="Subscribe to digest"
+      value="Subscribe to search"
     />
   );
 
   return (
     <div className="container-index-options">
-      {digestSubscribeButton}
+      {subscribeButton}
       {exportButton}
       <input
         type="button"

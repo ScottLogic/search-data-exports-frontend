@@ -10,7 +10,7 @@ describe('SubscriptionsListModal Reducer', () => {
     expect(reducer(initialState, {})).toEqual(initialState);
   });
 
-  it('Should handle the UPDATE_DIGEST_LIST_MODAL_DISPLAYED action', () => {
+  it('Should handle the UPDATE_SUBSCRIPTIONS_LIST_MODAL_DISPLAYED action', () => {
     const action = {
       type: types.UPDATE_SUBSCRIPTIONS_LIST_MODAL_DISPLAYED,
       payload: true

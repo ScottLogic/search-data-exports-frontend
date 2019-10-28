@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import DigestListModal from './SubscriptionsListModal';
+import SubscriptionsListModal from './SubscriptionsListModal';
 import getModalDisplayed from '../../selectors/SubscriptionsListModal';
 import selectDailySubscriptions from '../../selectors/DailySubscriptionsList';
 import selectRealTimeSubscriptions from '../../selectors/RealTimeSubscriptionsList';
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => ({
   getSubscriptions: () => getSubscriptions()(dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DigestListModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionsListModal);
