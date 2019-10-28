@@ -14,4 +14,4 @@ export const DAILY_SUBSCRIPTIONS = '/subscriptions/daily';
 
 export const REAL_TIME_SUBSCRIPTIONS = '/subscriptions/real-time';
 
-export const WEBSOCKET_ENDPOINT = `${process.env.REACT_APP_WEBSOCKET_ENDPOINT || ''}`;
+export const WEBSOCKET_ENDPOINT = `${process.env.REACT_APP_WEBSOCKET_ENDPOINT}`;

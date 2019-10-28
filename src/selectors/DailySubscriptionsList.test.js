@@ -18,7 +18,7 @@ describe('DailySubscriptionsList selector', () => {
     state = store.getState();
   });
 
-  it('getDigestList should return the users digest list', () => {
+  it('selectDailySubscriptions should return the users daily subscriptions list', () => {
     expect(selectDailySubscriptions(state)).toEqual(dailySubscriptionsList);
   });
 });

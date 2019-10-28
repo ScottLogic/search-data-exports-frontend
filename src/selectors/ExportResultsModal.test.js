@@ -3,7 +3,7 @@ import getModalDisplayed from './ExportResultsModal';
 
 const mockStore = configureMockStore();
 
-describe('DigestModal selectors', () => {
+describe('ExportResultsModal selectors', () => {
   const modalDisplayed = true;
 
   const store = mockStore({

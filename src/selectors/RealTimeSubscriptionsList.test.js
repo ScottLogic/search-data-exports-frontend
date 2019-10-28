@@ -18,7 +18,7 @@ describe('RealTimeSubscriptionsList selector', () => {
     state = store.getState();
   });
 
-  it('getDigestList should return the users digest list', () => {
+  it('selectRealTimeSubscriptions should return the users real time subscriptions list', () => {
     expect(selectRealTimeSubscriptions(state)).toEqual(realTimeSubscriptionsList);
   });
 });
