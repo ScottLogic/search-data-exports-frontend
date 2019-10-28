@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OptionsModal from '../reusableComponents/OptionsModal';
-import digestRequest from '../../api/digestRequest';
+import createSubscription from '../../api/createSubscription';
 
-const DigestModal = ({ showModal, lastRequest, closeModal }) => {
+const SubscriptionsModal = ({ showModal, lastRequest, closeModal }) => {
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
     closeModal();
-    digestRequest({
+    createSubscription({
       frequency: event.target.selectedOption.value,
       searchCriteria: lastRequest
     });
@@ -21,16 +21,16 @@ const DigestModal = ({ showModal, lastRequest, closeModal }) => {
       showModal={showModal}
       onSubmit={handleSubmit}
       onClose={closeModal}
-      modalTitle="Select a digest frequency"
+      modalTitle="Select a subscription frequency"
       submitButtonText="Subscribe"
     />
   );
 };
 
-DigestModal.propTypes = {
+SubscriptionsModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
   lastRequest: PropTypes.object.isRequired,
   closeModal: PropTypes.func.isRequired
 };
 
-export default DigestModal;
+export default SubscriptionsModal;

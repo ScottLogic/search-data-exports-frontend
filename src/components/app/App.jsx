@@ -10,7 +10,7 @@ import LoadingSpinner from '../reusableComponents/LoadingSpinner';
 import 'react-toastify/dist/ReactToastify.css';
 import ReportsModal from '../reports/ReportsModalContainer';
 import NewPostModal from '../newPost/NewPostModalContainer';
-import DigestModal from '../digestModal/DigestModalContainer';
+import SubscriptionsModal from '../subscriptionsModal/SubscriptionsModalContainer';
 import DigestListModal from '../digestListModal/DigestListModalContainer';
 import ModalController from '../modalController/ModalControllerContainer';
 import useInputForm from '../../utilities/hooks';
@@ -107,7 +107,7 @@ const App = ({
         <ExportResultsModal />
         <ReportsModal />
         <NewPostModal />
-        <DigestModal />
+        <SubscriptionsModal />
         <DigestListModal />
         <ToastContainer position="bottom-center" hideProgressBar newestOnTop />
       </div>

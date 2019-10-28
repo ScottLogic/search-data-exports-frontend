@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import './DigestListModal.css';
-import deleteDigest from '../../api/digestDelete';
+import deleteSubscription from '../../api/deleteSubscription';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
@@ -37,7 +37,7 @@ const DigestListModal = ({
   }, [getSubscriptions, showModal]);
 
   const handleDelete = (deleteObject) => {
-    deleteDigest(deleteObject)
+    deleteSubscription(deleteObject)
       .then(() => {
         getSubscriptions();
       });

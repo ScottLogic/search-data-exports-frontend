@@ -1,12 +1,12 @@
 import { API } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { DAILY_SUBSCRIPTIONS, REAL_TIME_SUBSCRIPTIONS } from '../endpoints';
-import digestRequest from './digestRequest';
+import createSubscription from './createSubscription';
 
 jest.mock('react-toastify');
 jest.mock('aws-amplify');
 
-describe('digestRequest API', () => {
+describe('createSubscription API', () => {
   const testSearchCriteria = {
     searchCriteria: {
       type: 'post',
@@ -25,7 +25,7 @@ describe('digestRequest API', () => {
   });
 
   it('throws an error when the frequency is unknown', async () => {
-    expect(digestRequest({ frequency: 'Monthly' })).rejects.toThrow(
+    expect(createSubscription({ frequency: 'Monthly' })).rejects.toThrow(
       'Unknown method on digest request Monthly'
     );
   });
@@ -33,7 +33,7 @@ describe('digestRequest API', () => {
   it('calls sendRequest with the real time endpoint when frequency is real time', async () => {
     API.post.mockResolvedValue();
     const request = { frequency: 'realTime', ...testSearchCriteria };
-    digestRequest(request);
+    createSubscription(request);
     expect(API.post).toHaveBeenCalledWith('APIGateway', REAL_TIME_SUBSCRIPTIONS, {
       body: { value: 'test' }
     });
@@ -42,7 +42,7 @@ describe('digestRequest API', () => {
   it('calls deleteDigest with the digest endpoint when frequency is daily', async () => {
     API.post.mockResolvedValue();
     const request = { frequency: 'daily', ...testSearchCriteria };
-    digestRequest(request);
+    createSubscription(request);
     expect(API.post).toHaveBeenCalledWith('APIGateway', DAILY_SUBSCRIPTIONS, {
       body: { value: 'test' }
     });
@@ -50,7 +50,7 @@ describe('digestRequest API', () => {
 
   it('displays a success toast when the request is successful', async () => {
     API.post.mockResolvedValue();
-    await digestRequest({ frequency: 'daily', ...testSearchCriteria });
+    await createSubscription({ frequency: 'daily', ...testSearchCriteria });
     expect(toast.success).toHaveBeenCalledTimes(1);
     expect(toast.success).toHaveBeenCalledWith('Subscription successful');
   });
@@ -58,7 +58,7 @@ describe('digestRequest API', () => {
   it('displays an error toast when the request is successful and an error message is provided', async () => {
     const message = 'Something went terribly wrong';
     API.post.mockRejectedValue({ response: { data: { message } } });
-    await digestRequest({ frequency: 'daily', ...testSearchCriteria });
+    await createSubscription({ frequency: 'daily', ...testSearchCriteria });
     expect(toast.error).toHaveBeenCalledTimes(1);
     expect(toast.error).toHaveBeenCalledWith('Something went terribly wrong');
   });
@@ -66,7 +66,7 @@ describe('digestRequest API', () => {
   it('displays an error toast when the request is successful and an error message is not provided', async () => {
     const error = new Error('Test error');
     API.post.mockRejectedValue(error);
-    await digestRequest({ frequency: 'daily', ...testSearchCriteria });
+    await createSubscription({ frequency: 'daily', ...testSearchCriteria });
     expect(toast.error).toHaveBeenCalledTimes(1);
     expect(toast.error).toHaveBeenCalledWith(`Something went wrong, ${error}.`);
   });

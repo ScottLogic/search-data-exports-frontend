@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import DigestModal from './DigestModal';
+import SubscriptionsModal from './SubscriptionsModal';
 import getModalDisplayed from '../../selectors/SubscriptionsModal';
 import { updateModalDisplayed } from '../../actions/SubscriptionsModal';
 import { getLastRequest } from '../../selectors/App';
@@ -13,4 +13,4 @@ const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(updateModalDisplayed(false))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DigestModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionsModal);

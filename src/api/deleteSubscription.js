@@ -25,6 +25,6 @@ export default async (request) => {
       await deleteSubscription(request.value, REAL_TIME_SUBSCRIPTIONS);
       break;
     default:
-      throw Error(`Unknown method passed to delete ${request.frequency}`);
+      throw Error(`Unknown method passed to delete: ${request.frequency}`);
   }
 };
