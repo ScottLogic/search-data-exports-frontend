@@ -2,12 +2,8 @@ import { toast } from 'react-toastify';
 import { WEBSOCKET_ENDPOINT } from '../endpoints';
 
 const showDownloadNotification = (reportURL) => {
-  const options = {
-    autoClose: false,
-    onClose: () => window.location.assign(reportURL)
-  };
-
-  toast.success('Click here to download your file.', options);
+  toast.success('Your download will begin shortly.');
+  window.location.assign(reportURL);
 };
 
 export default ({ executionArn, taskToken }) => {
@@ -22,12 +18,12 @@ export default ({ executionArn, taskToken }) => {
   };
 
   socket.onmessage = (msg) => {
-    const data = JSON.parse(msg.data);
-    if (data.reportURL) {
-      showDownloadNotification(data.reportURL);
+    try {
+      const data = JSON.parse(msg.data);
+      showDownloadNotification(data.data.reportURL);
       socket.close();
-    } else {
-      throw Error('Received unexpected message from websocket');
+    } catch (error) {
+      toast.error(`Error from websocket: ${error}`);
     }
   };
 };
