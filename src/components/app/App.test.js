@@ -21,6 +21,8 @@ describe('<App />', () => {
   };
 
   beforeEach(() => {
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+
     wrapper = shallow(<App {...appProps} />);
   });
 

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Amplify from 'aws-amplify';
 import './index.css';
 import { Provider } from 'react-redux';
-import App from './components/app/AppContainer';
+import AuthApp from './components/app/AuthApp';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 import awsConfig from './aws-config';
@@ -13,7 +13,7 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AuthApp />
   </Provider>,
   document.getElementById('root')
 );

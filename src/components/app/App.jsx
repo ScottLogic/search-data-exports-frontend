@@ -60,7 +60,6 @@ const App = ({
       handleSearch();
     }
     if (unsubscribeParam) showSubscriptionsModal();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
@@ -70,7 +69,7 @@ const App = ({
       <Header />
       <div className="paper-display-page">
         <div className="container-index-select-form">
-          <form onSubmit={handleSearch}>
+          <form id="searchForm" onSubmit={handleSearch}>
             <span className="searchInputs">
               <input
                 name="searchInput"
