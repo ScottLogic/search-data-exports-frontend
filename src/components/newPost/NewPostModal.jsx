@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import useInputForm from '../../utilities/editablehook';
+import useInputForm from '../../utilities/hooks';
 import handleModalSubmit from '../../api/newPost';
 import './NewPostModal.css';
 

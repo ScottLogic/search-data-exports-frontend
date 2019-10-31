@@ -7,6 +7,7 @@ export default (initValue) => {
 
   return {
     value,
-    onChange: handleValueChange
+    onChange: handleValueChange,
+    setValue
   };
 };

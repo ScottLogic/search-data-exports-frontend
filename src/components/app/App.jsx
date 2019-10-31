@@ -60,6 +60,7 @@ const App = ({
       handleSearch();
     }
     if (unsubscribeParam) showSubscriptionsModal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pageNavigationClass = isLoading ? 'pages loading' : 'pages';
