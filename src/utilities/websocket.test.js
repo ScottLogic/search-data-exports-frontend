@@ -9,12 +9,13 @@ describe('Connect Websocket Utility', () => {
   const wsTestEndpoint = 'ws://localhost:1234';
   const executionArn = 'executionArn';
   const taskToken = 'taskToken';
+  const reportURL = 'yourdownload.com';
   const originalWsEndpoint = endpoints.WEBSOCKET_ENDPOINT;
   let server;
 
   beforeEach(() => {
     endpoints.WEBSOCKET_ENDPOINT = wsTestEndpoint;
-    server = new WS(wsTestEndpoint, { jsonProtocol: true });
+    server = new WS(wsTestEndpoint);
   });
 
   afterEach(() => {
@@ -26,20 +27,20 @@ describe('Connect Websocket Utility', () => {
   it('on connection send the payload to the AWS lambda', async () => {
     connectWebsocket({ executionArn, taskToken });
     await server.connected;
-    await expect(server).toReceiveMessage({
+    await expect(server).toReceiveMessage(JSON.stringify({
       action: 'OpenConnection',
       executionArn,
       taskToken
-    });
+    }));
   });
 
   it('on message received with reportURL show the success notification and begin download', async () => {
     window.location.assign = jest.fn();
     connectWebsocket({ executionArn, taskToken });
     await server.connected;
-    await server.send({ data: { reportURL: 'yourdownload.com' } });
+    await server.send(JSON.stringify({ reportURL }));
     expect(toast.success).toHaveBeenCalledWith('Your download will begin shortly.');
-    expect(window.location.assign).toHaveBeenCalledWith('yourdownload.com');
+    expect(window.location.assign).toHaveBeenCalledWith(reportURL);
   });
 
   it('on message received without reportURL throw an error', async () => {
@@ -48,7 +49,7 @@ describe('Connect Websocket Utility', () => {
     });
     connectWebsocket({ executionArn, taskToken });
     await server.connected;
-    await server.send({ data: { reportURL: 'yourdownload.com' } });
+    await server.send(JSON.stringify({ reportURL }));
     expect(toast.error).toHaveBeenCalledWith('Error from websocket: Error: Something bad has happened');
   });
 });

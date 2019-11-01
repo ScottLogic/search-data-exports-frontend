@@ -20,7 +20,7 @@ export default ({ executionArn, taskToken }) => {
   socket.onmessage = (msg) => {
     try {
       const data = JSON.parse(msg.data);
-      showDownloadNotification(data.data.reportURL);
+      showDownloadNotification(data.reportURL);
       socket.close();
     } catch (error) {
       toast.error(`Error from websocket: ${error}`);
