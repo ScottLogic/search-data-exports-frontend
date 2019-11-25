@@ -1,5 +1,11 @@
 [![CircleCI Status](https://circleci.com/gh/ScottLogic/search-data-exports-frontend.svg?style=svg&circle-token=d7daa10ea7ae5395d3f8d70922fa62bfdb2a6e70)](https://circleci.com/gh/ScottLogic/search-data-exports-frontend)
 
+# search-data-exports-frontend
+
+Exploration of various large-scale data export techniques for browser-based users, using an AWS Serverless Lambda backend and an Elasticsearch datasource.
+
+See the [backend repository](https://github.com/ScottLogic/search-data-exports-backend) for more details.
+
 ## Notes - 19/07/2019 
 To run locally, create a local .env file based on the template in .env.local which will contain the URL of which to point to the search API gateway. 
 
